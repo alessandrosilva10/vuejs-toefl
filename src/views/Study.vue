@@ -33,14 +33,20 @@
             no-gutters
             style="height: 120px;"
         >
-        <v-col v-for="y in filteredItems" :key="y.video_id"  cols="4">
-            <StudyCard :name="y.name" :route="'/index/study&lesson=' + y.video_id" :thumbnail="y.thumbnail"/>
-        </v-col>
-        <v-pagination
-        v-model="page"
-        :length="youtube.length/perPage">
-        </v-pagination>
+            <v-col v-show="!loading" v-for="y in filteredItems" :key="y.video_id"  cols="4">
+                <StudyCard :name="y.name" :route="'/index/study&lesson=' + y.video_id" :thumbnail="y.thumbnail"/>
+            </v-col>
+            <v-pagination
+                v-show="!loading"
+                v-model="page"
+                :length="youtube.length/perPage">
+            </v-pagination>
         </v-row>
+        <div v-show="loading" class="loading">
+            <h1 class="subheading-6 grey--text">Loading the lessons from the server...</h1>
+            <br><br><br><br>
+            <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+        </div>
     </v-container>
   </div></div>
 </template>
@@ -48,10 +54,12 @@
 
 import axios from 'axios';
 import StudyCard from '../components/StudyCard';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
     components: {
-        StudyCard
+        StudyCard,
+        PulseLoader
     },
     data(){
         return {
@@ -60,15 +68,20 @@ export default {
             string: '',
             page: 1,
             perPage: 6,
+            loading: true,
+            size: '100px',
+            color: 'lightblue'
         }
     },mounted() {
-        const headers = { "Content-Type": "application/json" };
-        axios.get("https://toeflmadeeasy.pythonanywhere.com/imports", { headers })
-        .then(response => { this.youtube = response.data});
+        this.interval = setInterval(() => {
+            const headers = { "Content-Type": "application/json" };
+            axios.get("https://toeflmadeeasy.pythonanywhere.com/imports", { headers })
+            .then(response => { this.youtube = response.data; this.loading = false});
+        }, 2000);
       },
       methods: {
         filterByValue(array, string) {
-    return array.filter(o =>
+        return array.filter(o =>
         Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
     }
       },
@@ -94,5 +107,9 @@ export default {
     text-align: center;
     font-size: 56px;
     margin-top: 50px;
+}
+.loading{
+width: 50%;
+  margin: 0 auto;
 }
 </style>
