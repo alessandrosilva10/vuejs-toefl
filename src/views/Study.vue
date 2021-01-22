@@ -73,7 +73,6 @@ export default {
             color: 'lightblue',
         }
     },mounted() {
-
         this.interval = setInterval(() => {
             const headers = { "Content-Type": "application/json" };
             axios.get("https://toeflmadeeasy.pythonanywhere.com/imports", { headers })
@@ -81,15 +80,23 @@ export default {
         }, 2000);
       },
       methods: {
-        filterByValue(array, string) {
-        return array.filter(o =>
-        Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
+        NullSafeToLower(s)
+        {
+            if (s == null)
+            {
+                s = string.Empty;
+            }
+            return s.toLowerCase();
         },
+        filterByValue(array, value) {
+            return array.filter((data) =>  this.NullSafeToLower(JSON.stringify(data)).indexOf(value.toLowerCase()) !== -1);
+        }
       },
     computed: {
         filteredItems: function() {
             return this.filterByValue(this.youtube, this.string).slice((this.page - 1) * this.perPage, this.page* this.perPage);
         },
+
        /* like: function(){
             alert(this.likes)
             //console.log(this.$refs.video_id)
@@ -106,6 +113,9 @@ export default {
             console.log(error)
         });
     }*/
+  },
+  created(){
+      console.log(this.string)
   }
 };
 
