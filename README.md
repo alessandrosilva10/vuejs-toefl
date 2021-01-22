@@ -1,5 +1,4 @@
-# todo-ninja
-
+# TOEFL MADE EASY
 ## Project setup
 ```
 yarn install
