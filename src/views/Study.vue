@@ -16,9 +16,9 @@
     </v-card>
 </div>
 <div class="hidden-md-and-down">
-    <h1 class="subheading grey--text title">Videos imported from  YouTube</h1>
+    <h1 v-show="!loading" class="subheading grey--text title">Videos imported from  YouTube</h1>
     <v-container class="study-card my-5">
-        <div class="search-wrapper">
+        <div v-show="!loading" class="search-wrapper">
             <input type="text" v-model="string" placeholder="Search entire library..."/>
             <v-icon
             normal
@@ -34,12 +34,12 @@
             style="height: 120px;"
         >
             <v-col v-show="!loading" v-for="y in filteredItems" :key="y.video_id"  cols="4">
-                <StudyCard :name="y.name" :route="'/index/study&lesson=' + y.video_id" :thumbnail="y.thumbnail"/>
+                <StudyCard  :name="y.name" :route="'/index/study&lesson=' + y.video_id" :likes="y.likes" :video_id="y.video_id" :dislikes="y.dislikes" :thumbnail="y.thumbnail"/>
             </v-col>
             <v-pagination
                 v-show="!loading"
                 v-model="page"
-                :length="youtube.length/perPage">
+                :length="Math.ceil(youtube.length/perPage)">
             </v-pagination>
         </v-row>
         <div v-show="loading" class="loading">
@@ -70,26 +70,43 @@ export default {
             perPage: 6,
             loading: true,
             size: '100px',
-            color: 'lightblue'
+            color: 'lightblue',
         }
     },mounted() {
+
         this.interval = setInterval(() => {
             const headers = { "Content-Type": "application/json" };
             axios.get("https://toeflmadeeasy.pythonanywhere.com/imports", { headers })
-            .then(response => { this.youtube = response.data; this.loading = false});
+            .then(response => { this.youtube = response.data;  this.loading = false});
         }, 2000);
       },
       methods: {
         filterByValue(array, string) {
         return array.filter(o =>
         Object.keys(o).some(k => o[k].toLowerCase().includes(string.toLowerCase())));
-    }
+        },
       },
     computed: {
-    filteredItems: function() {
-        return this.filterByValue(this.youtube, this.string).slice((this.page - 1) * this.perPage, this.page* this.perPage);
-    }
- }
+        filteredItems: function() {
+            return this.filterByValue(this.youtube, this.string).slice((this.page - 1) * this.perPage, this.page* this.perPage);
+        },
+       /* like: function(){
+            alert(this.likes)
+            //console.log(this.$refs.video_id)
+        const headers = { "Content-Type": "application/json" };
+
+
+        axios.post("https://toeflmadeeasy.pythonanywhere.com/likes",
+        { "video": this.video, "likes": 1},
+        { headers })
+        .then(response => {
+
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    }*/
+  }
 };
 
 </script>
