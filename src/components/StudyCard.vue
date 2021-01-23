@@ -75,12 +75,12 @@ import axios from 'axios';
         },
         dislike(){
             const headers = { "Content-Type": "application/json" };
-            axios.post("https://toeflmadeeasy.pythonanywhere.com/likes",
-            { "video": this.video, "dislikes": 1},
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/dislikes",
+            { "video_id": this.video_id, "dislikes": 1},
             { headers })
             .then(response => {
                 if(response.data.length){
-                    this.video = response.data;
+
                 }else{
                     this.$toast.error("The Lesson with ID " + this.$route.params.video_id +" was not found", {
                         timeout: 3000
