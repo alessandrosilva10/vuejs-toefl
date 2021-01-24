@@ -111,30 +111,28 @@
     methods: {
       submit () {
         this.$v.$touch()
-        const headers = { "Content-Type": "application/json" };
-        axios.post("https://toeflmadeeasy.pythonanywhere.com/import",{
-       "name": this.video_name,
-       "video": this.name
-    }, { headers })
-        .then(response => {
-            this.$toast.success("The video has been imported successfully", {
+         if(this.name === ''){
+            this.$toast.error("The name must not be empty", {
             timeout: 3000
-            });
-        }).catch(error => {
-            if (this.name === ''){
-                this.$toast.error("The video must not be empty", {
-                timeout: 3000
-             });
-            }else if(this.video_name === ''){
-                this.$toast.error("The name must not be empty", {
-                timeout: 3000
-            });
-            }else{
+          })}else if(this.video_name === ''){
+              this.$toast.error("The video must not be empty", {
+              timeout: 3000
+            })
+          }else{
+          const headers = { "Content-Type": "application/json" };
+          axios.post("https://toeflmadeeasy.pythonanywhere.com/import",{
+          "name": this.video_name,
+          "video": this.name
+          }, { headers })
+          .then(response => {
+              this.$toast.success("The video has been imported successfully", {
+              timeout: 3000
+              });
+          }).catch(error => {
                 this.$toast.error("Video not found " + this.name, {
                 timeout: 3000
             });
-            }
-        })
+          })}
       },
       clear () {
         this.$v.$reset()

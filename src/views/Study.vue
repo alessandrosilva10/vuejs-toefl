@@ -38,6 +38,7 @@
                 <StudyCard  :name="y.name" :route="'/index/study&lesson=' + y.video_id" :likes="y.likes" :video_id="y.video_id" :dislikes="y.dislikes" :thumbnail="y.thumbnail"/>
             </v-col>
             <v-pagination
+                class="pagination"
                 v-show="!loading"
                 v-model="page"
                 :length="Math.ceil(youtube.length/perPage)">
@@ -171,5 +172,8 @@ export default {
   width: 50%;
   margin: 0 auto;
   padding-left: 70px;
+}
+.pagination {
+    position: static;
 }
 </style>
