@@ -117,14 +117,23 @@
        "video": this.name
     }, { headers })
         .then(response => {
-            console.log(response)
             this.$toast.success("The video has been imported successfully", {
             timeout: 3000
             });
         }).catch(error => {
-            this.$toast.error("An error has occurred \n Status code 500", error, {
-             timeout: 3000
+            if (this.name === ''){
+                this.$toast.error("The video must not be empty", {
+                timeout: 3000
+             });
+            }else if(this.video_name === ''){
+                this.$toast.error("The name must not be empty", {
+                timeout: 3000
             });
+            }else{
+                this.$toast.error("Video not found " + this.name, {
+                timeout: 3000
+            });
+            }
         })
       },
       clear () {

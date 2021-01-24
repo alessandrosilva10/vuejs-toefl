@@ -33,7 +33,7 @@ export default {
                 this.$toast.error("The Lesson with ID " + this.$route.params.video_id +" was not found", {
                     timeout: 4000
                 });
-             this.$router.push('/index');
+                this.$router.push('/index');
             }
         })
         .catch(error => {

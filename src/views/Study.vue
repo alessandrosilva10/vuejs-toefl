@@ -45,8 +45,29 @@
         </v-row>
         <div v-show="loading" class="loading">
             <h1 class="subheading-6 grey--text">Loading the lessons from the server...</h1>
-            <br><br><br><br>
-            <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+            <br><br><br><br><!--
+<grid-loader :loading="loading" :color="color" :size="size"></grid-loader>
+<clip-loader :loading="loading" :color="color" :size="size"></clip-loader><clip-loader :loading="loading" :color="color" :size="size"></clip-loader><clip-loader :loading="loading" :color="color" :size="size"></clip-loader>
+<rise-loader :loading="loading" :color="color" :size="size"></rise-loader>
+<beat-loader :loading="loading" :color="color" :size="size"></beat-loader>
+<sync-loader :loading="loading" :color="color" :size="size"></sync-loader>
+<rotate-loader :loading="loading" :color="color" :size="size"></rotate-loader>
+<rotate-loader :loading="loading" :color="color" :size="size"></rotate-loader>
+<rotate-loader :loading="loading" :color="color" :size="size"></rotate-loader>
+<fade-loader :loading="loading" :color="color" :height="height" :width="width"></fade-loader>
+<pacman-loader :loading="loading" :color="color" :size="size"></pacman-loader>
+<square-loader :loading="loading" :color="color" :size="size"></square-loader>
+<scale-loader :loading="loading" :color="color" :height="height" :width="width"></scale-loader>
+<skew-loader :loading="loading" :color="color" :size="size"></skew-loader>
+<moon-loader :loading="loading" :color="color" :size="size"></moon-loader>
+<ring-loader :loading="loading" :color="color" :size="size"></ring-loader>
+<bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>-->
+        <v-row>
+            <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
+            <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
+            <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
+            <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
+        </v-row>
         </div>
     </v-container>
   </div></div>
@@ -56,13 +77,21 @@
 import axios from 'axios';
 import StudyCard from '../components/StudyCard';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import DotLoader from 'vue-spinner/src/DotLoader.vue'
+import SyncLoader from 'vue-spinner/src/SyncLoader.vue'
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+import RotateLoader from 'vue-spinner/src/RotateLoader.vue'
 import Navbar from '@/components/Navbar';
 
 export default {
     components: {
         StudyCard,
         PulseLoader,
-        Navbar
+        Navbar,
+        DotLoader,
+        SyncLoader,
+        ClipLoader,
+        RotateLoader
     },
     data(){
         return {
@@ -72,8 +101,8 @@ export default {
             page: 1,
             perPage: 6,
             loading: true,
-            size: '100px',
-            color: 'lightblue',
+            size: '150px',
+            color: 'grey',
         }
     },mounted() {
         this.interval = setInterval(() => {
@@ -139,7 +168,8 @@ export default {
     margin-top: 50px;
 }
 .loading{
-width: 50%;
+  width: 50%;
   margin: 0 auto;
+  padding-left: 70px;
 }
 </style>
