@@ -31,12 +31,13 @@ export default {
                 this.video = response.data;
             }else{
                 this.$toast.error("The Lesson with ID " + this.$route.params.video_id +" was not found", {
-                    timeout: 3000
+                    timeout: 4000
                 });
+             this.$router.push('/index');
             }
         })
         .catch(error => {
-            console.log(error)
+
         });
     }
 }

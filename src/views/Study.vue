@@ -118,7 +118,7 @@ export default {
     }*/
   },
   created(){
-      console.log(this.string)
+    console.log(this.string)
   }
 };
 
