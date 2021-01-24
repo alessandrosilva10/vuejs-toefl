@@ -1,5 +1,6 @@
 <template>
   <div class="team">
+      <Navbar/>
       <div class="hidden-md-and-up">
     <v-card class="mt-5 mb-8">
       <v-card-text>
@@ -55,11 +56,13 @@
 import axios from 'axios';
 import StudyCard from '../components/StudyCard';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import Navbar from '@/components/Navbar';
 
 export default {
     components: {
         StudyCard,
-        PulseLoader
+        PulseLoader,
+        Navbar
     },
     data(){
         return {

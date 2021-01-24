@@ -7,6 +7,7 @@ import Import from '../views/Import.vue'
 import Study from '../views/Study.vue'
 import QuizReading from '../views/QuizReading.vue'
 import StudyYoutube from '../views/StudyYoutube.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +61,12 @@ const routes = [
     path: '/index/study&lesson=:video_id',
     name: 'Study from YouTube',
     component: StudyYoutube
+  }
+  ,
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 

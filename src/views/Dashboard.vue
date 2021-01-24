@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+      <Navbar/>
       <h1 class="subtitle-1 grey--text">Dashboard</h1>
         <v-container class="my-5">
             <v-layout row>
@@ -18,12 +19,12 @@
 </template>
 
 <script>
-//import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 // @ is an alias to /src
 export default {
     name: 'Dashboard',
     components: {
-        //Footer,
+        Navbar
        // VuetifyAudio: () => import('vuetify-audio'),
     },
     data: () => ({

@@ -102,7 +102,7 @@ import axios from 'axios';
         .catch(error => {
             console.log(error)
         });
-        }
+    }
        /* like(){
             const headers = { "Content-Type": "application/json" };
             alert(this.video)
