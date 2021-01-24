@@ -19,17 +19,28 @@
 <div class="hidden-md-and-down">
     <h1 v-show="!loading" class="subheading grey--text title">Videos imported from  YouTube</h1>
     <v-container class="study-card my-5">
-        <div v-show="!loading" class="search-wrapper">
-            <input type="text" v-model="string" placeholder="Search entire library..."/>
-            <v-icon
-            normal
-            color="blue darken-2"
-            >
-            mdi-magnify
-            </v-icon>
-        </div>
-         <br/> <br/> <br/>
-        <br/>
+        <v-row>
+            <v-col>
+                <v-pagination
+                    class="pagination"
+                    v-show="this.filteredItems.length > 2"
+                    v-model="page"
+                    :length="Math.ceil(youtube.length/perPage)">
+                </v-pagination>
+            </v-col>
+            <v-col>
+             <div v-show="!loading" class="search-wrapper">
+                <input class="search" type="text" v-model="string" placeholder="Search entire library..."/>
+                <v-icon
+                class="search"
+                normal
+                color="blue darken-2"
+                >
+                mdi-magnify
+                </v-icon>
+                        </div>
+            </v-col>
+        </v-row>
         <v-row
             no-gutters
             style="height: 120px;"
@@ -37,32 +48,11 @@
             <v-col v-show="!loading" v-for="y in filteredItems" :key="y.video_id"  cols="4">
                 <StudyCard  :name="y.name" :route="'/index/study&lesson=' + y.video_id" :likes="y.likes" :video_id="y.video_id" :dislikes="y.dislikes" :thumbnail="y.thumbnail"/>
             </v-col>
-            <v-pagination
-                class="pagination"
-                v-show="!loading"
-                v-model="page"
-                :length="Math.ceil(youtube.length/perPage)">
-            </v-pagination>
+
         </v-row>
         <div v-show="loading" class="loading">
             <h1 class="subheading-6 grey--text">Loading the lessons from the server...</h1>
-            <br><br><br><br><!--
-<grid-loader :loading="loading" :color="color" :size="size"></grid-loader>
-<clip-loader :loading="loading" :color="color" :size="size"></clip-loader><clip-loader :loading="loading" :color="color" :size="size"></clip-loader><clip-loader :loading="loading" :color="color" :size="size"></clip-loader>
-<rise-loader :loading="loading" :color="color" :size="size"></rise-loader>
-<beat-loader :loading="loading" :color="color" :size="size"></beat-loader>
-<sync-loader :loading="loading" :color="color" :size="size"></sync-loader>
-<rotate-loader :loading="loading" :color="color" :size="size"></rotate-loader>
-<rotate-loader :loading="loading" :color="color" :size="size"></rotate-loader>
-<rotate-loader :loading="loading" :color="color" :size="size"></rotate-loader>
-<fade-loader :loading="loading" :color="color" :height="height" :width="width"></fade-loader>
-<pacman-loader :loading="loading" :color="color" :size="size"></pacman-loader>
-<square-loader :loading="loading" :color="color" :size="size"></square-loader>
-<scale-loader :loading="loading" :color="color" :height="height" :width="width"></scale-loader>
-<skew-loader :loading="loading" :color="color" :size="size"></skew-loader>
-<moon-loader :loading="loading" :color="color" :size="size"></moon-loader>
-<ring-loader :loading="loading" :color="color" :size="size"></ring-loader>
-<bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>-->
+            <br><br><br><br>
         <v-row>
             <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
             <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
@@ -77,22 +67,14 @@
 
 import axios from 'axios';
 import StudyCard from '../components/StudyCard';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import DotLoader from 'vue-spinner/src/DotLoader.vue'
-import SyncLoader from 'vue-spinner/src/SyncLoader.vue'
-import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
-import RotateLoader from 'vue-spinner/src/RotateLoader.vue'
 import Navbar from '@/components/Navbar';
 
 export default {
     components: {
         StudyCard,
-        PulseLoader,
         Navbar,
         DotLoader,
-        SyncLoader,
-        ClipLoader,
-        RotateLoader
     },
     data(){
         return {
@@ -158,10 +140,8 @@ export default {
     display: inline;
 }
 .search-wrapper{
+    padding-bottom: 10px;
     float: right;
-    margin-bottom: 80px;
-    border: 1px solid;
-    border-radius: 3px;
 }
 .title {
     text-align: center;
@@ -174,6 +154,13 @@ export default {
   padding-left: 70px;
 }
 .pagination {
-    position: static;
+    padding-bottom:25px;
+    padding-left:30px;
+    float: left;
 }
+
+.search-wrapper{
+
+}
+
 </style>

@@ -128,6 +128,7 @@
               this.$toast.success("The video has been imported successfully", {
               timeout: 3000
               });
+              this.$router.push('/index')
           }).catch(error => {
                 this.$toast.error("Video not found " + this.name, {
                 timeout: 3000
