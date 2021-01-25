@@ -9,6 +9,7 @@ import QuizReading from '../views/QuizReading.vue'
 import StudyYoutube from '../views/StudyYoutube.vue'
 import Login from '../views/Login.vue'
 import Teste from '../views/Teste.vue'
+import Reading from '../views/Reading.vue'
 
 Vue.use(VueRouter)
 
@@ -30,12 +31,12 @@ const routes = [
           }
         ]
       }
-  },
+  },/*,
   {
     path: '/reading',
     name: 'Reading  Practice',
-    component: QuizReading
-  },
+    component: Reading
+  },*/
   {
     path: '/import',
     name: 'YouTube',
@@ -74,6 +75,13 @@ const routes = [
     path: '/testeteste',
     name: 'Teste',
     component: Teste
+  },
+  ,
+  {
+    path: '/toefl/reading',
+    params: '/tpo=id',
+    name: 'Reading',
+    component: Reading
   }
 ]
 

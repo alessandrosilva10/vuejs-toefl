@@ -10,7 +10,7 @@
             </v-layout>
         </v-container>
          <div id="page-container">
-   <div id="content-wrap">
+     <div id="content-wrap">
      <!-- all other page content -->
    </div>
    <footer id="footer"></footer>
