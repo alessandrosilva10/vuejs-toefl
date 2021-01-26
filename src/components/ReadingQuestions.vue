@@ -1,6 +1,31 @@
 <template>
 <div id="app">
     <Navbar v-show="questionIndex === quiz.questions.length"/>
+{{selected}} {{selected22}}{{correctedAnwsers}}
+
+  <div v-show="selected.length === 2">
+    <table  v-show="questionIndex === quiz.questions.length">
+      <tr v-for="(s, i) in selected22" :key="i">
+        <th v-if="selected22[i] != 'Not Answered'">Resposta escolhida: {{selected[i]}}</th>
+        <th v-else-if="selected22[i] == 'Not Answered'">Resposta escolhida: 'Not Answered'</th>
+        <th>Resposta certa: {{correctedAnwsers[i]}}</th>
+      </tr>
+    </table>
+  </div>
+
+  <div v-show="selected22.length === 2">
+    <table  v-show="questionIndex === quiz.questions.length">
+      <tr v-for="(s, i) in selected22" :key="i">
+        <th v-if="selected22[i] != 'Not Answered'">Resposta escolhida: {{selected[i]}}</th>
+        <th v-else-if="selected22[i] == 'Not Answered'">Resposta escolhida: 'Not Answered'</th>
+        <th>Resposta certa: {{correctedAnwsers[i]}}</th>
+      </tr>
+    </table>
+  </div>
+
+
+  <h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>
+  <v-btn v-show="questionIndex > 1" @click="showResults = !showResults">Show answers</v-btn>
   <!--<h1>{{ quiz.title }}</h1>-->
   <!-- index is used to check with current question index -->
   <div v-for="(question, index) in quiz.questions" :key="index">
@@ -19,13 +44,15 @@
       <v-row>
     <v-col class="answers-col" col="6">
       <ol type="A">
-        <li v-for="response in question.responses">
+        <li v-for="(response, i) in question.responses" :key="i">
           <label>
             <!-- The radio button has three new directives -->
             <!-- v-bind:value sets "value" to "true" if the response is correct -->
-            <!-- v-bind:name sets "name" to question index to group answers by question -->
+            <!-- v-bind:name sets "name" to question index to gro
+            up answers by question -->
             <!-- v-model creates binding with userResponses -->
             <input type="radio"
+                  @change="consoleFilter(response.correct, response.answered)"
                    v-bind:value="response.correct"
                    v-bind:name="index"
                    v-model="userResponses[index]"> {{response.text}}
@@ -56,7 +83,9 @@
 </template>
 <script>
 import Navbar from '@/components/Navbar';
+import $ from 'jquery';
 
+//http://t.weixue100.com/toefl/read/result?aeid=396807
 var quiz = {
   title: 'My quiz',
   questions: [
@@ -160,18 +189,18 @@ held.
         2. The word <strong>“incredible”<strong> in the passage is closest in meaning to
       `,
       responses: [
-        {text: 'confusing'},
-        {text: 'comforting', correct: true},
-        {text: 'unbelievable'},
-        {text: 'interesting'},
+        {text: 'confusing', answered: 'A'},
+        {text: 'comforting', answered: 'B', correct: 'B'},
+        {text: 'unbelievable', answered: 'C'},
+        {text: 'interesting', answered: 'D'},
       ]
     }, {
       text: "Question 2",
       responses: [
-        {text: 'Right answer', correct: true},
-        {text: 'Wrong answer'},
-        {text: 'Right answer', },
-        {text: 'Wrong answer'},
+        {text: 'Right answer', answered: 'A', correct: 'A'},
+        {text: 'Wrong answer', answered: 'B', },
+        {text: 'Right answer', answered: 'C', },
+        {text: 'Wrong answer', answered: 'D', },
       ]
     }
   ]
@@ -185,7 +214,10 @@ export default {
      return {
         scrolledToBottom: false,
         quiz: quiz,
-        selected: '',
+        correctedAnwsers: ['B', 'A'],
+        selected: [''],
+        showResults: false,
+        selected22: [''],
         // Store current question index
         questionIndex: 0,
         // An array initialized with "false" values for each question
@@ -193,6 +225,20 @@ export default {
         userResponses: Array(quiz.questions.length).fill(false)
      }
     }, methods: {
+    consoleFilter(response, answered) {
+      if(typeof response !== 'undefined'){
+        this.selected[this.questionIndex-2] = response;
+      }else{
+        this.selected[this.questionIndex-2] = answered;
+      }
+
+      if(typeof response !== 'undefined'){
+        this.selected22[this.questionIndex-2] = response;
+      }else{
+        this.selected22[this.questionIndex-2] = 'Not answered';
+      }
+
+    },
         saveDatabase(score){
             alert(score)
             alert(this.$route.params.tpo_id)
@@ -209,6 +255,14 @@ export default {
 },
     // Go to next question
     next: function() {
+      if(this.questionIndex > 1){
+        if(!typeof this.selected22[this.questionIndex-2] !== "undefined"){
+            this.selected22[this.questionIndex-2] = "Not Answered"
+        }/*
+        if(typeof this.selected[this.questionIndex-2] !== "undefined"){
+          this.selected[this.questionIndex-2] = "Not Answered"
+        }*/
+      }
       this.questionIndex++;
     },
     // Go to previous question
@@ -220,8 +274,8 @@ export default {
       return this.userResponses.filter(function(val) { return val }).length;
     }
   },mounted () {
-
-    }
+      this.consoleFilter();
+  }
 }
 </script>
 

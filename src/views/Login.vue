@@ -8,7 +8,17 @@
         <h2>LOGIN</h2>
         <validation-observer ref="observer">
           <v-form @submit.prevent="submit">
-            <validation-provider v-slot="{ errors }" name="Name" rules="required|email">
+                <v-text-field
+                v-model="email"
+
+                label="Username"
+                required
+                outlined
+                dark
+                filled
+                dense
+              ></v-text-field>
+            <!--<validation-provider /*v-slot="{ errors }"*/ name="Name" rules="required|email">
               <v-text-field
                 v-model="email"
                 :error-messages="errors"
@@ -19,7 +29,7 @@
                 filled
                 dense
               ></v-text-field>
-            </validation-provider>
+            </validation-provider>-->
             <validation-provider v-slot="{ errors }" name="email" rules="required">
               <v-text-field
                 v-model="password"
@@ -43,13 +53,14 @@
           </v-form>
         </validation-observer>
       </v-col>
-    </v-row>
+    </v-row>{{email}}{{password}}
   </section>
 </template>
 
 <script>
 import { required, email } from 'vee-validate/dist/rules'
 import { extend, ValidationProvider, setInteractionMode, ValidationObserver } from 'vee-validate'
+import axios from 'axios';
 
 setInteractionMode('eager')
 
@@ -84,11 +95,24 @@ export default {
   methods: {
     async submit() {
       const valid = await this.$refs.observer.validate()
-      if (valid) {
-        //this.login(this.params) // action to login
-        alert('login')
-      }
-    },
+      //if (valid) {
+        axios.post("https://toeflmadeeasy.pythonanywhere.com/login",{},{
+        auth: {
+            username: this.email,
+            password: this.password
+        }})
+        .then(response => console.log(response.data))
+        .catch(error => alert(error));
+       }
+    //}
+    //this.login(this.params) // action to login
+    /*await axios.post(session_url, {}, {
+        auth: {
+            username: uname,
+            password: pass
+        }
+        });*/
+    ,
     clear() {
       // you can use this method to clear login form
       this.email = ''
