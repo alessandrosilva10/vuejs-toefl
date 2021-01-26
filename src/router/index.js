@@ -5,7 +5,7 @@ import ToeflListening from '../views/ToeflListening.vue'
 import Words1800 from '../views/Words1800.vue'
 import Import from '../views/Import.vue'
 import Study from '../views/Study.vue'
-import QuizReading from '../views/QuizReading.vue'
+import ReadingPractice from '../views/ReadingPractice.vue'
 import StudyYoutube from '../views/StudyYoutube.vue'
 import Login from '../views/Login.vue'
 import Teste from '../views/Teste.vue'
@@ -76,12 +76,16 @@ const routes = [
     name: 'Teste',
     component: Teste
   },
-  ,
   {
     path: '/toefl/reading',
-    params: '/tpo=id',
     name: 'Reading',
     component: Reading
+  }
+  ,
+  {
+    path: '/toefl/reading&tpo=:tpo_id',
+    name: 'Reading Practice',
+    component: ReadingPractice
   }
 ]
 

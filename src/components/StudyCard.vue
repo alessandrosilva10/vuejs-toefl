@@ -1,7 +1,6 @@
 <template>
 <div class="main">
-  <v-card flat class="text-center"
-  >
+  <v-card flat class="text-center">
   <v-responsive class="pt-4">
     <img
         :src="thumbnail"
@@ -102,20 +101,7 @@ import axios from 'axios';
         .catch(error => {
             console.log(error)
         });
-    }
-       /* like(){
-            const headers = { "Content-Type": "application/json" };
-            alert(this.video)
-            axios.post("https://toeflmadeeasy.pythonanywhere.com/likes",
-            { "video": this.video, "likes": 1},
-            { headers })
-            .then(response => {
-
-            })
-            .catch(error => {
-                console.log(error)
-            });
-        }*/
+     }
     }
   }
 </script>

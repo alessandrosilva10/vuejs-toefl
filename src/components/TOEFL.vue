@@ -4,7 +4,7 @@
   <v-card flat class="text-center main" >
   <v-responsive class="pt-4">
     <img
-        src="https://d2cyt36b7wnvt9.cloudfront.net/exams/wp-content/uploads/2020/07/09233814/TOEFL-Reading-Practice-600x400.png"
+        :src="thumbnail"
         width=70%
         height= auto
         display=block
@@ -27,6 +27,7 @@
         class="css"
         v-bind="attrs"
         v-on="on"
+        @click="openTPO(i)"
       >
       <v-icon small left>mdi-text</v-icon>
         LET'S GET STARTED
@@ -57,3 +58,93 @@
 </v-col>
 </v-row>
 </template>
+<script>
+import axios from 'axios';
+  export default {
+      props: ['thumbnail'],
+      tpos: 63,
+      data: () => ({
+          active_helpful: false,
+          active_not_helpful: false,
+          tpos: 63
+      }),
+      methods: {
+        openTPO(i){
+            window.open('/toefl/reading&tpo=' + i,'_self')
+        },
+        mouseOverHelpful: function(){
+            this.active_helpful = !this.active_helpful;
+        },
+        mouseOverNotHelpful: function(){
+            this.active_not_helpful = !this.active_not_helpful;
+        },
+        dislike(){
+            const headers = { "Content-Type": "application/json" };
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/dislikes1111",
+            { "video_id": this.video_id, "dislikes": 1},
+            { headers })
+            .then(response => {
+                if(response.data.length){
+
+                }else{
+                    this.$toast.error("The Lesson with ID " + this.$route.params.video_id +" was not found", {
+                        timeout: 3000
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        },
+        like: function(){
+        const headers = { "Content-Type": "application/json" };
+        axios.post("https://toeflmadeeasy.pythonanywhere.com/likes1111",
+        { "video_id": this.video_id, "likes": 1},
+        { headers })
+        .then(response => {
+
+        })
+        .catch(error => {
+            console.log(error)
+        });
+        }
+    }
+  }
+</script>
+
+<style scoped>
+.main1{
+    float: left;
+    margin-left: 40px;
+    margin-bottom: 50px;
+    border: 0.1px solid;
+}
+
+.main{
+    border: 0.1px solid;
+}
+
+.main:hover {
+  transform: scale(1.02); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.helpful{
+    display: none;
+}
+
+.like-button-up:hover .helpful{
+    display: block;
+}
+
+.css {
+  margin: 0 auto;
+  display: block;
+}
+
+.like-button-up {
+    margin-left: 10px;
+}
+.like-button-down {
+    margin-left: 10px;
+}
+</style>

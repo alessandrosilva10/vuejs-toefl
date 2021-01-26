@@ -57,7 +57,6 @@
             <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
             <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
             <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
-            <v-col col="3"><dot-loader :loading="loading" :color="color" :size="size"></dot-loader></v-col>
         </v-row>
         </div>
     </v-container>
@@ -111,23 +110,6 @@ export default {
         filteredItems: function() {
             return this.filterByValue(this.youtube, this.string).slice((this.page - 1) * this.perPage, this.page* this.perPage);
         },
-
-       /* like: function(){
-            alert(this.likes)
-            //console.log(this.$refs.video_id)
-        const headers = { "Content-Type": "application/json" };
-
-
-        axios.post("https://toeflmadeeasy.pythonanywhere.com/likes",
-        { "video": this.video, "likes": 1},
-        { headers })
-        .then(response => {
-
-        })
-        .catch(error => {
-            console.log(error)
-        });
-    }*/
   },
   created(){
     console.log(this.string)
