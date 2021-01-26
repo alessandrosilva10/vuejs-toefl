@@ -1,6 +1,6 @@
 <template>
-<!-- http://erikasarti.com/html/dingbats-simbolos-desenhos/ -->
-   <div id="app">
+<div id="app">
+    <Navbar v-show="questionIndex === quiz.questions.length"/>
   <!--<h1>{{ quiz.title }}</h1>-->
   <!-- index is used to check with current question index -->
   <div v-for="(question, index) in quiz.questions" :key="index">
@@ -19,7 +19,7 @@
       <v-row>
     <v-col class="answers-col" col="6">
       <ol type="A">
-        <li v-for="(response, index)  in question.responses" :key="index">
+        <li v-for="response in question.responses">
           <label>
             <!-- The radio button has three new directives -->
             <!-- v-bind:value sets "value" to "true" if the response is correct -->
@@ -28,7 +28,7 @@
             <input type="radio"
                    v-bind:value="response.correct"
                    v-bind:name="index"
-                   v-model="userResponses[index]"> {{response.text}} <br><br>
+                   v-model="userResponses[index]"> {{response.text}}
           </label>
         </li>
       </ol>
@@ -49,10 +49,14 @@
     <p>
       Total score: {{ score() }} / {{ quiz.questions.length - 2 }}
     </p>
+    <v-btn @click="saveDatabase(quiz.questions.length - 2)"> Save scores?</v-btn>
+
   </div>
 </div>
 </template>
 <script>
+import Navbar from '@/components/Navbar';
+
 var quiz = {
   title: 'My quiz',
   questions: [
@@ -166,16 +170,22 @@ held.
       responses: [
         {text: 'Right answer', correct: true},
         {text: 'Wrong answer'},
+        {text: 'Right answer', },
+        {text: 'Wrong answer'},
       ]
     }
   ]
 };
 
 export default {
+        components: {
+        Navbar
+    },
     data() {
      return {
         scrolledToBottom: false,
         quiz: quiz,
+        selected: '',
         // Store current question index
         questionIndex: 0,
         // An array initialized with "false" values for each question
@@ -183,8 +193,13 @@ export default {
         userResponses: Array(quiz.questions.length).fill(false)
      }
     }, methods: {
+        saveDatabase(score){
+            alert(score)
+            alert(this.$route.params.tpo_id)
+            alert(new Date().toLocaleString())
+        },
         scroll () {
-  window.onscroll = () => {
+    window.onscroll = () => {
     let bottomOfWindow = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight === document.documentElement.offsetHeight
 
     if (bottomOfWindow) {
@@ -205,8 +220,8 @@ export default {
       return this.userResponses.filter(function(val) { return val }).length;
     }
   },mounted () {
-  this.scroll()
-}
+
+    }
 }
 </script>
 
