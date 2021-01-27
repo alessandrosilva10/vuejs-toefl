@@ -8,6 +8,7 @@ import Study from '../views/Study.vue'
 import ReadingPractice from '../views/ReadingPractice.vue'
 import StudyYoutube from '../views/StudyYoutube.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import Teste from '../views/Teste.vue'
 import Reading from '../views/Reading.vue'
 
@@ -69,6 +70,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   }
   ,
   {

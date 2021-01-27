@@ -5,12 +5,11 @@
         <h1>TOEFL MADE EASY</h1>
       </v-col>
       <v-col cols="4" class="right">
-        <h2>LOGIN</h2>
+        <h2>REGISTER</h2>
         <validation-observer ref="observer">
           <v-form @submit.prevent="submit">
                 <v-text-field
-                v-model="email"
-
+                v-model="username"
                 label="Username"
                 required
                 outlined
@@ -18,7 +17,7 @@
                 filled
                 dense
               ></v-text-field>
-            <!--<validation-provider /*v-slot="{ errors }"*/ name="Name" rules="required|email">
+            <validation-provider v-slot="{ errors }" name="Name" rules="required|email">
               <v-text-field
                 v-model="email"
                 :error-messages="errors"
@@ -29,7 +28,7 @@
                 filled
                 dense
               ></v-text-field>
-            </validation-provider>-->
+            </validation-provider>
             <validation-provider v-slot="{ errors }" name="email" rules="required">
               <v-text-field
                 v-model="password"
@@ -47,7 +46,7 @@
             </validation-provider>
             <div class="text-center">
               <v-btn class="signin-btn" type="submit" rounded color="white" dark>
-                Sign In
+                Register
               </v-btn>
             </div>
           </v-form>
@@ -80,6 +79,7 @@ export default {
     ValidationObserver
   },
   data: () => ({
+    username: '',
     email: '',
     password: null,
     showPass: false
@@ -96,12 +96,16 @@ export default {
     async submit() {
       const valid = await this.$refs.observer.validate()
       //if (valid) {
-        axios.post("https://toeflmadeeasy.pythonanywhere.com/login",{},{
-        auth: {
-            username: this.email,
-            password: this.password
-        }})
-        .then(response => console.log(response.data))
+        axios.post("https://toeflmadeeasy.pythonanywhere.com/register",{
+            "name": this.username,
+            "email": this.email,
+            "password": this.password
+        })
+        .then(response =>
+            this.$toast.success(response.data , {
+            timeout: 5000
+            })
+        )
         .catch(error =>
         this.$toast.error(error.response.data , {
         timeout: 5000
