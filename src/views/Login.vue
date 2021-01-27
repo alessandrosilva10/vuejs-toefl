@@ -8,9 +8,10 @@
         <h2>LOGIN</h2>
         <validation-observer ref="observer">
           <v-form @submit.prevent="submit">
+              <validation-provider v-slot="{ errors }" name="Name" rules="required">
                 <v-text-field
                 v-model="email"
-
+                :error-messages="errors"
                 label="Username"
                 required
                 outlined
@@ -18,6 +19,7 @@
                 filled
                 dense
               ></v-text-field>
+              </validation-provider>
             <!--<validation-provider /*v-slot="{ errors }"*/ name="Name" rules="required|email">
               <v-text-field
                 v-model="email"
@@ -45,13 +47,24 @@
                 :type="showPass ? 'text' : 'password'"
               ></v-text-field>
             </validation-provider>
-            <div class="text-center">
-              <v-btn class="signin-btn" type="submit" rounded color="white" dark>
-                Sign In
-              </v-btn>
-            </div>
+            <v-row clas="credentials">
+                <v-col cols="6">
+                    <div class="text-center">
+                        <v-btn class="signin-btn" type="submit" rounded color="white" dark>
+                            Sign In
+                        </v-btn>
+                    </div>
+                </v-col>
+            </v-row>
           </v-form>
-        </validation-observer>
+        </validation-observer><v-row clas="credentials">
+         <v-col cols="6">
+                    <div class="text-center">
+                        <v-btn class="signin-btn" @click="register()" type="text" rounded color="white" dark>
+                            Register
+                        </v-btn>
+                    </div>
+                </v-col></v-row>
       </v-col>
     </v-row>
   </section>
@@ -61,6 +74,7 @@
 import { required, email } from 'vee-validate/dist/rules'
 import { extend, ValidationProvider, setInteractionMode, ValidationObserver } from 'vee-validate'
 import axios from 'axios';
+import VueCookies from 'vue-cookies'
 
 setInteractionMode('eager')
 
@@ -93,6 +107,9 @@ export default {
     }
   },
   methods: {
+    register() {
+        this.$router.push('/register')
+    },
     async submit() {
       const valid = await this.$refs.observer.validate()
       //if (valid) {
@@ -101,7 +118,14 @@ export default {
             username: this.email,
             password: this.password
         }})
-        .then(response => console.log(response.data))
+        .then(response => {
+            if(response.status === 200) {
+                VueCookies.set('TOEFLMADEEASY' , JSON.stringify(response.data), "4h")
+                window.location.href = '/';
+                this.$toast.success("Welcome back, " + VueCookies.get('TOEFLMADEEASY').name + " !", {
+                timeout: 5000
+            })}
+        })
         .catch(error =>
         this.$toast.error(error.response.data , {
         timeout: 5000
@@ -114,35 +138,36 @@ export default {
       this.password = null
       this.$refs.observer.reset()
     }
+  },
+  mounted() {
+      //console.log(VueCookies.get('TOEFLMADEEASY'))
   }
 }
 </script>
 
 <style lang="scss" scoped>
-    /* ./assets/styles.scss */
-.section-container {
-  padding: 20px;
-  margin: 20px;
+ .section-container {
   padding-left: 10%;
   padding-right: 10%;
   background: #fff;
   .signin {
     padding: 0;
     margin: 0 auto;
-    min-height: 800px;
+    min-height: 100vh;
     .left {
       padding: 30px;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
       display: flex;
-      color: #30ac7c;
-      background-color: #f9f9f9;
+      color: #287FD6;
+      background-color: #fff;
     }
     .right {
       padding-top: 10%;
+      padding-right: -10%;
       box-sizing: border-box;
-      background: #30ac7c;
+      background: #287FD6;
       color: #fff;
       h2 {
         text-align: center;
@@ -150,7 +175,7 @@ export default {
       }
       .signin-btn {
         width: 100%;
-        color: #30ac7c;
+        color: #287FD6;
         justify-content: center;
         align-items: center;
       }

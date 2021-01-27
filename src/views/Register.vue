@@ -8,15 +8,17 @@
         <h2>REGISTER</h2>
         <validation-observer ref="observer">
           <v-form @submit.prevent="submit">
+              <validation-provider v-slot="{ errors }" name="Username" rules="required">
                 <v-text-field
                 v-model="username"
+                 :error-messages="errors"
                 label="Username"
                 required
                 outlined
                 dark
                 filled
                 dense
-              ></v-text-field>
+              ></v-text-field></validation-provider>
             <validation-provider v-slot="{ errors }" name="Name" rules="required|email">
               <v-text-field
                 v-model="email"
@@ -87,6 +89,7 @@ export default {
   computed: {
     params() {
       return {
+          username: this.username,
         email: this.email,
         password: this.password
       }
@@ -95,7 +98,7 @@ export default {
   methods: {
     async submit() {
       const valid = await this.$refs.observer.validate()
-      //if (valid) {
+      if (valid) {
         axios.post("https://toeflmadeeasy.pythonanywhere.com/register",{
             "name": this.username,
             "email": this.email,
@@ -111,9 +114,11 @@ export default {
         timeout: 5000
         }));
        }
+    }
     ,
     clear() {
       // you can use this method to clear login form
+      this.username = ''
       this.email = ''
       this.password = null
       this.$refs.observer.reset()
@@ -125,28 +130,27 @@ export default {
 <style lang="scss" scoped>
     /* ./assets/styles.scss */
 .section-container {
-  padding: 20px;
-  margin: 20px;
   padding-left: 10%;
   padding-right: 10%;
   background: #fff;
   .signin {
     padding: 0;
     margin: 0 auto;
-    min-height: 800px;
+    min-height: 100vh;
     .left {
       padding: 30px;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
       display: flex;
-      color: #30ac7c;
-      background-color: #f9f9f9;
+      color: #287FD6;
+      background-color: #fff;
     }
     .right {
       padding-top: 10%;
+      padding-right: -10%;
       box-sizing: border-box;
-      background: #30ac7c;
+      background: #287FD6;
       color: #fff;
       h2 {
         text-align: center;
@@ -154,7 +158,7 @@ export default {
       }
       .signin-btn {
         width: 100%;
-        color: #30ac7c;
+        color: #287FD6;
         justify-content: center;
         align-items: center;
       }

@@ -11,59 +11,163 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Teste from '../views/Teste.vue'
 import Reading from '../views/Reading.vue'
+import VueCookies from 'vue-cookies'
+import axios from 'axios';
+import Toast from "vue-toastification";
 
 Vue.use(VueRouter)
+Vue.use(VueCookies)
+Vue.use(axios)
+Vue.use(Toast)
 
 const routes = [
   {
     path: '/',
     name: 'Dashboard',
     component: Dashboard,
-    meta: {
-        title: 'Home Page - Example App',
-        metaTags: [
-          {
-            name: 'description',
-            content: 'The home page of our example app.'
-          },
-          {
-            property: 'og:description',
-            content: 'The home page of our example app.'
-          }
-        ]
-      }
-  },/*,
-  {
-    path: '/reading',
-    name: 'Reading  Practice',
-    component: Reading
-  },*/
+    props: true,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
+    },
+
   {
     path: '/import',
     name: 'YouTube',
-    component: Import
+    component: Import,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   },
   {
     path: '/toefl',
     name: 'Toefl Listening',
-    component: ToeflListening
+    component: ToeflListening,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   },
   {
     path: '/1800',
     name: '1800 words',
-    component: Words1800
+    component: Words1800,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   }
   ,
   {
     path: '/index',
     name: 'Study from YouTube',
-    component: Study
+    component: Study,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   }
   ,
   {
     path: '/index/study&lesson=:video_id',
     name: 'Study from YouTube',
-    component: StudyYoutube
+    component: StudyYoutube,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   }
   ,
   {
@@ -80,18 +184,75 @@ const routes = [
   {
     path: '/testeteste',
     name: 'Teste',
-    component: Teste
+    component: Teste,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   },
   {
     path: '/toefl/reading',
     name: 'Reading',
-    component: Reading
+    component: Reading,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   }
   ,
   {
     path: '/toefl/reading&tpo=:tpo_id',
     name: 'Reading Practice',
-    component: ReadingPractice
+    component: ReadingPractice,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
   }
 ]
 

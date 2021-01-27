@@ -9,7 +9,7 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn text color="grey">
-                <span>Sign Out</span>
+                <span @click="signOut()">Sign Out</span>
                 <v-icon right>mdi-exit-to-app</v-icon>
             </v-btn>
         </v-app-bar>
@@ -28,6 +28,7 @@
     </nav>
 </template>
 <script>
+import VueCookies from 'vue-cookies'
 export default {
     data(){
         return {
@@ -45,6 +46,16 @@ export default {
                         { text: "Add Driver", route: "/drivers/add" }
                     ]},
             ],
+        }
+    },
+    methods: {
+        signOut(){
+            if(VueCookies.get('TOEFLMADEEASY')){
+                VueCookies.remove('TOEFLMADEEASY');
+                this.$router.push('/login');
+                this.$toast.success("You have been signed out successfully!", {
+                timeout: 5000
+            })}
         }
     }
 }
