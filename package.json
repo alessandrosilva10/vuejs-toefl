@@ -23,7 +23,8 @@
     "vuelidate": "^0.7.6",
     "vuetify": "^2.4.2",
     "vuetify-audio": "^0.3.3",
-    "vuetify-dialog": "^2.0.13"
+    "vuetify-dialog": "^2.0.13",
+    "vue-cookies": "^1.7.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
