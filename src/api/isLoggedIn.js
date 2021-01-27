@@ -26,7 +26,8 @@ export function isLoggedIn(){
         alert(err)
     }
 }
-
+//CHAVE SITE 6LdB0D4aAAAAAPM2XfJfKb2RfR7bR4DMik1TlV8T
+//CHAVE SECRETA 6LdB0D4aAAAAABz9TGx-Ua0ZoSYcUKMSsitKF7ja
 /*
 export function isLoggedIn(){
     axios.post("https://toeflmadeeasy.pythonanywhere.com/validate",{

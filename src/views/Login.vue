@@ -121,10 +121,11 @@ export default {
         .then(response => {
             if(response.status === 200) {
                 VueCookies.set('TOEFLMADEEASY' , JSON.stringify(response.data), "4h")
-                window.location.href = '/';
-                this.$toast.success("Welcome back, " + VueCookies.get('TOEFLMADEEASY').name + " !", {
+                 this.$toast.success("Welcome back, " + VueCookies.get('TOEFLMADEEASY').name + " !", {
                 timeout: 5000
-            })}
+                })
+                window.location.href = '/';
+               }
         })
         .catch(error =>
         this.$toast.error(error.response.data , {

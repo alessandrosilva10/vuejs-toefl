@@ -15,16 +15,17 @@
     "jw-vue-pagination": "^1.0.3",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
+    "vue-cookies": "^1.7.4",
     "vue-loader": "^15.9.6",
     "vue-pdf": "^4.2.0",
+    "vue-recaptcha-v3": "^2.0.0",
     "vue-router": "^3.2.0",
     "vue-spinner": "^1.0.4",
     "vue-toastification": "^1.7.11",
     "vuelidate": "^0.7.6",
     "vuetify": "^2.4.2",
     "vuetify-audio": "^0.3.3",
-    "vuetify-dialog": "^2.0.13",
-    "vue-cookies": "^1.7.4"
+    "vuetify-dialog": "^2.0.13"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
