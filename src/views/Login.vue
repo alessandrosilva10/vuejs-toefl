@@ -75,6 +75,10 @@ import { required, email } from 'vee-validate/dist/rules'
 import { extend, ValidationProvider, setInteractionMode, ValidationObserver } from 'vee-validate'
 import axios from 'axios';
 import VueCookies from 'vue-cookies'
+import Vue from 'vue'
+import Router from 'vue-router';
+
+Vue.use(Router)
 
 setInteractionMode('eager')
 
@@ -124,13 +128,15 @@ export default {
                  this.$toast.success("Welcome back, " + VueCookies.get('TOEFLMADEEASY').name + " !", {
                 timeout: 5000
                 })
-                window.location.href = '/';
+                //window.location.href = '/';
+                this.$router.push("/");
                }
         })
-        .catch(error =>
+        .catch(error =>{
+        console.log(error)
         this.$toast.error(error.response.data , {
         timeout: 5000
-        }));
+        })});
        }
     ,
     clear() {
