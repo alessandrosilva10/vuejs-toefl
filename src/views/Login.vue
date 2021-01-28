@@ -4,6 +4,7 @@
     <v-row>
         <v-col cols="12">
             <p class="line-1 anim-typewriter">TOEFL MADE EASY - 2021</p>
+            <br/>
             <p class="line-1 anim-typewriter">THE BEST WAY TO IMPROVE YOUR READING AND LISTENING FOR THE TOEFL TEST</p>
         </v-col>
         </v-row>
@@ -30,10 +31,12 @@
                                         </v-col>
                                         <v-col class="d-flex" cols="12" sm="6" xsm="12">
                                         </v-col>
-                                        <v-spacer></v-spacer>
-                                        <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
-                                            <v-btn x-large block :disabled="!valid" color="blue accent-4 white--text" @click="validate"> Login </v-btn>
-                                        </v-col>
+                                        <v-spacer></v-spacer><span style="display: inline-block;">
+                                        <v-col class="d-flex" cols="8">
+                                            <Dialog />
+                                            <!--<v-btn x-large block color="blue accent-4 white--text" @click="modal"> Recovery Password </v-btn>-->
+                                            <v-btn style="margin-left:40px;" x-large block :disabled="!valid" color="blue accent-4 white--text" @click="validate"> Login </v-btn>
+                                        </v-col></span>
                                     </v-row>
                                 </v-form>
                             </v-card-text>
@@ -81,16 +84,23 @@ import axios from 'axios';
 import VueCookies from 'vue-cookies'
 import Vue from 'vue'
 import Router from 'vue-router';
+import Dialog from '../components/Dialog.vue'
 
 Vue.use(Router)
 
 export default {
+components: {
+    Dialog
+},
 computed: {
     passwordMatch() {
       return () => this.password === this.verify || "Password must match";
     }
   },
   methods: {
+      modal(){
+          alert("modal")
+      },
       getTabId(index){
           this.currentTab = index;
       },
@@ -189,8 +199,6 @@ computed: {
     width: 600px;
     display: table;
     margin: 0 auto;
-    border: 2px solid;
-    border-color: #2962FF;
 }
 html{
   min-height: 100%;
