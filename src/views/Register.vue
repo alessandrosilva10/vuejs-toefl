@@ -89,7 +89,7 @@ export default {
   computed: {
     params() {
       return {
-          username: this.username,
+        username: this.username,
         email: this.email,
         password: this.password
       }

@@ -1,78 +1,72 @@
 <template>
-  <section class="section-container">
-    <v-row class="signin">
-      <v-col cols="8" class="left">
-        <h1>TOEFL MADE EASY</h1>
-      </v-col>
-      <v-col cols="4" class="right">
-        <h2>LOGIN</h2>
-        <validation-observer ref="observer">
-          <v-form @submit.prevent="submit">
-              <validation-provider v-slot="{ errors }" name="Name" rules="required">
-                <v-text-field
-                v-model="email"
-                :error-messages="errors"
-                label="Username"
-                required
-                outlined
-                dark
-                filled
-                dense
-              ></v-text-field>
-              </validation-provider>
-            <!--<validation-provider /*v-slot="{ errors }"*/ name="Name" rules="required|email">
-              <v-text-field
-                v-model="email"
-                :error-messages="errors"
-                label="Email"
-                required
-                outlined
-                dark
-                filled
-                dense
-              ></v-text-field>
-            </validation-provider>-->
-            <validation-provider v-slot="{ errors }" name="email" rules="required">
-              <v-text-field
-                v-model="password"
-                :error-messages="errors"
-                label="Password"
-                :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="showPass = !showPass"
-                required
-                outlined
-                dense
-                dark
-                filled
-                :type="showPass ? 'text' : 'password'"
-              ></v-text-field>
-            </validation-provider>
-            <v-row clas="credentials">
-                <v-col cols="6">
-                    <div class="text-center">
-                        <v-btn class="signin-btn" type="submit" rounded color="white" dark>
-                            Sign In
-                        </v-btn>
-                    </div>
-                </v-col>
-            </v-row>
-          </v-form>
-        </validation-observer><v-row clas="credentials">
-         <v-col cols="6">
-                    <div class="text-center">
-                        <v-btn class="signin-btn" @click="register()" type="text" rounded color="white" dark>
-                            Register
-                        </v-btn>
-                    </div>
-                </v-col></v-row>
-      </v-col>
-    </v-row>
-  </section>
+    <div id="app">
+    <v-app>
+        <v-dialog v-model="dialog" persistent max-width="600px" min-width="360px">
+            <div>
+                <v-tabs v-model="tab" show-arrows background-color="deep-purple accent-4" icons-and-text dark grow>
+                    <v-tabs-slider  color="purple darken-4"></v-tabs-slider>
+                    <v-tab v-for="(i, index) in tabs"  @click="getTabId(index)"  :key="index">
+                        <v-icon large>{{ i.icon }}</v-icon>
+                        <div  class="caption py-1">{{ i.name }}</div>
+                    </v-tab>
+                    <v-tab-item  >
+                        <v-card class="px-4">
+                            <v-card-text>
+                                <v-form ref="loginForm" v-model="valid" lazy-validation>
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="loginUsername" :rules="loginUsernameRules" label="Username" required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="loginPassword" :append-icon="show1?'eye':'eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show1 = !show1"></v-text-field>
+                                        </v-col>
+                                        <v-col class="d-flex" cols="12" sm="6" xsm="12">
+                                        </v-col>
+                                        <v-spacer></v-spacer>
+                                        <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
+                                            <v-btn x-large block :disabled="!valid" color="success" @click="validate"> Login </v-btn>
+                                        </v-col>
+                                    </v-row>
+                                </v-form>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card class="px-4">
+                            <v-card-text>
+                                <v-form ref="registerForm" v-model="valid" lazy-validation>
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="username" :rules="[rules.required]" label="Username" maxlength="40" required></v-text-field>
+                                        </v-col>
+                                        <!--<v-col cols="12" sm="6" md="6">
+                                            <v-text-field v-model="lastName" :rules="[rules.required]" label="Last Name" maxlength="20" required></v-text-field>
+                                        </v-col>-->
+                                        <v-col cols="12">
+                                            <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" counter @click:append="show1 = !show1"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field block v-model="verify" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, passwordMatch]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Confirm Password" counter @click:append="show1 = !show1"></v-text-field>
+                                        </v-col>
+                                        <v-spacer></v-spacer>
+                                        <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+                                            <v-btn x-large block :disabled="!valid" color="success" @click="validate">Register</v-btn>
+                                        </v-col>
+                                    </v-row>
+                                </v-form>
+                            </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                </v-tabs>
+            </div>
+        </v-dialog>
+    </v-app>
+</div>
 </template>
-
 <script>
-import { required, email } from 'vee-validate/dist/rules'
-import { extend, ValidationProvider, setInteractionMode, ValidationObserver } from 'vee-validate'
 import axios from 'axios';
 import VueCookies from 'vue-cookies'
 import Vue from 'vue'
@@ -80,113 +74,104 @@ import Router from 'vue-router';
 
 Vue.use(Router)
 
-setInteractionMode('eager')
-
-extend('required', {
-  ...required,
-  message: '{_field_} can not be empty'
-})
-
-extend('email', {
-  ...email,
-  message: 'Email must be valid'
-})
-
 export default {
-  components: {
-    ValidationProvider,
-    ValidationObserver
-  },
-  data: () => ({
-    email: '',
-    password: null,
-    showPass: false
-  }),
-  computed: {
-    params() {
-      return {
-        email: this.email,
-        password: this.password
-      }
+computed: {
+    passwordMatch() {
+      return () => this.password === this.verify || "Password must match";
     }
   },
   methods: {
-    register() {
-        this.$router.push('/register')
-    },
-    async submit() {
-      const valid = await this.$refs.observer.validate()
-      //if (valid) {
-        axios.post("https://toeflmadeeasy.pythonanywhere.com/login",{},{
-        auth: {
-            username: this.email,
-            password: this.password
-        }})
-        .then(response => {
-            if(response.status === 200) {
-                VueCookies.set('TOEFLMADEEASY' , JSON.stringify(response.data), "4h")
-                 this.$toast.success("Welcome back, " + VueCookies.get('TOEFLMADEEASY').name + " !", {
-                timeout: 5000
-                })
-                //window.location.href = '/';
-                this.$router.push("/");
-               }
+      getTabId(index){
+          this.currentTab = index;
+      },
+    validate() {
+      if (this.$refs.loginForm.validate()) {
+          if(this.currentTab == 0){
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/login",{},{
+            auth: {
+                username: this.loginUsername,
+                password: this.loginPassword
+            }})
+            .then(response => {
+                if(response.status === 200) {
+                    VueCookies.set('TOEFLMADEEASY' , JSON.stringify(response.data), "4h")
+                    this.$toast.success("Welcome back, " + VueCookies.get('TOEFLMADEEASY').name + " !", {
+                    timeout: 5000
+                    })
+                    this.$router.push("/");
+                }
+            })
+            .catch(error =>{
+            console.log(error)
+            this.$toast.error(error.response.data , {
+            timeout: 5000
+            })})}
+
+      }
+
+         if (this.$refs.registerForm.validate()) {
+          if(this.currentTab == 1){
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/register",{
+            "name": this.username,
+            "email": this.email,
+            "password": this.password
         })
-        .catch(error =>{
-        console.log(error)
+        .then(response =>
+            this.$toast.success(response.data , {
+            timeout: 5000
+            })
+        )
+        .catch(error =>
         this.$toast.error(error.response.data , {
         timeout: 5000
-        })});
-       }
-    ,
-    clear() {
-      // you can use this method to clear login form
-      this.email = ''
-      this.password = null
-      this.$refs.observer.reset()
+        }))}
+      }
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
     }
   },
   mounted() {
-      //console.log(VueCookies.get('TOEFLMADEEASY'))
-  }
+      console.log(this.currentTab)
+  },
+  data: () => ({
+    dialog: true,
+    tab: 0,
+    currentTab: 0,
+    tabs: [
+        {name:"Login", icon:"mdi-account"},
+        {name:"Register", icon:"mdi-account-outline"}
+    ],
+    valid: true,
+    username: "",
+    email: "",
+    password: "",
+    verify: "",
+    loginPassword: "",
+    loginUsername: "",
+    loginUsernameRules: [
+      v => !!v || "Required",
+      //v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+    ],
+    emailRules: [
+      v => !!v || "Required",
+      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+    ],
+
+    show1: false,
+    rules: {
+      required: value => !!value || "Required.",
+      min: v => (v && v.length >= 8) || "Min 8 characters"
+    }
+  })
 }
 </script>
 
-<style lang="scss" scoped>
- .section-container {
-  padding-left: 10%;
-  padding-right: 10%;
-  background: #fff;
-  .signin {
-    padding: 0;
-    margin: 0 auto;
-    min-height: 100vh;
-    .left {
-      padding: 30px;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-      display: flex;
-      color: #287FD6;
-      background-color: #fff;
-    }
-    .right {
-      padding-top: 10%;
-      padding-right: -10%;
-      box-sizing: border-box;
-      background: #287FD6;
-      color: #fff;
-      h2 {
-        text-align: center;
-        margin: 30px 0;
-      }
-      .signin-btn {
-        width: 100%;
-        color: #287FD6;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-}
+<style scoped>
+
+
 </style>
+
