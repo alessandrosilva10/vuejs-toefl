@@ -1,9 +1,17 @@
 <template>
-    <div id="app">
+    <div id="app" >
     <v-app>
-        <v-dialog v-model="dialog" persistent max-width="600px" min-width="360px">
+    <v-row>
+        <v-col cols="12">
+            <p class="line-1 anim-typewriter">TOEFL MADE EASY - 2021</p>
+            <p class="line-1 anim-typewriter">THE BEST WAY TO IMPROVE YOUR READING AND LISTENING FOR THE TOEFL TEST</p>
+        </v-col>
+        </v-row>
+        <v-row>
+        <v-col cols="12">
+        <div class="dialog">
             <div>
-                <v-tabs v-model="tab" show-arrows background-color="deep-purple accent-4" icons-and-text dark grow>
+                <v-tabs v-model="tab" show-arrows background-color="blue accent-4" icons-and-text dark grow>
                     <v-tabs-slider  color="purple darken-4"></v-tabs-slider>
                     <v-tab v-for="(i, index) in tabs"  @click="getTabId(index)"  :key="index">
                         <v-icon large>{{ i.icon }}</v-icon>
@@ -24,7 +32,7 @@
                                         </v-col>
                                         <v-spacer></v-spacer>
                                         <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
-                                            <v-btn x-large block :disabled="!valid" color="success" @click="validate"> Login </v-btn>
+                                            <v-btn x-large block :disabled="!valid" color="blue accent-4 white--text" @click="validate"> Login </v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-form>
@@ -53,7 +61,7 @@
                                         </v-col>
                                         <v-spacer></v-spacer>
                                         <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
-                                            <v-btn x-large block :disabled="!valid" color="success" @click="validate">Register</v-btn>
+                                            <v-btn x-large block :disabled="!valid" color="blue accent-4 white--text" @click="validate">Register</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-form>
@@ -62,7 +70,9 @@
                     </v-tab-item>
                 </v-tabs>
             </div>
-        </v-dialog>
+        </div>
+        </v-col>
+        </v-row>
     </v-app>
 </div>
 </template>
@@ -106,9 +116,7 @@ computed: {
             this.$toast.error(error.response.data , {
             timeout: 5000
             })})}
-
       }
-
          if (this.$refs.registerForm.validate()) {
           if(this.currentTab == 1){
             axios.post("https://toeflmadeeasy.pythonanywhere.com/register",{
@@ -172,6 +180,52 @@ computed: {
 
 <style scoped>
 
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
 
+/* Global */
+.dialog {
+    height: 380px;
+    width: 600px;
+    display: table;
+    margin: 0 auto;
+    border: 2px solid;
+    border-color: #2962FF;
+}
+html{
+  min-height: 100%;
+  overflow: hidden;
+}
+p{
+  color: #2962FF;
+  font-family: 'Anonymous Pro', monospace;
+}
+.line-1{
+    position: relative;
+    top: 50%;
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 8s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+             animation-iteration-count:infinite;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 50em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
 </style>
 
