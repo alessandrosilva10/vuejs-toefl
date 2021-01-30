@@ -7,6 +7,9 @@
       <v-card>
         <v-card-title class="blue--text" primary-title>Listen to a conversation</v-card-title>
         <vuetify-audio :file="mp3" color="success"></vuetify-audio>
+       <!-- <vuetify-audio file="http://docs.google.com/uc?export=open&id=1luYjxXpuIjhQjG1ti3dXBAYgItLvB9nX" color="success"></vuetify-audio>
+        <vuetify-audio :file="mp3" color="success"></vuetify-audio>
+         <vuetify-audio file="http://docs.google.com/uc?export=open&id=  1luYjxXpuIjhQjG1ti3dXBAYgItLvB9nX  " color="success"></vuetify-audio>-->
         <br/>
         <v-container class="grey lighten-5">
     <v-row
@@ -19,7 +22,7 @@
           outlined
           tile>
         <div class="divchange" @click.prevent="testFunction">
-            <span>{{lecture}}</span>
+            <span> {{lecture}}</span>
         </div>
         </v-card>
       </v-col>
@@ -62,12 +65,13 @@
 
 <script>
 import axios from 'axios';
-
+//https://stackoverflow.com/questions/2920150/insert-text-at-cursor-in-a-content-editable-div
+//https://pypi.org/project/py-translate/
 export default {
     name: 'Dashboard',
     props: ['lecture', 'mp3'],
     components: {
-        VuetifyAudio: () => import('vuetify-audio')
+        VuetifyAudio: () => import('vuetify-audio'),
     },
     data: () => ({
         items: ['Portuguese', 'English', 'Chinese', 'Cantonese', 'Spanish', 'German', 'Spanish'],
@@ -77,17 +81,20 @@ export default {
 
     }),methods:{
         testFunction(e){
-        e.preventDefault();
+
         var s = window.getSelection();
-        var range = s.getRangeAt(0);
+        //console.log(s)
+        var s = window.getSelection();
+       var range = s.getRangeAt(0);
         var node = s.anchorNode;
-        while(range.toString().indexOf(' ') != 0) {
+        while(range.toString().indexOf('') != 0) {
             range.setStart(node,(range.startOffset -1));
         }
-        range.setStart(node, range.startOffset +1);
+        range.setStart(node, range.startOffset);
         do{
-            range.setEnd(node,range.endOffset + 1);
-        }while(range.toString().indexOf(' ') == -1 && range.toString().trim() != '');
+            range.setEnd(node,range.endOffset);
+        }while(range.toString().indexOf('') == -1 && range.toString().trim() != '');
+        console.log(range.toString())
         var str = range.toString().trim();
 
         const headers = { "Content-Type": "application/json" };
@@ -103,7 +110,6 @@ export default {
 <style scoped>
   .divchange {
       display: inline-block;
-      cursor: pointer;
       text-align: justify;
       text-justify: inter-word;
       font-family: "dosis", sans-serif;

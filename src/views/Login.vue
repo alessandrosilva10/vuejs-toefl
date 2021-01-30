@@ -33,13 +33,15 @@
                                         </v-col>
                                         <v-spacer></v-spacer><span style="display: inline-block;">
                                         <v-col class="d-flex" cols="8">
-                                            <Dialog />
                                             <!--<v-btn x-large block color="blue accent-4 white--text" @click="modal"> Recovery Password </v-btn>-->
-                                            <v-btn style="margin-left:40px;" x-large block :disabled="!valid" color="blue accent-4 white--text" @click="validate"> Login </v-btn>
+                                            <v-btn style="margin-right:40px;" x-large block :disabled="!valid" color="blue accent-4 white--text" @click="validate"> Login </v-btn>
+                                            <Dialog />
                                         </v-col></span>
                                     </v-row>
                                 </v-form>
                             </v-card-text>
+                            <br/>
+                            <span v-show="message">{{messageBan}}</span>
                         </v-card>
                     </v-tab-item>
                     <v-tab-item>
@@ -122,10 +124,16 @@ computed: {
                 }
             })
             .catch(error =>{
-            console.log(error)
-            this.$toast.error(error.response.data , {
-            timeout: 5000
-            })})}
+            if(error.response.status == 401){
+                this.message = true;
+                this.$toast.error(error.response.data , {
+                timeout: 5000
+                })
+            }else if(error.response.status === 429){
+                this.$toast.error("Your IP has been banned. Please try again in an hour." , {
+                timeout: 5000
+            })}
+        })}
       }
          if (this.$refs.registerForm.validate()) {
           if(this.currentTab == 1){
@@ -157,6 +165,8 @@ computed: {
   },
   data: () => ({
     dialog: true,
+    message: false,
+    messageBan: "You'll be banned with 10 failed attempts",
     tab: 0,
     currentTab: 0,
     tabs: [

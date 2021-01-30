@@ -2,6 +2,7 @@
 <template>
 <!-- https://codesandbox.io/s/n5y077y0wj?file=/src/components/NestedGrid.vue:1655-1946-->
 <div>
+
 <div class="hidden-md-and-up">
     <v-card class="mt-5 mb-8">
       <v-card-text>
@@ -17,7 +18,8 @@
       </v-card-text>
     </v-card>
 </div>
-  <div class="hidden-md-and-down">
+
+<div class="hidden-md-and-down">
 <v-card class="mt-5 mb-8"><div v-show="!loading">
     <h1 justify="center" align="center" class="subtitle-5 blue--text">TOEFL LISTENING WITH TRANSCRIPT AND DICTIONARY</h1>
       <v-card-text>
