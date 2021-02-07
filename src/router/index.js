@@ -8,7 +8,7 @@ import Study from '../views/Study.vue'
 import ReadingPractice from '../views/ReadingPractice.vue'
 import StudyYoutube from '../views/StudyYoutube.vue'
 import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+import AddSpeaking from '../views/AddSpeaking.vue'
 import Teste from '../views/Teste.vue'
 import Reading from '../views/Reading.vue'
 import VueCookies from 'vue-cookies'
@@ -124,6 +124,31 @@ const routes = [
     path: '/index',
     name: 'Study from YouTube',
     component: Study,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
+  }
+  ,
+  {
+    path: '/add-listening-lecture',
+    name: 'Add new lectures / Speaking section',
+    component: AddSpeaking,
     beforeEnter(to, from, next) {
         try {
             if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
