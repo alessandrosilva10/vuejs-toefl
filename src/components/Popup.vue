@@ -2,7 +2,16 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="1550px">
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" class="blue white--text ">Open Lesson</v-btn>
+    <v-btn
+        text
+        :to="route"
+        class="css"
+        v-bind="attrs"
+        v-on="on"
+      >
+      <v-icon small left>mdi-text</v-icon>
+        open the lesson
+      </v-btn>
       </template>
       <v-card>
         <v-card-title class="blue--text" primary-title>Listen to a conversation</v-card-title>

@@ -38,7 +38,7 @@
                 >
                 mdi-magnify
                 </v-icon>
-                        </div>
+             </div>
             </v-col>
         </v-row>
         <v-row
@@ -81,7 +81,7 @@ export default {
             my_string: "https://www.youtube.com/embed/",
             string: '',
             page: 1,
-            perPage: 6,
+            perPage: 9,
             loading: true,
             size: '150px',
             color: 'grey',

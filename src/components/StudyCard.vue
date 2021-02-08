@@ -20,7 +20,7 @@
     </v-list-item>
     <v-card-actions>
     <v-tooltip top>
-        <template v-slot:activator="{ on, attrs }">
+    <template v-slot:activator="{ on, attrs }">
         <v-btn
         text
         :to="route"
@@ -34,6 +34,7 @@
         </template>
         <span>Open the lesson? Let's study now?</span>
     </v-tooltip>
+
         <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-icon class="like-button-up" v-bind="attrs"
@@ -120,6 +121,14 @@ import axios from 'axios';
 
 .helpful{
     display: none;
+}
+
+.css{
+    display: none;
+}
+
+.css:hover .helpful{
+    display: block;
 }
 
 .like-button-up:hover .helpful{

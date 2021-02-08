@@ -3,6 +3,7 @@
     <v-row justify="center" align="center">
         <v-col cols="12" sm="10">
   <form>
+    <h1 style="text-align: center">Insert new Lectures and Conversations</h1><br>
     <v-text-field
       v-model="lecture"
       :counter="10"
@@ -10,21 +11,22 @@
       required
       @input="$v.name.$touch()"
       @blur="$v.name.$touch()"
-    ></v-text-field>
+    ></v-text-field><br>
     <v-select
         v-model="select"
         height="30"
           :items="items"
           label="TPO ID"
           outlined
-        ></v-select>
+        ></v-select><br>
      <v-textarea
           v-model="text"
+          style="border:1px solid"
           height="680"
           solo
           name="input-7-4"
           label="Lecture and/or conversation"
-        ></v-textarea>
+        ></v-textarea><br>
     <v-text-field
       v-model="google_drive_id"
       :counter="10"
@@ -34,13 +36,14 @@
       @blur="$v.name.$touch()"
     ></v-text-field>
     <v-checkbox
+    style="font-weight: bold;"
       v-model="checkbox"
       :error-messages="checkboxErrors"
       label="Do you agree?"
       required
       @change="$v.checkbox.$touch()"
       @blur="$v.checkbox.$touch()"
-    ></v-checkbox>
+    ></v-checkbox><br>
     <v-btn
       class="mr-4"
       @click="submit"
