@@ -23,7 +23,6 @@
   <Navbar/>
   <div v-if="!loading">
     <h1 justify="center" align="center" class="subtitle-5 blue--text">TOEFL LISTENING WITH TRANSCRIPT AND DICTIONARY</h1>
-
       <v-card-text>
         <v-container>
           <v-row>
@@ -34,14 +33,27 @@
                     :length="Math.ceil(tpos.length/perPage)">
                 </v-pagination>
             </v-col>
-            <input class="search1" type="text" v-model="string" placeholder="Search entire library..."/>
+            <v-col
+                class="d-flex"
+                cols="3"
+                sm="3"
+            >
+                <v-select
+                v-model="selected_tpo"
+            :items="items"
+            label="SELECT TPO"
+            outlined
+            ></v-select>
+            </v-col>
+
+            <!--<input class="search1" type="text" v-model="string" placeholder="Search entire library..."/>
                 <v-icon
                 class="search"
                 normal
                 color="blue darken-2"
                 >
                 mdi-magnify
-                </v-icon>
+                </v-icon>-->
             </v-row>
             <v-row>
             <v-col md="3" v-for="tpo in filteredItems" :key="tpo.id"><div class="main">
@@ -62,8 +74,9 @@
               <br/>
               <!--<div class="grey--text">{{ tpo.lecture}}</div>-->
             </v-card-text>
-                                  <img :src="img" class="img" width="150"/>
-                      <br>
+                <img :src="img" class="img" width="150"/>
+                      <br/> <br/>
+                     <div class="subheading">TPO {{tpo.tpo_id}}</div>
                       <div class="css">
                       <Popup :lecture="tpo.text" :mp3="tpo.mp3"/></div>
       </v-list-item-content>
@@ -128,10 +141,12 @@ export default {
             tpos: '',
             dialog: true,
             loading: true,
-            img: "https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg",
+            img: "https://i.ibb.co/rmS202b/TPO1.png",
             page: 1,
             perPage: 12,
-            string: ''
+            string: '',
+            items: ['ALL', 'TPO1', 'TPO2', 'TPO3', 'TPO4', 'TPO5'],
+            selected_tpo: ''
         }
     },
     methods: {
@@ -149,7 +164,11 @@ export default {
     }
     ,computed: {
         filteredItems: function() {
-            return this.filterByValue(this.tpos, this.string).slice((this.page - 1) * this.perPage, this.page* this.perPage);
+            if(this.selected_tpo === 'ALL' || this.selected_tpo === '') {
+                return this.filterByValue(this.tpos, '').slice((this.page - 1) * this.perPage, this.page* this.perPage);
+            }else{
+                return this.filterByValue(this.tpos, this.selected_tpo);
+            }
         },
   },
   created(){
