@@ -17,7 +17,7 @@
     </v-card>
 </div>
 <div class="hidden-md-and-down">
-    <h1 v-show="!loading" class="subheading grey--text title">Videos imported from  YouTube</h1>
+    <h1 v-show="!loading" class="subheading grey--text title">Imported  videos from  YouTube</h1>
     <v-container class="study-card my-5">
         <v-row>
             <v-col>
