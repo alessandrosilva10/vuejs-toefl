@@ -124,13 +124,13 @@ export default {
     },
     data(){
         return{
-            tpos: '1',
+            tpos: '',
             dialog: true,
             loading: true,
             img: "https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg",
             page: 1,
             perPage: 12,
-            string: '1'
+            string: ''
         }
     },
     methods: {
