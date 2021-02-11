@@ -1,31 +1,17 @@
 <template>
 <div id="app">
     <Navbar v-show="questionIndex === quiz.questions.length"/>
-{{selected}} {{selected22}}{{correctedAnwsers}}
-
   <div v-show="selected.length === 2">
     <table  v-show="questionIndex === quiz.questions.length">
-      <tr v-for="(s, i) in selected22" :key="i">
-        <th v-if="selected22[i] != 'Not Answered'">Resposta escolhida: {{selected[i]}}</th>
-        <th v-else-if="selected22[i] == 'Not Answered'">Resposta escolhida: 'Not Answered'</th>
+      <tr v-for="(s, i) in selected" :key="i">
+        <th v-if="selected[i] != 'Not Answered'">Resposta escolhida: {{selected[i]}}</th>
+        <th v-else-if="selected[i] == 'Not Answered'">Resposta escolhida: 'Not Answered'</th>
         <th>Resposta certa: {{correctedAnwsers[i]}}</th>
       </tr>
     </table>
   </div>
-
-  <div v-show="selected22.length === 2">
-    <table  v-show="questionIndex === quiz.questions.length">
-      <tr v-for="(s, i) in selected22" :key="i">
-        <th v-if="selected22[i] != 'Not Answered'">Resposta escolhida: {{selected[i]}}</th>
-        <th v-else-if="selected22[i] == 'Not Answered'">Resposta escolhida: 'Not Answered'</th>
-        <th>Resposta certa: {{correctedAnwsers[i]}}</th>
-      </tr>
-    </table>
-  </div>
-
-
   <h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>
-  <v-btn v-show="questionIndex > 1" @click="showResults = !showResults">Show answers</v-btn>
+  <v-btn v-show="questionIndex > 1 && questionIndex < 4" @click="showResults = !showResults">Show answer</v-btn>
   <!--<h1>{{ quiz.title }}</h1>-->
   <!-- index is used to check with current question index -->
   <div v-for="(question, index) in quiz.questions" :key="index">
@@ -42,6 +28,7 @@
           </v-col>
       </v-row>
       <v-row>
+          <br><br><br>
     <v-col class="answers-col" col="6">
       <ol type="A">
         <li v-for="(response, i) in question.responses" :key="i">
@@ -52,6 +39,9 @@
             up answers by question -->
             <!-- v-model creates binding with userResponses -->
             <input type="radio"
+            style="   border: 0px;
+    width: 10%;
+    height: 2em;"
                   @change="consoleFilter(response.correct, response.answered)"
                    v-bind:value="response.correct"
                    v-bind:name="index"
@@ -83,7 +73,7 @@
 </template>
 <script>
 import Navbar from '@/components/Navbar';
-import $ from 'jquery';
+import Vtabs from '@/components/Vtabs';
 
 //http://t.weixue100.com/toefl/read/result?aeid=396807
 var quiz = {
@@ -120,7 +110,7 @@ meteoric water is water that has soaked into the ground from the surface, from
 precipitation (rain and snow) and from lakes and streams. There it remains,
 sometimes for long periods, before emerging at the surface again. At first thought
 it seems incrediblethat there can be enough space in the “solid” ground underfoot
-to hold all this water.
+to hold all this water. <br/> <br/>
 The necessary space is there, however, in many forms. The commonest spaces are
 those among the particles—sand grains and tiny pebbles—of loose, unconsolidated
 sand and gravel. Beds of this material, out of sightbeneath the soil, are common.
@@ -128,7 +118,7 @@ They are found wherever fast rivers carrying loads of coarse sediment once flowe
 For example, as the great ice sheets that covered North America during the last ice
 age steadily melted away, huge volumes of water flowed from them. The water
 was always laden with pebbles, gravel, and sand, known as glacial outwash, that
-was deposited as the flow slowed down.
+was deposited as the flow slowed down. <br/> <br/>
 The same thing happens to this day, though on a smaller scale, wherever a
 sediment-laden river or stream emerges from a mountain valley onto relatively flat
 land, dropping its load as the current slows: the water usually spreads out fanwise,
@@ -136,36 +126,32 @@ depositing the sediment in the form of a smooth, fan-shaped slope. Sediments are
 also dropped where a river slows on entering a lake or the sea, the deposited
 sediments are on a lake floor or the seafloor at first, but will be located inland at
 some future date, when the sea level falls or the land rises; such beds are
-sometimes thousands of meters thick.
-TPO Reading Passages (www.ZabanExam.com)
-[14]
+sometimes thousands of meters thick. <br/> <br/>
 In lowland country almost any spot on the ground may overlie what was once the
 bed of a river that has since become buried by soil; if they are now below the
 water’s upper surface (the water table), the gravels and sands of the former
-riverbed, and its sandbars, will be saturated with groundwater.
+riverbed, and its sandbars, will be saturated with groundwater. <br/> <br/>
 So much for unconsolidated sediments. Consolidated (or cemented) sediments, too,
 contain millions of minute water-holding pores. This is because the gaps among
 the original grains are often not totally pluggedwith cementing chemicals; also,
 parts of the original grains may become dissolved by percolating groundwater,
 either while consolidation is taking place or at any time afterwards. The result is
 that sandstone, for example, can be as porous as the loose sand from which it was
-formed.
+formed. <br/> <br/>
 Thus a proportion of the total volume of any sediment, loose or cemented, consists
 of empty space. Most crystalline rocks are much more solid; a common exception
 is basalt, a form of solidified volcanic lava, which is sometimes full of tiny bubbles
-that make it very porous.
+that make it very porous. <br/> <br/>
 The proportion of empty space in a rock is known as its porosity. But note that
 porosity is not the same as permeability, which measures the ease with which
 water can flow through a material; this depends on the sizes of the individual
-cavities and the crevices linking them.
+cavities and the crevices linking them. <br/> <br/>
 Much of the water in a sample of water-saturated sediment or rock will drain from
 it if the sample is put in a suitable dry place. But some will remain, clinging to all
 solid surfaces. It is held there by the force of surface tension without which water
 would drain instantly from any wet surface, leaving it totally dry. The total volume
 of water in the saturated sample must therefore be thought of as consisting of water
-that can, and water that cannot, drain away.
-TPO Reading Passages (www.ZabanExam.com)
-[15]
+that can, and water that cannot, drain away. <br/> <br/>
 The relative amount of these two kinds of water varies greatly from one kind of
 rock or sediment to another, even though their porosities may be the same. What
 happens depends on pore size. If the pores are large, the water in them will exist as
@@ -177,30 +163,40 @@ held.
         <br/>
       `,
     },
-    {
-      text: `
-      Paragraph 1: ✦ Ordinary meteoric water is water that has soaked into the ground
-        from the surface, from precipitation (rain and snow) and from lakes and streams.
-        There it remains, sometimes for long periods, before emerging at the surface again.
-        At first thought it seems incredible that there can be enough space in the “solid”
-        ground underfoot to hold all this water.
-
+     {
+      text: `Paragraph 1: ✦ Groundwater is the word used to describe water that saturates the ground,filling all the available spaces. By far the most abundant type of groundwater is meteoric water; this is the groundwater that circulates as part of the water cycle. Ordinary meteoric water is water that has soaked into the ground from the surface, from precipitation (rain and snow) and from lakes and streams. There it remains, sometimes for long periods, before emerging at the surface again. At first thought it seems incredible that there can be enough space in the “solid” ground underfoot to hold all this water.
         <br><br>
-        2. The word <strong>“incredible”<strong> in the passage is closest in meaning to
-      `,
+        1. Which of the following can be inferred from paragraph 1 about the ground that we walk on?
+        `,
       responses: [
-        {text: 'confusing', answered: 'A'},
-        {text: 'comforting', answered: 'B', correct: 'B'},
-        {text: 'unbelievable', answered: 'C'},
-        {text: 'interesting', answered: 'D'},
+        {text: 'It cannot hold rainwater for long periods of time', answered: 'A'},
+        {text: 'It prevents most groundwater from circulating', answered: 'B', },
+        {text: 'It has the capacity to store large amounts of water', answered: 'C',  correct: 'C'},
+        {text: 'It absorbs most of the water it contains from rivers', answered: 'D', },
       ]
-    }, {
-      text: "Question 2",
+    },
+    {
+      text: `Paragraph 1: ✦ Groundwater is the word used to describe water that saturates the ground,filling all the available spaces. By far the most abundant type of groundwater is meteoric water; this is the groundwater that circulates as part of the water cycle. Ordinary meteoric water is water that has soaked into the ground from the surface, from precipitation (rain and snow) and from lakes and streams. There it remains, sometimes for long periods, before emerging at the surface again. At first thought it seems <strong>incredible</strong> that there can be enough space in the “solid” ground underfoot to hold all this water.
+        <br><br>
+        2.The word <strong>"incredible"</strong> in the passage is closest in meaning to
+        `,
       responses: [
-        {text: 'Right answer', answered: 'A', correct: 'A'},
-        {text: 'Wrong answer', answered: 'B', },
-        {text: 'Right answer', answered: 'C', },
-        {text: 'Wrong answer', answered: 'D', },
+        {text: 'Confusing', answered: 'A'},
+        {text: 'Comforting', answered: 'B', },
+        {text: 'Unbelievable', answered: 'C',  correct: 'C'},
+        {text: 'Interesting', answered: 'D', },
+      ]
+    },
+    {
+      text: `Paragraph 2: ✦The necessary space is there, however, in many forms. The commonest spaces are those among the particles—sand grains and tiny pebbles—of loose, unconsolidated sand and gravel. Beds of this material, <strong>out of sight</strong> beneath the soil, are common. They are found wherever fast rivers carrying loads of coarse sediment once flowed. For example, as the great ice sheets that covered North America during the last ice age steadily melted away, huge volumes of water flowed from them. The water was always laden with pebbles, gravel, and sand, known as glacial outwash, that was deposited as the flow slowed down.
+        <br><br>
+        3.The word <strong>"out of sight"</strong> in the passage is closest in meaning to
+        `,
+      responses: [
+        {text: 'Far away', answered: 'A'},
+        {text: 'Hidden', answered: 'B', correct: 'B'},
+        {text: 'Partly visible', answered: 'C'},
+        {text: 'Discovered', answered: 'D', },
       ]
     }
   ]
@@ -208,13 +204,13 @@ held.
 
 export default {
         components: {
-        Navbar
+        Navbar, Vtabs
     },
     data() {
      return {
         scrolledToBottom: false,
         quiz: quiz,
-        correctedAnwsers: ['B', 'A'],
+        correctedAnwsers: ['C', 'C', 'B'],
         selected: [''],
         showResults: false,
         selected22: [''],
