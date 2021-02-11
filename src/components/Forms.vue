@@ -82,7 +82,7 @@
       text: '',
       google_drive_id: 'http://docs.google.com/uc?export=open&id=',
       lecture: '',
-      items: [...Array(25).keys()],
+      items: [...Array(80).keys()],
       select: null,
       checkbox: false,
     }),
@@ -115,7 +115,12 @@
         return errors
       },
     },
-
+    created () {
+        const tpos = this.items.map(item => {
+            return 'TPO'+item
+        })
+        this.items = tpos;
+    },
     methods: {
       submit () {
         this.$v.$touch()
