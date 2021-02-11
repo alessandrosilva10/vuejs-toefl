@@ -9,6 +9,7 @@ import ReadingPractice from '../views/ReadingPractice.vue'
 import StudyYoutube from '../views/StudyYoutube.vue'
 import Login from '../views/Login.vue'
 import AddSpeaking from '../views/AddSpeaking.vue'
+import Contact from '../views/Contact.vue'
 import Teste from '../views/Teste.vue'
 import Reading from '../views/Reading.vue'
 import VueCookies from 'vue-cookies'
@@ -278,6 +279,11 @@ const routes = [
           catch(err) {
 
         }},
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact,
   }
 ]
 

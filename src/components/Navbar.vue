@@ -43,8 +43,9 @@ export default {
                 { icon: 'mdi-youtube', text: 'Study', route: '/index' ,
                     subLinks: [
                         { text: "Add Driver", route: "/drivers/add" },
-                        { text: "Add Driver", route: "/drivers/add" }
+                        { text: "Add Driver", route: "/drivers/add" },
                     ]},
+                { icon: 'mdi-message', text: 'Contact', route: '/contact' },
             ],
         }
     },
