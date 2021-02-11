@@ -20,7 +20,7 @@
     </table>
   </div>
   <h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>
-  <v-btn v-show="questionIndex > 1 && questionIndex < 4" @click="showResults = !showResults">Show answer</v-btn>
+  <!--<v-btn v-show="questionIndex > 1 && questionIndex < 4" @click="showResults = !showResults">Show answer</v-btn>-->
   <!--<h1>{{ quiz.title }}</h1>-->
   <!-- index is used to check with current question index -->
   <div v-for="(question, index) in quiz.questions" :key="index">
@@ -29,7 +29,7 @@
     <v-row>
     <br><br><br>
     <v-col class="answers-col" col="10">
-      <v-col col="2"><span v-html="question.question"/></v-col>
+      <v-col col="2"><span class="justify" v-html="question.question"/></v-col>
       <ol type="A">
         <li v-for="(response, i) in question.responses" :key="i">
           <label>
@@ -174,7 +174,7 @@ var quiz_tpo_01 = {
       text: `Paragraph 1: ✦ Groundwater is the word used to describe water that saturates the ground,filling all the available spaces. By far the most abundant type of groundwater is meteoric water; this is the groundwater that circulates as part of the water cycle. Ordinary meteoric water is water that has soaked into the ground from the surface, from precipitation (rain and snow) and from lakes and streams. There it remains, sometimes for long periods, before emerging at the surface again. At first thought it seems <strong>incredible</strong> that there can be enough space in the “solid” ground underfoot to hold all this water.
         <br><br>
         `,
-      question: `2.The word <strong>"incredible"</strong> in the passage is closest in meaning to`,
+      question: `2. The word <strong>"incredible"</strong> in the passage is closest in meaning to`,
       responses: [
         {text: 'Confusing', answered: 'A'},
         {text: 'Comforting', answered: 'B', },
@@ -183,10 +183,10 @@ var quiz_tpo_01 = {
       ]
     },
     {
-      text: `Paragraph 2: ✦The necessary space is there, however, in many forms. The commonest spaces are those among the particles—sand grains and tiny pebbles—of loose, unconsolidated sand and gravel. Beds of this material, <strong>out of sight</strong> beneath the soil, are common. They are found wherever fast rivers carrying loads of coarse sediment once flowed. For example, as the great ice sheets that covered North America during the last ice age steadily melted away, huge volumes of water flowed from them. The water was always laden with pebbles, gravel, and sand, known as <strong>glacial outwash</strong>, that was deposited as the flow slowed down.
+      text: `Paragraph 2: ✦ The necessary space is there, however, in many forms. The commonest spaces are those among the particles—sand grains and tiny pebbles—of loose, unconsolidated sand and gravel. Beds of this material, <strong>out of sight</strong> beneath the soil, are common. They are found wherever fast rivers carrying loads of coarse sediment once flowed. For example, as the great ice sheets that covered North America during the last ice age steadily melted away, huge volumes of water flowed from them. The water was always laden with pebbles, gravel, and sand, known as glacial outwash, that was deposited as the flow slowed down.
         <br><br>
         `,
-      question: '3.The word <strong>"out of sight"</strong> in the passage is closest in meaning to',
+      question: '3. The word <strong>"out of sight"</strong> in the passage is closest in meaning to',
       responses: [
         {text: 'Far away', answered: 'A'},
         {text: 'Hidden', answered: 'B', correct: 'B'},
@@ -195,10 +195,10 @@ var quiz_tpo_01 = {
       ]
     },
     {
-      text: `Paragraph 2: ✦The necessary space is there, however, in many forms. The commonest spaces are those among the particles—sand grains and tiny pebbles—of loose, unconsolidated sand and gravel. Beds of this material, out of sight beneath the soil, are common. They are found wherever fast rivers carrying loads of coarse sediment once flowed. For example, as the great ice sheets that covered North America during the last ice age steadily melted away, huge volumes of water flowed from them. The water was always laden with pebbles, gravel, and sand, known as glacial outwash, that was deposited as the flow slowed down.
+      text: `Paragraph 2: ✦ The necessary space is there, however, in many forms. The commonest spaces are those among the particles—sand grains and tiny pebbles—of loose, unconsolidated sand and gravel. Beds of this material, out of sight beneath the soil, are common. They are found wherever fast rivers carrying loads of coarse sediment once flowed. For example, as the great ice sheets that covered North America during the last ice age steadily melted away, huge volumes of water flowed from them. The water was always laden with pebbles, gravel, and sand, known as glacial outwash, that was deposited as the flow slowed down.
         <br><br>
         `,
-      question: '4.According to paragraph 2, where is groundwater usually found?',
+      question: '4. According to paragraph 2, where is groundwater usually found?',
       responses: [
         {text: 'Inside pieces of sand and gravel', answered: 'A'},
         {text: 'On top of beds of rock', answered: 'B'},
@@ -207,7 +207,7 @@ var quiz_tpo_01 = {
       ]
     },
     {
-      text: `Paragraph 2: ✦The necessary space is there, however, in many forms. The commonest spaces are those among the particles—sand grains and tiny pebbles—of loose, unconsolidated sand and gravel. Beds of this material, out of sight beneath the soil, are common. They are found wherever fast rivers carrying loads of coarse sediment once flowed. For example, as the great ice sheets that covered North America during the last ice age steadily melted away, huge volumes of water flowed from them. The water was always laden with pebbles, gravel, and sand, known as glacial outwash, that was deposited as the flow slowed down.
+      text: `Paragraph 2: ✦ The necessary space is there, however, in many forms. The commonest spaces are those among the particles—sand grains and tiny pebbles—of loose, unconsolidated sand and gravel. Beds of this material, out of sight beneath the soil, are common. They are found wherever fast rivers carrying loads of coarse sediment once flowed. For example, as the great ice sheets that covered North America during the last ice age steadily melted away, huge volumes of water flowed from them. The water was always laden with pebbles, gravel, and sand, known as <strong>glacial outwash</strong>, that was deposited as the flow slowed down.
         <br><br>
         `,
       question: '5.The phrase <strong>"glacial outwash"</strong> in the passage refers to',
@@ -216,6 +216,30 @@ var quiz_tpo_01 = {
         {text: 'Glaciers', answered: 'B'},
         {text: 'The huge volumes of water created by glacial melting', answered: 'C'},
         {text: 'The particles carried in water from melting glaciers', answered: 'D', correct: 'D' },
+      ]
+    },
+    {
+      text: `Paragraph 3: ✦ The same thing happens to this day, though on a smaller scale, wherever a sediment-laden river or stream emerges from a mountain valley onto relatively flat land, dropping its load as the current slows: the water usually spreads out fanwise, depositing the sediment in the form of a smooth, fan-shaped slope. Sediments are also dropped where a river slows on entering a lake or the sea, the deposited sediments are on a lake floor or the seafloor at first, but will be located inland at some future date, when the sea level falls or the land rises; such beds are sometimes thousands of meters thick.
+        <br><br>
+        `,
+      question: '6. All of the following are mentioned in paragraph 3 as places that sediment-laden rivers can deposit their sediments EXCEPT',
+      responses: [
+        {text: 'A mountain valley', answered: 'A', correct: 'A' },
+        {text: 'Flat land', answered: 'B'},
+        {text: 'A lake floor', answered: 'C'},
+        {text: 'The seafloor', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 4: ✦ In lowland country almost any spot on the ground may <strong>overlie</strong> what was once the bed of a river that has since become buried by soil; if they are now below the water’s upper surface (the water table), the gravels and sands of the former riverbed, and its sandbars, will be saturated with groundwater.
+        <br><br>
+        `,
+      question: '7. The word "overlie" in the passage is closest in meaning to',
+      responses: [
+        {text: 'Cover', answered: 'A', correct: 'A' },
+        {text: 'Change', answered: 'B'},
+        {text: 'Separate', answered: 'C'},
+        {text: 'Surround', answered: 'D'},
       ]
     }
   ]
@@ -229,7 +253,7 @@ export default {
      return {
         scrolledToBottom: false,
         quiz: quiz_tpo_01,
-        correctedAnwsers: ['C', 'C', 'B', 'D'],
+        correctedAnwsers: ['C', 'C', 'B', 'D', 'A', 'A'],
         selected: [''],
         showResults: false,
         selected22: [''],
@@ -311,8 +335,8 @@ export default {
 }
 
 #app {
-  margin-left: 150px;
-  margin-right: 250px;
+  margin-left: 120px;
+  margin-right: 220px;
 }
 
 .answers-col{
