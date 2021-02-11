@@ -18,10 +18,12 @@
       </v-card-text>
     </v-card>
 </div>
-<div class="hidden-md-and-down">
-<v-card class="mt-5 mb-8"><div v-show="!loading">
+<div class="hidden-md-and-down"><div v-if="loading"><Spinner /></div>
+<v-card class="mt-5 mb-8">
+  <Navbar/>
+  <div v-if="!loading">
     <h1 justify="center" align="center" class="subtitle-5 blue--text">TOEFL LISTENING WITH TRANSCRIPT AND DICTIONARY</h1>
-    <Navbar/>
+
       <v-card-text>
         <v-container>
           <v-row>
@@ -104,7 +106,7 @@
         </v-container>
       </v-card-text></div>
     </v-card>
-    <div v-show="loading"><Spinner /></div>
+
     </div>
   </div>
 </template>
@@ -122,13 +124,13 @@ export default {
     },
     data(){
         return{
-            tpos: '',
-             dialog: true,
-             loading: true,
-             img: "https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg",
+            tpos: '1',
+            dialog: true,
+            loading: true,
+            img: "https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg",
             page: 1,
             perPage: 12,
-            string: ''
+            string: '1'
         }
     },
     methods: {
@@ -149,6 +151,9 @@ export default {
             return this.filterByValue(this.tpos, this.string).slice((this.page - 1) * this.perPage, this.page* this.perPage);
         },
   },
+  created(){
+
+  },
   mounted() {
   // GET request using axios with set headers
     this.interval = setInterval(() => {
@@ -160,6 +165,7 @@ export default {
     ,beforeDestroy () {
       //clearInterval(this.interval)
     },
+
 }
 </script>
 <style scoped>
