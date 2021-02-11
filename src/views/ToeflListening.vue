@@ -59,7 +59,8 @@
       <v-list-item-content>
             <v-card-text>
               <div class="subheading">{{ tpo.lecture }}</div>
-              <div class="grey--text">{{ tpo.lecture}}</div>
+              <br/>
+              <!--<div class="grey--text">{{ tpo.lecture}}</div>-->
             </v-card-text>
                                   <img :src="img" class="img" width="150"/>
                       <br>

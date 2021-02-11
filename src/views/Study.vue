@@ -22,8 +22,8 @@
         <v-row>
             <v-col>
                 <v-pagination
+                    v-if="!loading"
                     class="pagination"
-                    v-show="this.filteredItems.length > 2"
                     v-model="page"
                     :length="Math.ceil(youtube.length/perPage)">
                 </v-pagination>
