@@ -7,7 +7,17 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
-      <h3>Question {{(questionIndex-questionIndexDecrementByText) + 2 }} of {{quiz.questions.length-questionIndexDecrementByText}} </h3><br/> <br/> <br/>
+      <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
+        <h3>
+          Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
+        </h3>
+      </div>
+      <div v-else>
+          <h3>
+          Question {{(questionIndex-questionIndexDecrementByText)}} of {{(quiz.questions.length-questionIndexDecrementByText) - 1}}
+        </h3>
+      </div>
+      <br/> <br/> <br/>
     </div>
     <v-card min-height="1000px">
   <div v-show="selected.length === 2">
@@ -30,20 +40,51 @@
     <br><br><br>
     <v-col class="answers-col" col="10">
       <v-col col="2"><span class="justify" v-html="question.question"/></v-col>
-      <ol type="A">
-        <li v-for="(response, i) in question.responses" :key="i">
-          <label>
-            <input type="radio"
-              style="   border: 0px;
-              width: 10%;
-              height: 2em;"
-              @change="consoleFilter(response.correct, response.answered)"
-                v-bind:value="response.correct"
-                v-bind:name="index"
-                v-model="userResponses[index]"> {{response.text}}
-          </label>
-        </li>
-      </ol>
+      <div v-if="questionIndex !=15">
+        <ol type="A">
+            <li v-for="(response, i) in question.responses" :key="i">
+            <label>
+                <input type="radio"
+                style="   border: 0px;
+                width: 10%;
+                height: 2em;"
+                @change="consoleFilter(response.correct, response.answered)"
+                    v-bind:value="response.correct"
+                    v-bind:name="index"
+                    v-model="userResponses[index]"> {{response.text}}
+            </label>
+            </li>
+        </ol>
+      </div>
+       <!--:disabled="userResponses.length > 3 && userResponses.indexOf(n) === -1"-->
+       <div v-if="questionIndex === 15">
+        <ol type="A">
+            <li v-for="(response, i) in question.responses" :key="i">
+                <label>
+                <v-container fluid>
+                    <v-checkbox
+                      v-model="userResponses[i+14]"
+                      :label="response.text"
+                      v-bind:value="response.correct"
+                      @click="removeItemFromArray(i)"
+                    ></v-checkbox>
+                  </v-container>
+                  <!--
+                    <input
+                    @click="removeItemFromArray(i)"
+                    type="checkbox"
+                    style="border: 0px;
+                    width: 10%;
+                    height: 2em;"
+                    :disabled="userResponsesMulti.length > 3 && userResponsesMulti.indexOf(n) === -1"
+                    v-bind:value="response.correct"
+                    v-bind:name="index"
+                    v-model="userResponsesMulti[i]"> {{response.text}}-->
+                </label>
+            </li>
+        </ol>
+      </div>
+
       </v-col>
         <v-col class="text-col" col="10">
          <span class="justify" v-html="question.text">
@@ -63,10 +104,11 @@
   </div>
   <div v-show="questionIndex === quiz.questions.length">
     <h2>
-    Quiz finished
+    COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON!
   </h2>
+  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
     <p>
-      Total score: {{ score() }} / {{ quiz.questions.length - questionIndexDecrementByText }}
+      Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
     </p>
     <v-btn @click="saveDatabase(quiz.questions.length - 2)"> Save scores?</v-btn>
   </div>
@@ -333,84 +375,91 @@ var quiz_tpo_01 = {
       ]
     },{
       text: `
-        Desert Formation
+        The Origins of Theater
         <br><br>
-        The deserts, which already occupy approximately a fourth of the Earth's land
-        surface, have in recent decades been increasing at an alarming pace. The expansion
-        of desert-like conditions into areas where they did not previously exist is called
-        desertification. It has been estimated that an additional one-fourth of the Earth's
-        land surface is threatened by this process.<br><br>
-        Desertification is accomplished primarily through the loss of stabilizing natural
-vegetation and the subsequent accelerated erosion of the soil by wind and water. In
-some cases the loose soil is blown completely away, leaving a stony surface. In
-other cases, the finer particles may be removed, while the sand-sized particles are
-accumulated to form mobile hills or ridges of sand.<br><br>
-Even in the areas that retain a soil cover, the reduction of vegetation typically
-results in the loss of the soil's ability to absorb substantial quantities of water. The
-impact of raindrops on the loose soil tends to transfer fine clay particles into the
-tiniest soil spaces, sealing them and producing a surface that allows very little
-water penetration. Water absorption is greatly reduced; consequently runoff is
-increased, resulting in accelerated erosion rates. The gradual drying of the soil
-caused by its diminished ability to absorb water results in the further loss of
-vegetation, so that a cycle of progressive surface deterioration is established.<br><br>
-In some regions, the increase in desert areas is occurring largely as the result of a
-trend toward drier climatic conditions. Continued gradual global warming has
-produced an increase in aridity for some areas over the past few thousand years.
-The process may be accelerated in subsequent decades if global warming resulting
-from air pollution seriously increases.<br><br>
-There is little doubt, however, that desertification in most areas results primarily
-from human activities rather than natural processes. The semiarid lands bordering
-the deserts exist in a delicate ecological balance and are limited in their potential to
-adjust to increased environmental pressures. Expanding populations are subjecting
-the land to increasing pressures to provide them with food and fuel. In wet periods,
-the land may be able to respond to these stresses. During the dry periods that are
-common phenomena along the desert margins, though, the pressure on the land is
-often far in excess of its diminished capacity, and desertification results.<br><br>
-Four specific activities have been identified as major contributors to the
-desertification processes: overcultivation, overgrazing, firewood gathering, and
-overirrigation. The cultivation of crops has expanded into progressively drier
-regions as population densities have grown. These regions are especially likely to
-have periods of severe dryness, so that crop failures are common. Since the raising
-of most crops necessitates the prior removal of the natural vegetation, crop failures
-leave extensive tracts of land devoid of a plant cover and susceptible to wind and
-water erosion.<br><br>
-The raising of livestock is a major economic activity in semiarid lands, where
-grasses are generally the dominant type of natural vegetation. The consequences of
-an excessive number of livestock grazing in an area are the reduction of the
-vegetation cover and the trampling and pulverization of the soil. This is usually
-followed by the drying of the soil and accelerated erosion.<br><br>
-Firewood is the chief fuel used for cooking and heating in many countries. The
-increased pressures of expanding populations have led to the removal of woody
-plants so that many cities and towns are surrounded by large areas completely
-lacking in trees and shrubs. The increasing use of dried animal waste as a substitute
-fuel has also hurt the soil because this valuable soil conditioner and source of plant
-nutrients is no longer being returned to the land.<br><br>
-The final major human cause of desertification is soil salinization resulting from
-overirrigation. Excess water from irrigation sinks down into the water table. If no
-drainage system exists, the water table rises, bringing dissolved salts to the surface.
-The water evaporates and the salts are left behind, creating a white crustal layer
-that prevents air and water from reaching the underlying soil.<br><br>
-The extreme seriousness of desertification results from the vast areas of land and
-the tremendous numbers of people affected, as well as from the great difficulty of
-reversing or even slowing the process. Once the soil has been removed by erosion,
-only the passage of centuries or millennia will enable new soil to form. In areas
-where considerable soil still remains, though, a rigorously enforced program of
-land protection and cover-crop planting may make it possible to reverse the present
-deterioration of the surface.<br><br>
+        In seeking to describe the origins of theater, one must rely primarily on
+        speculation, since there is little concrete evidence on which to draw. The most
+        widely accepted theory, championed by anthropologists in the late nineteenth and
+        early twentieth centuries, envisions theater as emerging out of myth and ritual. The
+        process perceived by these anthropologists may be summarized briefly. During the
+        early stages of its development, a society becomes aware of forces that appear to
+        influence or control its food supply and well-being. Having little understanding of
+        natural causes, it attributes both desirable and undesirable occurrences to
+        supernatural or magical forces, and it searches for means to win the favor of these
+        forces. Perceiving an apparent connection between certain actions performed by
+        the group and the result it desires, the group repeats, refines and formalizes those
+        actions into fixed ceremonies, or rituals.<br><br>
+        Stories (myths) may then grow up around a ritual. Frequently the myths include
+        representatives of those supernatural forces that the rites celebrate or hope to
+        influence. Performers may wear costumes and masks to represent the mythical
+        characters or supernatural forces in the rituals or in accompanying celebrations. As
+        a people becomes more sophisticated, its conceptions of supernatural forces and
+        causal relationships may change. As a result, it may abandon or modify some rites.
+        But the myths that have grown up around the rites may continue as part of the
+        group’s oral tradition and may even come to be acted out under conditions
+        divorced from these rites. When this occurs, the first step has been taken toward
+        theater as an autonomous activity, and thereafter entertainment and aesthetic values
+        may gradually replace the former mystical and socially efficacious concerns.<br><br>
+        Although origin in ritual has long been the most popular, it is by no means the only
+        theory about how the theater came into being.Storytelling has been proposed as
+        one alternative. Under this theory, relating and listening to stories are seen as
+        fundamental human pleasures. Thus, the recalling of an event (a hunt, battle, or
+        other feat) is elaborated through the narrator’s pantomime and impersonation and
+        eventually through each role being assumed by a different person.<br><br>
+        A closely related theory sees theater as evolving out of dances that are primarily
+        pantomimic, rhythmical or gymnastic, or from imitations of animal noises and
+        sounds. Admiration for the performer’s skill, virtuosity, and grace are seen as
+        motivation for elaborating the activities into fully realized theatrical performances.
+        In addition to exploring the possible antecedents of theater, scholars have also
+        theorized about the motives that led people to develop theater. Why did theater
+        develop, and why was it valued after it ceased to fulfill the function of ritual? Most
+        answers fall back on the theories about the human mind and basic human needs.
+        One, set forth by Aristotle in the fourth century B.C., sees humans as naturally
+        imitative—as taking pleasure in imitating persons, things, and actions and in seeing
+        such imitations. Another, advanced in the twentieth century, suggests that humans
+        have a gift for fantasy, through which they seek to reshape reality into more
+        satisfying forms than those encountered in daily life. Thus, fantasy or fiction (of
+        which drama is one form) permits people to objectify their anxieties and fears,
+        confront them, and fulfill their hopes in fiction if not fact. The theater, then, is one
+        tool whereby people define and understand their world or escape from unpleasant
+        realities.<br><br>
+        But neither the human imitative instinct nor a penchant for fantasy by itself leads
+        to an autonomous theater. Therefore, additional explanations are needed. One
+        necessary condition seems to be a somewhat detached view of human problems.
+        For example, one sign of this condition is the appearance of the comic vision,
+        since comedy requires sufficient detachment to view some deviations from social
+        norms as ridiculous rather than as serious threats to the welfare of the entire group.
+        Another condition that contributes to the development of autonomous theater is the
+        emergence of the aesthetic sense. For example, some early societies ceased to
+        consider certain rites essential to their well-being and abandoned them,
+        nevertheless, they retained as parts of their oral tradition the myths that had grown
+        up around the rites and admired them for their artistic qualities rather than for their
+        religious usefulness.<br><br>
       `},
      {
-      text: `Paragraph 5: ✦ There is little doubt, however, that desertification in most areas results primarily from human activities rather than natural processes. The semiarid lands bordering the deserts exist in a <strong>delicate</strong> ecological balance and are limited in their potential to adjust to increased environmental pressures. Expanding populations are subjecting the land to increasing pressures to provide them with food and fuel. In wet periods, the land may be able to respond to these stresses. During the dry periods that are common phenomena along the desert margins, though, the pressure on the land is often far in excess of its diminished capacity, and desertification results..
+      text: `Paragraph 1: ✦ In seeking to describe the origins of theater, one must rely primarily on speculation, since there is little concrete evidence on which to draw. The most widely accepted theory, <strong>championed</strong> by anthropologists in the late nineteenth and early twentieth centuries, envisions theater as emerging out of myth and ritual. The process perceived by these anthropologists may be summarized briefly. During the early stages of its development, a society becomes aware of forces that appear to influence or control its food supply and well-being. Having little understanding of natural causes, it attributes both desirable and undesirable occurrences to supernatural or magical forces, and it searches for means to win the favor of these forces. Perceiving an apparent connection between certain actions performed by the group and the result it desires, the group repeats, refines and formalizes those actions into fixed ceremonies, or rituals.
         <br><br>
         `,
-      question: '1. The word "delicate" in the passage is closest in meaning to',
+      question: '1. The word “championed” in the passage is closest in meaning to',
       responses: [
-        {text: 'Fragile', answered: 'A', correct: 'A'},
-        {text: 'Predictable', answered: 'B'},
-        {text: 'Complex', answered: 'C'},
-        {text: 'Valuable', answered: 'D'},
+        {text: 'Changed', answered: 'A'},
+        {text: 'Debated', answered: 'B'},
+        {text: 'Created', answered: 'C'},
+        {text: 'Supported', answered: 'D', correct: 'D'},
       ]
     }
-    ,
+    ,{
+      text: `Paragraph 1: ✦ In seeking to describe the origins of theater, one must rely primarily on speculation, since there is little concrete evidence on which to draw. The most widely accepted theory, championed by anthropologists in the late nineteenth and early twentieth centuries, envisions theater as emerging out of myth and ritual. The process perceived by these anthropologists may be summarized briefly. During the early stages of its development, a society becomes aware of forces that appear to influence or control its food supply and well-being. Having little understanding of natural causes, it <strong>attributes</strong> both desirable and undesirable occurrences to supernatural or magical forces, and it searches for means to win the favor of these forces. Perceiving an apparent connection between certain actions performed by the group and the result it desires, the group repeats, refines and formalizes those actions into fixed ceremonies, or rituals.
+        <br><br>
+        `,
+      question: '2. The word “championed” in the passage is closest in meaning to',
+      responses: [
+        {text: 'Ascribes', answered: 'A', correct: 'A'},
+        {text: 'Leaves', answered: 'B'},
+        {text: 'Limits', answered: 'C'},
+        {text: 'Contrasts', answered: 'D'},
+      ]
+    },
   ]
 };
 //https://t.weixue100.com/toefl/read/34925/27645.html##
@@ -420,10 +469,10 @@ export default {
     },
     data() {
      return {
-        questionIndexDecrementByText: 3,
+        questionIndexDecrementByText: 2,
         scrolledToBottom: false,
         quiz: quiz_tpo_01,
-        correctedAnwsers: ['C', 'C', 'B', 'D', 'A', 'A', 'A', 'C', 'B', 'D', 'A'],
+        correctedAnwsers: ['C', 'C', 'B', 'D','D', 'A', 'A', 'A', 'C', 'B', 'D', 'A', 'D', 'A', 'B', 'C', 'D', 'A',],
         selected: [''],
         showResults: false,
         selected22: [''],
@@ -431,7 +480,8 @@ export default {
         questionIndex: 0,
         // An array initialized with "false" values for each question
         // It means: "did the user answered correctly to the question n?" "no".
-        userResponses: Array(quiz_tpo_01.questions.length).fill(false)
+        userResponses: Array(quiz_tpo_01.questions.length).fill(false),
+        userResponsesMulti: []
      }
     }, methods: {
     consoleFilter(response, answered) {
@@ -448,6 +498,10 @@ export default {
       }
 
     },
+    removeItemFromArray (i) {
+        alert(i)
+    }
+    ,
         saveDatabase(score){
             alert(score)
             alert(this.$route.params.tpo_id)
