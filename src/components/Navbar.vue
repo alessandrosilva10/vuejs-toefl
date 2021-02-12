@@ -8,10 +8,59 @@
                 <span>Made Easy</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
+        <!--<v-btn text color="grey">
+                <span @click="signOut()">Profile</span>
+                <v-icon right>mdi-account-cog-outline</v-icon>
+            </v-btn>
             <v-btn text color="grey">
                 <span @click="signOut()">Sign Out</span>
                 <v-icon right>mdi-exit-to-app</v-icon>
             </v-btn>
+            <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>-->
+        <v-menu
+            left
+            bottom
+        >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-cog-outline</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>
+            <v-btn text color="grey">
+                <span @click="signOut()">Profile</span>
+                <v-icon right>mdi-account-cog-outline</v-icon>
+            </v-btn>
+            </v-list-item-title>
+          </v-list-item>
+           <v-list-item>
+            <v-list-item-title>
+            <v-btn text color="grey">
+                <span @click="signOut()">Scoreboard</span>
+                <v-icon right>mdi-eyedropper-minus</v-icon>
+            </v-btn>
+            </v-list-item-title>
+          </v-list-item>
+            <v-list-item>
+            <v-list-item-title>
+                <v-btn text color="grey">
+                    <span @click="signOut()">Sign Out</span>
+                    <v-icon right>mdi-exit-to-app</v-icon>
+                </v-btn>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+
+      </v-menu>
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" app class="blue">
             <v-list>
