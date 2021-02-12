@@ -5,7 +5,8 @@
         <v-container class="my-5">
             <v-layout row>
                 <v-flex xs12 md6>
-                    Dashboard
+                    Coming soon!
+                    <Chart/>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -20,11 +21,12 @@
 
 <script>
 import Navbar from '@/components/Navbar';
+import Chart from '@/components/Chart';
 // @ is an alias to /src
 export default {
     name: 'Dashboard',
     components: {
-        Navbar
+        Navbar, Chart
        // VuetifyAudio: () => import('vuetify-audio'),
     },
     data: () => ({

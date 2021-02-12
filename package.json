@@ -10,11 +10,13 @@
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.26",
     "axios": "^0.21.1",
+    "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
     "jw-vue-pagination": "^1.0.3",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.1",
     "vue-cookies": "^1.7.4",
     "vue-loader": "^15.9.6",
     "vue-pdf": "^4.2.0",
