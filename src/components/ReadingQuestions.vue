@@ -7,7 +7,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
-      <h3>Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{quiz.questions.length-questionIndexDecrementByText}} </h3><br/> <br/> <br/>
+      <h3>Question {{(questionIndex-questionIndexDecrementByText) + 2 }} of {{quiz.questions.length-questionIndexDecrementByText}} </h3><br/> <br/> <br/>
     </div>
     <v-card min-height="1000px">
   <div v-show="selected.length === 2">
