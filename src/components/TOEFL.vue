@@ -60,17 +60,24 @@
 </template>
 <script>
 import axios from 'axios';
+//import Vue from 'vue';
+//import VueRouter from 'vue-router';
+
+//Vue.use(VueRouter)
+
   export default {
       props: ['thumbnail'],
       tpos: 63,
       data: () => ({
           active_helpful: false,
           active_not_helpful: false,
-          tpos: 63
+          tpos: 63,
       }),
       methods: {
         openTPO(i){
             window.open('/toefl/reading&tpo=' + i,'_self')
+           //Router.push();
+         //this.$router.push('/toefl/reading&tpo=' + i);
         },
         mouseOverHelpful: function(){
             this.active_helpful = !this.active_helpful;
