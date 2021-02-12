@@ -241,6 +241,96 @@ var quiz_tpo_01 = {
         {text: 'Separate', answered: 'C'},
         {text: 'Surround', answered: 'D'},
       ]
+    },
+    {
+      text: `Paragraph 5: ✦ <strong>So much for</strong> unconsolidated sediments. Consolidated (or cemented) sediments, too, contain millions of minute water-holding pores. This is because the gaps among the original grains are often not totally plugged with cementing chemicals; also, parts of the original grains may become dissolved by percolating groundwater, either while consolidation is taking place or at any time afterwards. The result is that sandstone, for example, can be as porous as the loose sand from which it was formed.
+        <br><br>
+        `,
+      question: '8. The phrase "So much for" in the passage is closest in meaning to',
+      responses: [
+        {text: 'That is enough about', answered: 'A', correct: 'A' },
+        {text: 'Now let us turn to', answered: 'B'},
+        {text: 'Of greater concern are', answered: 'C'},
+        {text: 'This is related to', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 5: ✦ So much for unconsolidated sediments. Consolidated (or cemented) sediments, too, contain millions of minute water-holding pores. This is because the gaps among the original grains are often not totally <strong>plugged</strong> with cementing chemicals; also, parts of the original grains may become dissolved by percolating groundwater, either while consolidation is taking place or at any time afterwards. The result is that sandstone, for example, can be as porous as the loose sand from which it was formed.
+        <br><br>
+        `,
+      question: '9. The word "plugged" in the passage is closet in meaning to',
+      responses: [
+        {text: 'Washed', answered: 'A'},
+        {text: 'Dragged', answered: 'B'},
+        {text: 'Filled up', answered: 'C', correct: 'C' },
+        {text: 'Soaked through', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 6: ✦ Thus a proportion of the total volume of any sediment, loose or cemented, consists of empty space. Most crystalline rocks are much more solid; a common exception is basalt, a form of solidified volcanic lava, which is sometimes full of tiny bubbles that make it very porous.
+        <br> <br>
+        Paragraph 7: ✦ The proportion of empty space in a rock is known as its porosity. But note that porosity is not the same as permeability, which measures the ease with which water can flow through a material; this depends on the sizes of the individual cavities and the crevices linking them.
+        <br><br>
+        `,
+      question: '10. According to paragraphs 6 and 7, why is basalt unlike most crystalline forms of rock?',
+      responses: [
+        {text: 'It is unusually solid.', answered: 'A'},
+        {text: 'It often has high porosity.', answered: 'B', correct: 'B'},
+        {text: 'It has a low proportion of empty space.', answered: 'C'},
+        {text: 'It is highly permeable', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 7: ✦ The proportion of empty space in a rock is known as its porosity. But note that porosity is not the same as permeability, which measures the ease with which water can flow through a material; this depends on the sizes of the individual cavities and the crevices linking them.
+        <br><br>
+        `,
+      question: '11. What is the main purpose of paragraph 7?',
+      responses: [
+        {text: 'To explain why water can flow through rock', answered: 'A'},
+        {text: 'To emphasize the large amount of empty space in all rock', answered: 'B'},
+        {text: 'To point out that a rock cannot be both porous and permeable', answered: 'C'},
+        {text: 'To distinguish between two related properties of rock', answered: 'D', correct: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 9: ✦ The relative amount of these two kinds of water varies greatly from one kind of rock or sediment to another, even though their porosities may be the same. What happens depends on pore size. <strong>If the pores are large, the water in them will exist as drops too heavy for surface tension to hold, and it will drain away; but if the pores are small enough, the water in them will exist as thin films, too light to overcome the force of surface tension holding them in place; then the water will be firmly held</strong>.
+        <br><br>
+        `,
+      question: '12. Which of the sentences below best expresses the essential information in the highlighted sentence in the passage? Incorrect choices change the meaning in important ways or leave out essential information.',
+      responses: [
+        {text: 'Surface tension is not strong enough to retain drops of water in rocks with large pores but it strong enough to hold on to thin films of water in rocks with small pores.', answered: 'A', correct: 'A'},
+        {text: 'Water in rocks is held in place by large pores and drains away from small size pores through surface tension.', answered: 'B'},
+        {text: 'Small pores and large pores both interact with surface tension to determine whether a rock will hold water as heavy drops or as a thin film.', answered: 'C'},
+        {text: 'If the force of surface tension is too weak to hold water in place as heavy drops, the water will continue to be held firmly in place as a thin film when large pores exist.', answered: 'D'},
+      ]
+    },
+    //////////////
+    {
+      text: `Paragraph 9: ✦ The relative amount of these two kinds of water varies greatly from one kind of rock or sediment to another, even though their porosities may be the same. What happens depends on pore size. <strong>If the pores are large, the water in them will exist as drops too heavy for surface tension to hold, and it will drain away; but if the pores are small enough, the water in them will exist as thin films, too light to overcome the force of surface tension holding them in place; then the water will be firmly held</strong>.
+        <br><br>
+        `,
+      question: '12. Which of the sentences below best expresses the essential information in the highlighted sentence in the passage? Incorrect choices change the meaning in important ways or leave out essential information.',
+      responses: [
+        {text: 'Surface tension is not strong enough to retain drops of water in rocks with large pores but it strong enough to hold on to thin films of water in rocks with small pores.', answered: 'A', correct: 'A'},
+        {text: 'Water in rocks is held in place by large pores and drains away from small size pores through surface tension.', answered: 'B'},
+        {text: 'Small pores and large pores both interact with surface tension to determine whether a rock will hold water as heavy drops or as a thin film.', answered: 'C'},
+        {text: 'If the force of surface tension is too weak to hold water in place as heavy drops, the water will continue to be held firmly in place as a thin film when large pores exist.', answered: 'D'},
+      ]
+    }///////////////
+    ,
+    {
+      text: `
+        <br><br>
+        `,
+      question: '14. An introductory sentence for a brief summary of the passage is provided below. Complete the summary by selecting the THREE answer choices that express the most important ideas in the passage. Some sentences do not belong in the summary because they express ideas that are not presented in the passage or are minor ideas in the passage. This question is worth 2 points. Much of the ground is actually saturated with water.',
+      responses: [
+        {text: 'Sediments that hold water were spread by glaciers and are still spread by rivers and streams.', answered: 'A', correct: 'A'},
+        {text: 'Water is stored underground in beds of loose sand and gravel or in cemented sediment.', answered: 'B', correct: 'B'},
+        {text: 'The size of a saturated rock’s pores determines how much water it will retain when the rock is put in a dry place.', answered: 'C', correct: 'C'},
+        {text: 'Groundwater often remains underground for a long time before it emerges again.', answered: 'D'},
+        {text: 'Like sandstone, basalt is a crystalline rock that is very porous.', answered: 'D'},
+        {text: 'Beds of unconsolidated sediments are typically located at inland sites that were once underwater.', answered: 'D'},
+      ]
     }
   ]
 };
@@ -253,7 +343,7 @@ export default {
      return {
         scrolledToBottom: false,
         quiz: quiz_tpo_01,
-        correctedAnwsers: ['C', 'C', 'B', 'D', 'A', 'A'],
+        correctedAnwsers: ['C', 'C', 'B', 'D', 'A', 'A', 'A', 'C', 'B', 'D', 'A'],
         selected: [''],
         showResults: false,
         selected22: [''],
