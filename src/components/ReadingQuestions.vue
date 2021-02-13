@@ -9,6 +9,7 @@
     justify-content: center;
     padding-left: 200px;
     align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
+    {{userResponses}}
       <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
         <h3>
           Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
@@ -126,7 +127,7 @@
     <p>
       Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
     </p>
-    <v-btn @click="saveDatabase(quiz.questions.length - 2)"> Save scores?</v-btn>
+    <v-btn @click="saveDatabase(score())"> Save scores?</v-btn>
   </div>
 </v-card>
 </div>
@@ -384,8 +385,8 @@ var quiz_tpo_01 = {
         {text: 'Water is stored underground in beds of loose sand and gravel or in cemented sediment.', answered: 'B', correct: 'B'},
         {text: 'The size of a saturated rock’s pores determines how much water it will retain when the rock is put in a dry place.', answered: 'C', correct: 'C'},
         {text: 'Groundwater often remains underground for a long time before it emerges again.', answered: 'D'},
-        {text: 'Like sandstone, basalt is a crystalline rock that is very porous.', answered: 'D'},
-        {text: 'Beds of unconsolidated sediments are typically located at inland sites that were once underwater.', answered: 'D'},
+        {text: 'Like sandstone, basalt is a crystalline rock that is very porous.', answered: 'E'},
+        {text: 'Beds of unconsolidated sediments are typically located at inland sites that were once underwater.', answered: 'F'},
       ]
     },{
       text: `
@@ -478,7 +479,8 @@ var quiz_tpo_01 = {
 };
 //https://t.weixue100.com/toefl/read/34925/27645.html##
 
-let response = '232'
+let response = ''
+import VueCookies from 'vue-cookies'
 
 export default {
         components: {
@@ -576,8 +578,6 @@ export default {
             }
             response = "D"
         });
-
-
         if(response === this.correctedAnwsers[17]){
             this.response1 = "A"
             this.userResponses[13] = "A"
@@ -586,13 +586,11 @@ export default {
              this.userResponses[13] = false
         }else if(response === 'C'){
             this.response1 = "C"
-             this.userResponses[13] = false
+            this.userResponses[13] = false
         }else if(response === 'D'){
             this.response1 = "D"
-             this.userResponses[13] = false
+            this.userResponses[13] = false
         }
-
-
     },
         countDownTimer() {
             if(this.countDown > 0) {
@@ -619,6 +617,8 @@ export default {
             alert(score)
             alert(this.$route.params.tpo_id)
             alert(new Date().toLocaleString())
+            alert(VueCookies.get('TOEFLMADEEASY').public_id)
+
         },
         scroll () {
     window.onscroll = () => {
@@ -649,7 +649,7 @@ export default {
     },
     // Return "true" count in userResponses
     score: function() {
-      return this.userResponses.filter(function(val) { return val }).length;
+      return this.userResponses.filter(function(val) { if(val !== true) { return val}}).length;
     }
   },mounted () {
       //if(this.questionIndex > 0){
