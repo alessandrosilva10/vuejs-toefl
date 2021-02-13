@@ -486,7 +486,7 @@ export default {
     },
     data() {
      return {
-         countDown : 3240,
+        countDown : 3240,
         response1: 'teste',
         questionIndexDecrementByText: 2,
         scrolledToBottom: false,
@@ -607,8 +607,8 @@ export default {
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
 
-    var mDisplay = m > 0 ? m + (m == 1 ? "" : "") : "";
-    var sDisplay = s > 0 ? s + (s == 1 ? " " : " ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? "" : "") : "00";
+    var sDisplay = s > 0 ? s + (s == 1 ? " " : " ") : "00";
     return mDisplay + ':' + sDisplay;
 },
     removeItemFromArray(i) {
@@ -659,6 +659,22 @@ export default {
   },
   created(){
       console.log("created")
+  },
+  computed: {
+      timeIsOver: function () {
+        if(this.countDown < 1){
+          alert("Time is over")
+          this.$router.push('/toefl/reading');
+        }
+      }
+  },
+  watch : {
+    timeIsOver: function () {
+        if(this.countDown < 1){
+          alert("Time is over")
+          this.$router.push('/toefl/reading');
+        }
+      }
   }
 }
 </script>
