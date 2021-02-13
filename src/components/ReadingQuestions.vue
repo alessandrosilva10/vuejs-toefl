@@ -7,6 +7,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding-left: 200px;
     align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
       <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
         <h3>
@@ -18,6 +19,14 @@
           Question {{(questionIndex-questionIndexDecrementByText)}} of {{(quiz.questions.length-questionIndexDecrementByText) - 1}}
         </h3>
       </div>
+              <div
+    style="
+    float: left;
+    font-size: 30px;
+    padding-left: 200px;
+    " >
+        {{secondsToHms(countDown) }}
+    </div>
       <br/> <br/> <br/>
     </div>
     <v-card min-height="1000px">
@@ -477,6 +486,7 @@ export default {
     },
     data() {
      return {
+         countDown : 3240,
         response1: 'teste',
         questionIndexDecrementByText: 2,
         scrolledToBottom: false,
@@ -584,6 +594,23 @@ export default {
 
 
     },
+        countDownTimer() {
+            if(this.countDown > 0) {
+                setTimeout(() => {
+                    this.countDown -= 1
+                    this.countDownTimer()
+                }, 1000)
+            }
+        },
+    secondsToHms(d) {
+    d = Number(d);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var mDisplay = m > 0 ? m + (m == 1 ? "" : "") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " " : " ") : "";
+    return mDisplay + ':' + sDisplay;
+},
     removeItemFromArray(i) {
         //alert(i)
     }
@@ -625,6 +652,9 @@ export default {
       return this.userResponses.filter(function(val) { return val }).length;
     }
   },mounted () {
+      //if(this.questionIndex > 0){
+          this.countDownTimer();
+      //}
       console.log("mounted")
   },
   created(){
