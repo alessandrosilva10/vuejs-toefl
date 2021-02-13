@@ -9,7 +9,11 @@
                         outlined
                         tile
                     >
-                        Scoreboard - Reading
+                    <div class="black--text" style="padding-top: 25px; padding-bottom: 25px; width: 50%;
+  margin: 0 auto;">Scoreboard - Reading</div>
+                    <div>
+                        <apexchart width="800" type="line" :options="options_reading" :series="series"></apexchart>
+                    </div>
                 </v-card>
                 </v-col>
                 <v-col>
@@ -49,11 +53,29 @@
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
 import VueCookies from 'vue-cookies'
+import VueApexCharts from 'vue-apexcharts'
 
 export default {
     components: {
-        Navbar
+        Navbar,
+        VueApexCharts
     },
+    data: function() {
+    return {
+      options_reading: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: ['02-13', '02-15', '02-11', '02-19', '02-22', '02-28', '02-09', '02-28']
+        }
+      },
+      series: [{
+        name: 'Reading score',
+        data: [15, 18, 20, 16, 25, 22, 29, 17]
+      }]
+    }
+  }
 }
 </script>
 <style scoped>

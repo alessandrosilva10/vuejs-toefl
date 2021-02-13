@@ -1,6 +1,6 @@
 
 <template>
-<div id="app">
+<div oncopy="return false" onpaste="return false" oncut="return false" id="app">
   <Navbar/>
     <Navbar v-show="questionIndex === quiz.questions.length"/>
     <div style="display: flex;

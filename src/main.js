@@ -8,6 +8,8 @@ import axios from "axios";
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
+import VueApexCharts from "vue-apexcharts";
+
 
 const options = {
     // You can set your default options here
@@ -17,6 +19,10 @@ import JwPagination from 'jw-vue-pagination';
 Vue.component('jw-pagination', JwPagination);
 
 Vue.use(Toast, options);
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
+
 Vue.use(VuetifyDialog, {
   context: {
     vuetify
