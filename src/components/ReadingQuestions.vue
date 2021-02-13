@@ -1,3 +1,4 @@
+
 <template>
 <div id="app">
   <Navbar/>
@@ -40,7 +41,7 @@
     <br><br><br>
     <v-col class="answers-col" col="10">
       <v-col col="2"><span class="justify" v-html="question.question"/></v-col>
-      <div v-if="questionIndex !=15">
+      <div v-if="questionIndex !=15 && questionIndex != 14">
         <ol type="A">
             <li v-for="(response, i) in question.responses" :key="i">
             <label>
@@ -56,6 +57,13 @@
             </li>
         </ol>
       </div>
+
+    <div v-if="questionIndex === 14">
+        <div v-for="(response, i) in question.responses" :key="i">
+            <span>{{response.text}}</span>
+        </div>
+    </div>
+
        <!--:disabled="userResponses.length > 3 && userResponses.indexOf(n) === -1"-->
        <div v-if="questionIndex === 15">
         <ol type="A">
@@ -84,10 +92,11 @@
             </li>
         </ol>
       </div>
-
+      {{response1}}
+      {{userResponses}}
       </v-col>
         <v-col class="text-col" col="10">
-         <span class="justify" v-html="question.text">
+         <span class="justify" @onchange="onChange()" @click="insertText()" v-html="question.text">
         </span>
         </v-col>
       </v-row><v-row>
@@ -118,6 +127,7 @@
 <script>
 import Navbar from '@/components/Navbar';
 import Vtabs from '@/components/Vtabs';
+import $ from "jquery";
 
 //http://t.weixue100.com/toefl/read/result?aeid=396807
 var quiz_tpo_01 = {
@@ -348,15 +358,12 @@ var quiz_tpo_01 = {
     },
     //////////////
     {
-      text: `Paragraph 9: ✦ The relative amount of these two kinds of water varies greatly from one kind of rock or sediment to another, even though their porosities may be the same. What happens depends on pore size. <strong>If the pores are large, the water in them will exist as drops too heavy for surface tension to hold, and it will drain away; but if the pores are small enough, the water in them will exist as thin films, too light to overcome the force of surface tension holding them in place; then the water will be firmly held</strong>.
+      text: `Much of the water in a sample of water-saturated sediment or rock will drain from it if the sample is put in a suitable dry place. <span class="A">[▇]</span> But some will remain, clinging to all solid surfaces. <span class="B">[▇]</span> It is held there by the force of surface tension without which water would drain instantly from any wet surface, leaving it totally dry. <span class="C">[▇]</span> The total volume of water in the saturated sample must therefore be thought of as consisting of water that can, and water that cannot, drain away. <span class="D">[▇]</span>
         <br><br>
         `,
-      question: '12. Which of the sentences below best expresses the essential information in the highlighted sentence in the passage? Incorrect choices change the meaning in important ways or leave out essential information.',
+      question: '13. Look at the four squares [▇] that indicate where the following sentence could be added to the passage. Where would the sentence best fit?',
       responses: [
-        {text: 'Surface tension is not strong enough to retain drops of water in rocks with large pores but it strong enough to hold on to thin films of water in rocks with small pores.', answered: 'A', correct: 'A'},
-        {text: 'Water in rocks is held in place by large pores and drains away from small size pores through surface tension.', answered: 'B'},
-        {text: 'Small pores and large pores both interact with surface tension to determine whether a rock will hold water as heavy drops or as a thin film.', answered: 'C'},
-        {text: 'If the force of surface tension is too weak to hold water in place as heavy drops, the water will continue to be held firmly in place as a thin film when large pores exist.', answered: 'D'},
+        {text: 'What, then, determines what proportion of the water stays and what proportion drains away?', answered: 'A', correct: 'A'},
       ]
     }///////////////
     ,
@@ -463,12 +470,16 @@ var quiz_tpo_01 = {
   ]
 };
 //https://t.weixue100.com/toefl/read/34925/27645.html##
+
+let response = '232'
+
 export default {
         components: {
         Navbar, Vtabs
     },
     data() {
      return {
+        response1: 'teste',
         questionIndexDecrementByText: 2,
         scrolledToBottom: false,
         quiz: quiz_tpo_01,
@@ -498,7 +509,84 @@ export default {
       }
 
     },
-    removeItemFromArray (i) {
+    onChange(){
+
+    },
+    insertText(){
+         $(".A").unbind().click(function() {
+            $(".A").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            if($(".B").text().length > 3){
+                $(".B").html('[▇]');
+            }
+            if($(".C").text().length > 3){
+                $(".C").html('[▇]');
+            }
+            if($(".D").text().length > 3){
+                $(".D").html('[▇]');
+            }
+            response = 'A';
+        });
+
+         $(".B").unbind().click(function() {
+            $(".B").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            if($(".A").text().length > 3){
+                $(".A").html('[▇]');
+            }
+            if($(".C").text().length > 3){
+                $(".C").html('[▇]');
+            }
+            if($(".D").text().length > 3){
+                $(".D").html('[▇]');
+            }
+            response = 'B';
+        });
+
+        $(".C").unbind().click(function() {
+            $(".C").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            if($(".A").text().length > 3){
+                $(".A").html('[▇]');
+            }
+            if($(".B").text().length > 3){
+                $(".B").html('[▇]');
+            }
+            if($(".D").text().length > 3){
+                $(".D").html('[▇]');
+            }
+            response = "C"
+        });
+
+        $(".D").unbind().click(function() {
+            $(".D").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            if($(".A").text().length > 3){
+                $(".A").html('[▇]');
+            }
+            if($(".B").text().length > 3){
+                $(".B").html('[▇]');
+            }
+            if($(".C").text().length > 3){
+                $(".C").html('[▇]');
+            }
+            response = "D"
+        });
+
+
+        if(response === this.correctedAnwsers[17]){
+            this.response1 = "A"
+            this.userResponses[13] = "A"
+        }else if(response === 'B'){
+            this.response1 = "B"
+             this.userResponses[13] = false
+        }else if(response === 'C'){
+            this.response1 = "C"
+             this.userResponses[13] = false
+        }else if(response === 'D'){
+            this.response1 = "D"
+             this.userResponses[13] = false
+        }
+
+
+    },
+    removeItemFromArray(i) {
         alert(i)
     }
     ,
@@ -539,10 +627,10 @@ export default {
       return this.userResponses.filter(function(val) { return val }).length;
     }
   },mounted () {
-
+      console.log("mounted")
   },
-  watch: function() {
-
+  created(){
+      console.log("created")
   }
 }
 </script>
@@ -582,3 +670,4 @@ export default {
     left: 50%;
 }
 </style>
+
