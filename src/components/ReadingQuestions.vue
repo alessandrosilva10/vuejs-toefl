@@ -92,8 +92,6 @@
             </li>
         </ol>
       </div>
-      {{response1}}
-      {{userResponses}}
       </v-col>
         <v-col class="text-col" col="10">
          <span class="justify" @onchange="onChange()" @click="insertText()" v-html="question.text">
