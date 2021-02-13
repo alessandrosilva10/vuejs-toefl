@@ -37,7 +37,7 @@
           <v-list-item>
             <v-list-item-title>
             <v-btn text color="grey">
-                <span @click="signOut()">Profile</span>
+                <span @click="profile()">Profile</span>
                 <v-icon right>mdi-account-cog-outline</v-icon>
             </v-btn>
             </v-list-item-title>
@@ -99,6 +99,9 @@ export default {
         }
     },
     methods: {
+        profile(){
+            this.$router.push('/profile');
+        },
         signOut(){
             if(VueCookies.get('TOEFLMADEEASY')){
                 VueCookies.remove('TOEFLMADEEASY');
