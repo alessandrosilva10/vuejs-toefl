@@ -585,7 +585,7 @@ export default {
 
     },
     removeItemFromArray(i) {
-        alert(i)
+        //alert(i)
     }
     ,
         saveDatabase(score){
