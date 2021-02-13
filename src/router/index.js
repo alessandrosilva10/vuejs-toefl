@@ -13,9 +13,11 @@ import Contact from '../views/Contact.vue'
 import Teste from '../views/Teste.vue'
 import Reading from '../views/Reading.vue'
 import VueCookies from 'vue-cookies'
-import axios from 'axios';
-import Toast from "vue-toastification";
+import axios from 'axios'
+import Toast from "vue-toastification"
 import Profile from '../views/Profile.vue'
+import Scoreboard from '../views/Scoreboard.vue'
+
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -175,6 +177,30 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+
+        }},
+  },
+  {
+    path: '/scoreboard',
+    name: 'Scoreboard',
+    component: Scoreboard,
     beforeEnter(to, from, next) {
         try {
             if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {

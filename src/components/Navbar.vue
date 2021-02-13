@@ -45,7 +45,7 @@
            <v-list-item>
             <v-list-item-title>
             <v-btn text color="grey">
-                <span @click="signOut()">Scoreboard</span>
+                <span @click="scoreboard()">Scoreboard</span>
                 <v-icon right>mdi-eyedropper-minus</v-icon>
             </v-btn>
             </v-list-item-title>
@@ -101,6 +101,9 @@ export default {
     methods: {
         profile(){
             this.$router.push('/profile');
+        },
+        scoreboard(){
+            this.$router.push('/scoreboard');
         },
         signOut(){
             if(VueCookies.get('TOEFLMADEEASY')){
