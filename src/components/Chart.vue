@@ -16,7 +16,7 @@ export default {
     this.renderChart(this.chartData)
   },
   created() {
-    axios.post(`http://toeflmadeeasy.pythonanywhere.com/getreadingscore`,{
+    axios.post(`https://toeflmadeeasy.pythonanywhere.com/getreadingscore`,{
         "public_id": VueCookies.get('TOEFLMADEEASY').public_id,
     })
       .then(response => {
