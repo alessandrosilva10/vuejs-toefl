@@ -50,7 +50,7 @@
     <br><br><br>
     <v-col class="answers-col" col="10">
       <v-col col="2"><span class="justify" v-html="question.question"/></v-col>
-      <div v-if="questionIndex !=15 && questionIndex != 14">
+      <div v-if="questionIndex !=15 && questionIndex != 14 && questionIndex != 29">
         <ol type="A">
             <li v-for="(response, i) in question.responses" :key="i">
             <label>
@@ -67,7 +67,7 @@
         </ol>
       </div>
 
-    <div v-if="questionIndex === 14">
+    <div v-if="questionIndex === 14 || questionIndex === 29">
         <div v-for="(response, i) in question.responses" :key="i">
             <span>{{response.text}}</span>
         </div>
@@ -467,7 +467,7 @@ var quiz_tpo_01 = {
       text: `Paragraph 1: ✦ In seeking to describe the origins of theater, one must rely primarily on speculation, since there is little concrete evidence on which to draw. The most widely accepted theory, championed by anthropologists in the late nineteenth and early twentieth centuries, envisions theater as emerging out of myth and ritual. The process perceived by these anthropologists may be summarized briefly. During the early stages of its development, a society becomes aware of forces that appear to influence or control its food supply and well-being. Having little understanding of natural causes, it <strong>attributes</strong> both desirable and undesirable occurrences to supernatural or magical forces, and it searches for means to win the favor of these forces. Perceiving an apparent connection between certain actions performed by the group and the result it desires, the group repeats, refines and formalizes those actions into fixed ceremonies, or rituals.
         <br><br>
         `,
-      question: '2. The word “championed” in the passage is closest in meaning to',
+      question: '2. The word “attributes” in the passage is closest in meaning to',
       responses: [
         {text: 'Ascribes', answered: 'A', correct: 'A'},
         {text: 'Leaves', answered: 'B'},
@@ -475,11 +475,159 @@ var quiz_tpo_01 = {
         {text: 'Contrasts', answered: 'D'},
       ]
     },
+    {
+      text: `Paragraph 1: ✦ In seeking to describe the origins of theater, one must rely primarily on speculation, since there is little concrete evidence on which to draw. The most widely accepted theory, championed by anthropologists in the late nineteenth and early twentieth centuries, envisions theater as emerging out of myth and ritual. The process perceived by these anthropologists may be summarized briefly. During the early stages of its development, a society becomes aware of forces that appear to influence or control its food supply and well-being. Having little understanding of natural causes, it attributes both desirable and undesirable occurrences to supernatural or magical forces, and it searches for means to win the favor of these forces. Perceiving an apparent connection between certain actions performed by the group and the result it desires, the group repeats, refines and formalizes those actions into fixed ceremonies, or rituals.
+        <br><br>
+        `,
+      question: '3. According to paragraph 1, theories of the origins of theater',
+      responses: [
+        {text: 'Are mainly hypothetical', answered: 'A', correct: 'A'},
+        {text: 'Are well supported by factual evidence', answered: 'B'},
+        {text: 'Have rarely been agreed upon by anthropologists', answered: 'C'},
+        {text: 'Were expressed in the early stages of theater’s development', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 1: ✦ In seeking to describe the origins of theater, one must rely primarily on speculation, since there is little concrete evidence on which to draw. The most widely accepted theory, championed by anthropologists in the late nineteenth and early twentieth centuries, envisions theater as emerging out of myth and ritual. The process perceived by these anthropologists may be summarized briefly. During the early stages of its development, a society becomes aware of forces that appear to influence or control its food supply and well-being. Having little understanding of natural causes, it attributes both desirable and undesirable occurrences to supernatural or magical forces, and it searches for means to win the favor of these forces. Perceiving an apparent connection between certain actions performed by the group and the result it desires, the group repeats, refines and formalizes those actions into fixed ceremonies, or rituals.
+        <br><br>
+        `,
+      question: '4. According to paragraph 1, why did some societies develop and repeat ceremonial actions?',
+      responses: [
+        {text: 'To establish a positive connection between the members of the society', answered: 'A'},
+        {text: 'To help society members better understand the forces controlling their food supply', answered: 'B'},
+        {text: 'To distinguish their beliefs from those of other societies', answered: 'C'},
+        {text: 'To increase the society’s prosperity', answered: 'D', correct: 'D'},
+      ]
+    },
+      {
+      text: `Paragraph 2: ✦ Stories (myths) may then grow up around a ritual. Frequently the myths include representatives of those supernatural forces that the rites celebrate or hope to influence. Performers may wear costumes and masks to represent the mythical characters or supernatural forces in the rituals or in accompanying celebrations. As a person becomes more sophisticated, its conceptions of supernatural forces and causal relationships may change. As a result, it may abandon or modify some rites. But the myths that have grown up around the rites may continue as part of the group’s oral tradition and may even come to be acted out under conditions divorced from these rites. When <strong>this</strong> occurs, the first step has been taken toward theater as an autonomous activity, and thereafter entertainment and aesthetic values may gradually replace the former mystical and socially efficacious concerns.
+        <br><br>
+        `,
+      question: '5. The word “this” in the passage refers to',
+      responses: [
+        {text: 'The acting out of rites', answered: 'A'},
+        {text: 'The divorce of ritual performers from the rest of society', answered: 'B'},
+        {text: 'The separation of myths from rites', answered: 'C', correct: 'C'},
+        {text: 'The celebration of supernatural forces', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 2: ✦ Stories (myths) may then grow up around a ritual. Frequently the myths include representatives of those supernatural forces that the rites celebrate or hope to influence. Performers may wear costumes and masks to represent the mythical characters or supernatural forces in the rituals or in accompanying celebrations. As a person becomes more sophisticated, its conceptions of supernatural forces and causal relationships may change. As a result, it may abandon or modify some rites. But the myths that have grown up around the rites may continue as part of the group’s oral tradition and may even come to be acted out under conditions divorced from these rites. When this occurs, the first step has been taken toward theater as an <strong>autonomous</strong> activity, and thereafter entertainment and aesthetic values may gradually replace the former mystical and socially efficacious concerns.
+        <br><br>
+        `,
+      question: '6. The word “autonomous” in the passage is closest in meaning to',
+      responses: [
+        {text: 'Artistic', answered: 'A'},
+        {text: 'Important', answered: 'B'},
+        {text: 'Independent', answered: 'C', correct: 'C'},
+        {text: 'Established', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 2: ✦ Stories (myths) may then grow up around a ritual. Frequently the myths include representatives of those supernatural forces that the rites celebrate or hope to influence. Performers may wear costumes and masks to represent the mythical characters or supernatural forces in the rituals or in accompanying celebrations. As a person becomes more sophisticated, its conceptions of supernatural forces and causal relationships may change. As a result, it may abandon or modify some rites. But the myths that have grown up around the rites may continue as part of the group’s oral tradition and may even come to be acted out under conditions divorced from these rites. When this occurs, the first step has been taken toward theater as an autonomous activity, and thereafter entertainment and aesthetic values may gradually replace the former mystical and socially efficacious concerns.
+        <br><br>
+        `,
+      question: '7. According to paragraph 2, what may cause societies to abandon certain rites?',
+      responses: [
+        {text: 'Emphasizing theater as entertainment', answered: 'A'},
+        {text: 'Developing a new understanding of why events occur', answered: 'B', correct: 'B'},
+        {text: 'Finding a more sophisticated way of representing mythical characters', answered: 'C'},
+        {text: 'Moving from a primarily oral tradition to a more written tradition', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 5: ✦ In addition to exploring the possible antecedents of theater, scholars have also theorized about the motives that led people to develop theater. Why did theater develop, and why was it valued after it ceased to fulfill the function of ritual? Most answers fall back on the theories about the human mind and basic human needs. One, set forth by Aristotle in the fourth century B.C., sees humans as naturally imitative—as taking pleasure in imitating persons, things, and actions and in seeing such imitations. Another, advanced in the twentieth century, suggests that humans have a gift for fantasy, through which they seek to reshape reality into more satisfying forms than those encountered in daily life. Thus, fantasy or fiction (of which drama is one form) permits people to objectify their anxieties and fears, confront them, and fulfill their hopes in fiction if not fact. The theater, then, is one tool whereby people define and understand their world or escape from unpleasant realities.
+        <br><br>
+        `,
+      question: '8. All of following are mentioned in paragraph 5 as possible reasons that led societies to develop theater EXCEPT',
+      responses: [
+        {text: 'Theater allows people to face that they are afraid of.', answered: 'A'},
+        {text: 'Theater gives an opportunity to imagine a better reality.', answered: 'B'},
+        {text: 'Theater is a way to enjoy imitating other people.', answered: 'C'},
+        {text: 'Theater provides people the opportunity to better understand the human mind.', answered: 'D', correct: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 5: ✦ In addition to exploring the possible antecedents of theater, scholars have also theorized about the motives that led people to develop theater. Why did theater develop, and why was it valued after it ceased to fulfill the function of ritual? Most answers fall back on the theories about the human mind and basic human needs. One, set forth by Aristotle in the fourth century B.C., sees humans as naturally imitative—as taking pleasure in imitating persons, things, and actions and in seeing such imitations. Another, advanced in the twentieth century, suggests that humans have a gift for fantasy, through which they seek to reshape reality into more satisfying forms than those encountered in daily life. Thus, fantasy or fiction (of which drama is one form) permits people to objectify their anxieties and fears, confront them, and fulfill their hopes in fiction if not fact. The theater, then, is one tool whereby people define and understand their world or escape from unpleasant realities.
+        <br><br>
+        `,
+      question: '9. Which of the following best describes the organization of paragraph 5?',
+      responses: [
+        {text: 'The author presents two theories for a historical phenomenon.', answered: 'A', correct: 'A'},
+        {text: 'The author argues against theories expressed earlier in the passage.', answered: 'B'},
+        {text: 'The author argues for replacing older theories with a new one.', answered: 'C'},
+        {text: 'The author points out problems with two popular theories.', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 6: ✦ But neither the human imitative instinct nor a <strong>penchant</strong> for fantasy by itself leads to an autonomous theater. Therefore, additional explanations are needed. One necessary condition seems to be a somewhat detached view of human problems. For example, one sign of this condition is the appearance of the comic vision, since comedy requires sufficient detachment to view some deviations from social norms as ridiculous rather than as serious threats to the welfare of the entire group. Another condition that contributes to the development of autonomous theater is the emergence of the aesthetic sense. For example, some early societies ceased to consider certain rites essential to their well-being and abandoned them, nevertheless, they retained as parts of their oral tradition the myths that had grown up around the rites and admired them for their artistic qualities rather than for their religious usefulness.
+        <br><br>
+        `,
+      question: '10. The word “penchant ” in the passage is closest in meaning to',
+      responses: [
+        {text: 'Compromise', answered: 'A'},
+        {text: 'Inclination', answered: 'B', correct: 'B'},
+        {text: 'Tradition', answered: 'C'},
+        {text: 'Respect', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 6: ✦ But neither the human imitative instinct nor a penchant for fantasy by itself leads to an autonomous theater. Therefore, additional explanations are needed. One necessary condition seems to be a somewhat detached view of human problems. For example, one sign of this condition is the appearance of the comic vision, since <strong>comedy</strong> requires sufficient detachment to view some deviations from social norms as ridiculous rather than as serious threats to the welfare of the entire group. Another condition that contributes to the development of autonomous theater is the emergence of the aesthetic sense. For example, some early societies ceased to consider certain rites essential to their well-being and abandoned them, nevertheless, they retained as parts of their oral tradition the myths that had grown up around the rites and admired them for their artistic qualities rather than for their religious usefulness.
+        <br><br>
+        `,
+      question: '11. Why does the author mention “comedy”?',
+      responses: [
+        {text: 'To give an example of early types of theater', answered: 'A'},
+        {text: 'To explain how theater helps a society respond to threats to its welfare', answered: 'B'},
+        {text: 'To help explain why detachment is needed for the development of theater', answered: 'C', correct: 'C'},
+        {text: 'To show how theatrical performers become detached from other members of society', answered: 'D'},
+      ]
+    },
+        {
+      text: `Paragraph 6: ✦ But neither the human imitative instinct nor a penchant for fantasy by itself leads to an autonomous theater. Therefore, additional explanations are needed. One necessary condition seems to be a somewhat detached view of human problems. <strong>For example, one sign of this condition is the appearance of the comic vision, since <strong>comedy</strong> requires sufficient detachment to view some deviations from social norms as ridiculous rather than as serious threats to the welfare of the entire group. Another condition that contributes to the development of autonomous theater is the emergence of the aesthetic sense. For example, some early societies ceased to consider certain rites essential to their well-being and abandoned them, nevertheless, they retained as parts of their oral tradition the myths that had grown up around the rites and admired them for their artistic qualities rather than for their religious usefulness.</strong>
+        <br><br>
+        `,
+      question: '12. Which of the sentences below best expresses the essential information in the highlighted sentence in the passage? Incorrect choices change the meaning in important ways or leave out essential information.',
+      responses: [
+        {text: 'A society’s rites were more likely to be retained in the oral tradition if its myths were admired for artistic qualities.', answered: 'A'},
+        {text: 'The artistic quality of a myth was sometimes an essential reason for a society to abandon it from the oral tradition.', answered: 'B'},
+        {text: 'Some early societies stopped using myths in their religious practices when rites ceased to be seen as useful for social well-being.', answered: 'C'},
+        {text: 'Myths sometimes survived in a society’s tradition because of their artistic qualities even after they were no longer deemed religiously beneficial.', answered: 'D', correct: 'D'},
+      ]
+    },
+    ////////////////////////////////////////////////////////////////
+    {
+      text: `<span class="TEXT2A">[▇]</span>Although origin in ritual has long been the most popular, it is by no means the only theory about how the theater came into being.<span class="TEXT2B">[▇]</span> Storytelling has been proposed as one alternative.<span class="TEXT2C">[▇]</span> Under this theory, relating and listening to stories are seen as fundamental human pleasures.<span class="TEXT2D">[▇]</span> Thus, the recalling of an event (a hunt, battle, or other feat) is elaborated through the narrator’s pantomime and impersonation and eventually through each role being assumed by a different person.
+        <br><br>
+        `,
+      question: '13. Look at the four squares [▇] that indicate where the following sentence could be added to the passage. Where would the sentence best fit?',
+      responses: [
+        {text: 'To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.', answered: 'D', correct: 'D'},
+      ]
+    },
+    //////////////////////////////
+            {
+      text: `
+        <br><br>
+        `,
+      question: '14. Directions: An introductory sentence for a brief summary of the passage is provided below. Complete the summary by selecting the THREE answer choices that express the most important ideas in the passage. Some sentences do not belong in the summary because they express ideas that are not presented in the passage or are minor ideas in the passage. This question is worth 2 points. Anthropologists have developed many theories to help understand why and how theater originated.',
+      responses: [
+        {text: 'The presence of theater in almost all societies is thought to have occurred because early storytellers traveled to different groups to tell their stories.', answered: 'A'},
+        {text: 'Many theorists believe that theater arises when societies act out myths to preserve social well-being.', answered: 'B', correct: 'B'},
+        {text: 'The more sophisticated societies became, the better they could influence desirable occurrences through ritualized theater.', answered: 'C'},
+        {text: 'Some theories of theater development focus on how theater was used by group leaders to group leaders govern other members of society.', answered: 'D', correct: 'D'},
+        {text: 'Theater may have come from pleasure humans receive from storytelling and moving rhythmically.', answered: 'E', correct: 'E'},
+        {text: 'The human capacities for imitation and fantasy are considered possible reasons why societies develop theater.', answered: 'F', correct: 'F'},
+
+      ]
+    },
   ]
 };
 //https://t.weixue100.com/toefl/read/34925/27645.html##
 
-let response = ''
+let response_text_one = ''
+let response_text_two = ''
+let response_text_three = ''
 import VueCookies from 'vue-cookies'
 
 export default {
@@ -489,11 +637,12 @@ export default {
     data() {
      return {
         countDown : 3240,
-        response1: 'teste',
+        response1: '',
+        response2: '',
         questionIndexDecrementByText: 2,
         scrolledToBottom: false,
         quiz: quiz_tpo_01,
-        correctedAnwsers: ['C', 'C', 'B', 'D','D', 'A', 'A', 'A', 'C', 'B', 'D', 'A', 'D', 'A', 'B', 'C', 'D', 'A',],
+        correctedAnwsers: ['C', 'C', 'B', 'D','D', 'A', 'A', 'A', 'C', 'B', 'D', 'A', 'D', 'A', 'B', 'C', 'D', 'A','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D'],
         selected: [''],
         showResults: false,
         selected22: [''],
@@ -534,7 +683,7 @@ export default {
             if($(".D").text().length > 3){
                 $(".D").html('[▇]');
             }
-            response = 'A';
+            response_text_one = 'A';
         });
 
          $(".B").unbind().click(function() {
@@ -548,7 +697,7 @@ export default {
             if($(".D").text().length > 3){
                 $(".D").html('[▇]');
             }
-            response = 'B';
+            response_text_one = 'B';
         });
 
         $(".C").unbind().click(function() {
@@ -562,7 +711,7 @@ export default {
             if($(".D").text().length > 3){
                 $(".D").html('[▇]');
             }
-            response = "C"
+            response_text_one = "C"
         });
 
         $(".D").unbind().click(function() {
@@ -576,21 +725,98 @@ export default {
             if($(".C").text().length > 3){
                 $(".C").html('[▇]');
             }
-            response = "D"
+            response_text_one = "D"
         });
-        if(response === this.correctedAnwsers[17]){
+
+
+////////////////////////////////////////////////////////////////
+
+        $(".TEXT2A").unbind().click(function() {
+            $(".TEXT2A").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT2B").text().length > 3){
+                $(".TEXT2B").html('[▇]');
+            }
+            if($(".TEXT2C").text().length > 3){
+                $(".TEXT2C").html('[▇]');
+            }
+            if($(".TEXT2D").text().length > 3){
+                $(".TEXT2D").html('[▇]');
+            }
+            response_text_two = 'A';
+        });
+
+         $(".TEXT2B").unbind().click(function() {
+            $(".TEXT2B").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT2A").text().length > 3){
+                $(".TEXT2A").html('[▇]');
+            }
+            if($(".TEXT2C").text().length > 3){
+                $(".TEXT2C").html('[▇]');
+            }
+            if($(".TEXT2D").text().length > 3){
+                $(".TEXT2D").html('[▇]');
+            }
+            response_text_two = 'B';
+        });
+
+        $(".TEXT2C").unbind().click(function() {
+            $(".TEXT2C").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT2A").text().length > 3){
+                $(".TEXT2A").html('[▇]');
+            }
+            if($(".TEXT2B").text().length > 3){
+                $(".TEXT2B").html('[▇]');
+            }
+            if($(".TEXT2D").text().length > 3){
+                $(".TEXT2D").html('[▇]');
+            }
+            response_text_two = "C"
+        });
+
+        $(".TEXT2D").unbind().click(function() {
+            $(".TEXT2D").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT2A").text().length > 3){
+                $(".TEXT2A").html('[▇]');
+            }
+            if($(".TEXT2B").text().length > 3){
+                $(".TEXT2B").html('[▇]');
+            }
+            if($(".TEXT2C").text().length > 3){
+                $(".TEXT2C").html('[▇]');
+            }
+            response_text_two = "D"
+        });
+
+        //text 1
+        if(response_text_one === this.correctedAnwsers[17]){
             this.response1 = "A"
             this.userResponses[13] = "A"
-        }else if(response === 'B'){
+        }else if(response_text_one === 'B'){
             this.response1 = "B"
              this.userResponses[13] = false
-        }else if(response === 'C'){
+        }else if(response_text_one === 'C'){
             this.response1 = "C"
             this.userResponses[13] = false
-        }else if(response === 'D'){
+        }else if(response_text_one === 'D'){
             this.response1 = "D"
             this.userResponses[13] = false
         }
+
+
+        //text 2
+        if(response_text_two === this.correctedAnwsers[23]){
+            this.response2 = "D"
+            this.userResponses[26] = "D"
+        }else{
+            this.userResponses[26] = false
+        }
+        //////////
+
+
+
+
+
+
     },
         countDownTimer() {
             if(this.countDown > 0) {
