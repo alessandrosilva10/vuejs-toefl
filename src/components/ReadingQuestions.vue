@@ -636,7 +636,8 @@ export default {
     },
     data() {
      return {
-        countDown : 3240,
+        //countDown : 3240,
+        countDown: 40,
         response1: '',
         response2: '',
         questionIndexDecrementByText: 2,
@@ -791,17 +792,9 @@ export default {
         if(response_text_one === this.correctedAnwsers[17]){
             this.response1 = "A"
             this.userResponses[13] = "A"
-        }else if(response_text_one === 'B'){
-            this.response1 = "B"
-             this.userResponses[13] = false
-        }else if(response_text_one === 'C'){
-            this.response1 = "C"
-            this.userResponses[13] = false
-        }else if(response_text_one === 'D'){
-            this.response1 = "D"
+        }else{
             this.userResponses[13] = false
         }
-
 
         //text 2
         if(response_text_two === this.correctedAnwsers[23]){
@@ -811,12 +804,6 @@ export default {
             this.userResponses[26] = false
         }
         //////////
-
-
-
-
-
-
     },
         countDownTimer() {
             if(this.countDown > 0) {
@@ -899,7 +886,8 @@ export default {
       timeIsOver: function () {
         if(this.countDown < 1){
           alert("Time is over")
-          this.$router.push('/toefl/reading');
+          this.saveDatabase(this.userResponses.filter(function(val) { if(val !== true) { return val}}).length);
+          this.$router.push('/scoreboard');
         }
       }
   },
