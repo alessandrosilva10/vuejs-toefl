@@ -84,7 +84,7 @@ export default {
             drawer: true,
             links: [
                 { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
-                { icon: 'mdi-book', text: 'Reading Practice', route: '/toefl/reading' },
+                { icon: 'mdi-book', text: 'Reading Practice', route: '/reading' },
                 { icon: 'mdi-account', text: 'Team', route: '/team' },
                 { icon: 'mdi-file-music', text: 'TOEFL Listening', route: '/toefl' },
                 { icon: 'mdi-file-music', text: '1800 Essential Words', route: '/1800' },

@@ -281,7 +281,7 @@ const routes = [
         }},
   },
   {
-    path: '/toefl/reading',
+    path: '/reading',
     name: 'Reading',
     component: Reading,
     beforeEnter(to, from, next) {
