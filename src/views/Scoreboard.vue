@@ -10,13 +10,11 @@
                         tile
                     >
                     <div class="black--text" style="padding-top: 25px; padding-bottom: 25px; width: 50%;
-  margin: 0 auto;">Scoreboard - Reading</div>
+  margin: 0 auto;">Scoreboard - Reading
+  </div>
 
-                        <div class="container">
-                    <Chart
-                    v-if="loaded"
-                    :chartdata="chartdata"
-                    :options="options"/>
+                        <div style=" width: 50%;">
+                            <Chart/>
                 </div>
 
                 </v-card>
@@ -65,20 +63,8 @@ export default {
         Navbar, Chart
     },
   data: () => ({
-    loaded: false,
-    chartdata: null
+
   }),
-  async mounted () {
-    this.loaded = false
-    try {
-      const { userlist } = await fetch('http://toeflmadeeasy.pythonanywhere.com/getreadingscore')
-      this.chartdata = userlist
-      this.loaded = true
-    } catch (e) {
-      console.error(e)
-    }
-    console.log(this.chartdata)
-  }
   /*mounted() {/*
        this.interval = setInterval(() => {
 
