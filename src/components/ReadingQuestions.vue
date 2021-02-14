@@ -9,7 +9,6 @@
     justify-content: center;
     padding-left: 200px;
     align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
-    {{userResponses}}
       <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
         <h3>
           Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
@@ -127,7 +126,7 @@
     <p>
       Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
     </p>
-    <v-btn @click="saveDatabase(score())"> Save scores?</v-btn>
+    <v-btn @click="saveDatabase(score())"> Finish</v-btn>
   </div>
 </v-card>
 </div>
@@ -136,6 +135,7 @@
 import Navbar from '@/components/Navbar';
 import Vtabs from '@/components/Vtabs';
 import $ from "jquery";
+import axios from 'axios';
 
 //http://t.weixue100.com/toefl/read/result?aeid=396807
 var quiz_tpo_01 = {
@@ -608,16 +608,22 @@ export default {
     var mDisplay = m > 0 ? m + (m == 1 ? "" : "") : "00";
     var sDisplay = s > 0 ? s + (s == 1 ? " " : " ") : "00";
     return mDisplay + ':' + sDisplay;
-},
+    },
     removeItemFromArray(i) {
         //alert(i)
-    }
-    ,
+    },
         saveDatabase(score){
-            alert(score)
-            alert(this.$route.params.tpo_id)
-            alert(new Date().toLocaleString())
-            alert(VueCookies.get('TOEFLMADEEASY').public_id)
+        const headers = { "Content-Type": "application/json" };
+          axios.post("https://toeflmadeeasy.pythonanywhere.com/insertreadingscore",{
+          "public_id": VueCookies.get('TOEFLMADEEASY').public_id,
+          "score": score,
+          "id_tpo": this.$route.params.tpo_id,
+          "data": new Date().toLocaleString()
+          }, { headers })
+          .then(response =>
+          console.log(response.data)
+              //this.$router.push('/index')
+          ).catch(error => console.log(error.response.data));
 
         },
         scroll () {
@@ -659,6 +665,9 @@ export default {
   },
   created(){
       console.log("created")
+//console.log(VueCookies.get('TOEFLMADEEASY').public_id)
+    //console.log(VueCookies.get('TOEFLMADEEASY').jwt)
+
   },
   computed: {
       timeIsOver: function () {
@@ -672,6 +681,7 @@ export default {
     timeIsOver: function () {
         if(this.countDown < 1){
           alert("Time is over")
+          this.saveDatabase(score);
           this.$router.push('/toefl/reading');
         }
       }

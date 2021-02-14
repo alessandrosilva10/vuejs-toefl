@@ -11,9 +11,14 @@
                     >
                     <div class="black--text" style="padding-top: 25px; padding-bottom: 25px; width: 50%;
   margin: 0 auto;">Scoreboard - Reading</div>
-                    <div>
-                        <apexchart width="800" type="line" :options="options_reading" :series="series"></apexchart>
-                    </div>
+
+                        <div class="container">
+                    <Chart
+                    v-if="loaded"
+                    :chartdata="chartdata"
+                    :options="options"/>
+                </div>
+
                 </v-card>
                 </v-col>
                 <v-col>
@@ -53,29 +58,42 @@
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
 import VueCookies from 'vue-cookies'
-import VueApexCharts from 'vue-apexcharts'
+import Chart from '../components/Chart';
 
 export default {
     components: {
-        Navbar,
-        VueApexCharts
+        Navbar, Chart
     },
-    data: function() {
-    return {
-      options_reading: {
-        chart: {
-          id: 'vuechart-example'
-        },
-        xaxis: {
-          categories: ['02-13', '02-15', '02-11', '02-19', '02-22', '02-28', '02-09', '02-28']
-        }
-      },
-      series: [{
-        name: 'Reading score',
-        data: [15, 18, 20, 16, 25, 22, 29, 17]
-      }]
+  data: () => ({
+    loaded: false,
+    chartdata: null
+  }),
+  async mounted () {
+    this.loaded = false
+    try {
+      const { userlist } = await fetch('http://toeflmadeeasy.pythonanywhere.com/getreadingscore')
+      this.chartdata = userlist
+      this.loaded = true
+    } catch (e) {
+      console.error(e)
     }
+    console.log(this.chartdata)
   }
+  /*mounted() {/*
+       this.interval = setInterval(() => {
+
+            axios.post("http://toeflmadeeasy.pythonanywhere.com/getreadingscore",{
+        "public_id": VueCookies.get('TOEFLMADEEASY').public_id,
+    })
+    .then(response => {
+            this.date = response.data.map(a => a.data);
+            this.score1 = response.data.map(a => a.score);
+            this.loading = false;
+    })
+
+       }, 4000);
+      this.renderChart(this.chartdata, this.options)
+    }*/
 }
 </script>
 <style scoped>
