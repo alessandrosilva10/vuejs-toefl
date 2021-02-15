@@ -75,7 +75,6 @@
             <span>{{response.text}}</span>
         </div>
     </div>
-
        <!--:disabled="userResponses.length > 3 && userResponses.indexOf(n) === -1"-->
        <div v-if="questionIndex === 15">
         <ol type="A">
@@ -666,6 +665,7 @@ var quiz_tpo_01 = {
 let response_text_one = ''
 let response_text_two = ''
 let response_text_three = ''
+let old_value = [];
 import VueCookies from 'vue-cookies'
 
 export default {
@@ -676,6 +676,7 @@ export default {
      return {
         countDown : 3240,
         //countDown: 40,
+        values: old_value,
         response1: '',
         response2: '',
         questionIndexDecrementByText: 2,
@@ -693,12 +694,18 @@ export default {
      }
     }, methods: {
     consoleFilter(response, answered) {
-      if(this.questionIndex != 0 && this.questionIndex != 1 && !this.selected[this.questionIndex] && this.questionIndex != 16){
+      if(this.questionIndex === 15){
+           if(old_value.includes(answered)){
+               old_value = old_value.filter(e => e !== answered)
+           }else{
+               old_value.push(...answered)
+           }
+          this.selected[this.questionIndex-2] = old_value;
+          vm.$forceUpdate();
+      }
+      else if(this.questionIndex != 0 && this.questionIndex != 1 && !this.selected[this.questionIndex] && this.questionIndex != 16){
           this.selected[this.questionIndex-2] = answered;
-      }/*
-      if(this.selected[this.questionIndex-3] === null){
-          this.selected[this.questionIndex-3] = 'Not Answered';
-      }*/
+      }
     },
     onChange(){
 
@@ -897,7 +904,13 @@ export default {
         if(typeof this.selected[this.questionIndex-2] !== "undefined"){
           this.selected[this.questionIndex-2] = "Not Answered"
         }*/
-      }this.questionIndex++;
+      }
+      if(old_value.length > 3){
+          alert("You can't select more than 3 options")
+      }else{
+           this.questionIndex++;
+      }
+
       /*if(this.questionIndex != 15){
         this.questionIndex++;
       }*/
@@ -929,7 +942,10 @@ export default {
           this.saveDatabase(this.userResponses.filter(function(val) { if(val !== true) { return val}}).length);
           this.$router.push('/scoreboard');
         }
-      }
+      },
+       /* hasAdditional() {
+    return this.values.length > 2
+  }*/
   },
   watch : {
     timeIsOver: function () {
