@@ -100,7 +100,7 @@
                         </v-col>
                         <v-col cols="6">
                             <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Check your answers</h2>
-                            <v-simple-table v-show="questionIndex === quiz.questions.length">
+                            <v-simple-table v-if="questionIndex === quiz.questions.length">
                                 <template v-slot:default>
                                     <thead>
                                         <tr>
