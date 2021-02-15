@@ -30,7 +30,7 @@
       <br/> <br/> <br/>
     </div>
     <v-card min-height="1000px">
-  <div v-show="selected.length === 2">
+  <!--<div v-show="selected.length === 2">
     <table  v-show="questionIndex === quiz.questions.length">
       <tr v-for="(s, i) in selected" :key="i">
         <th v-if="selected[i] != 'Not Answered'">Resposta escolhida: {{selected[i]}}</th>
@@ -38,7 +38,7 @@
         <th>Right anwer: {{correctedAnwsers[i]}}</th>
       </tr>
     </table>
-  </div>
+  </div>-->
   <h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>
   <!--<v-btn v-show="questionIndex > 1 && questionIndex < 4" @click="showResults = !showResults">Show answer</v-btn>-->
   <!--<h1>{{ quiz.title }}</h1>-->
@@ -865,8 +865,8 @@ export default {
           "data": new Date().toLocaleString()
           }, { headers })
           .then(response =>
-          console.log(response.data)
-              //this.$router.push('/index')
+
+              this.$router.push('/scoreboard')
           ).catch(error => console.log(error.response.data));
 
         },
