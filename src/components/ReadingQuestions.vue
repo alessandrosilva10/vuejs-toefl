@@ -7,7 +7,7 @@
                     flex-wrap: wrap;
                     justify-content: center;
                     padding-left: 200px;
-                    align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
+                    align-items: center;" v-show="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
             <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
                 <h3>
                     Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
@@ -35,7 +35,7 @@
                         <br><br><br>
                         <v-col class="answers-col" col="10">
                             <v-col col="2"><span class="justify" v-html="question.question" /></v-col>
-                            <div v-if="questionIndex !=15 && questionIndex != 14 && questionIndex != 29">
+                            <div v-show="questionIndex !=15 && questionIndex != 14 && questionIndex != 29">
                                 <ol style="
                                         font-size: 20px; margin-top:10px;
                                         display: inline-block;
@@ -53,17 +53,17 @@
                                 </ol>
                             </div>
 
-                            <div v-if="questionIndex === 14 || questionIndex === 29">
+                            <div v-show="questionIndex === 14 || questionIndex === 29">
                                 <div v-for="(response, i) in question.responses" :key="i">
                                     <span>{{response.text}}</span>
                                 </div>
                             </div>
-                            <div v-if="questionIndex === 15">
+                            <div v-show="questionIndex === 15">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
                                             <v-container fluid>
-                                                <v-checkbox v-model="userResponses[i+14]" :label="response.text" v-bind:value="response.correct" @change="consoleFilter(response.correct, response.answered)" @click="removeItemFromArray(i)"></v-checkbox>
+                                                <v-checkbox v-model="userResponses[i+14]" :label="response.text" v-bind:value="response.correct" @change="consoleFilter(response.correct, response.answered)"></v-checkbox>
                                             </v-container>
                                         </label>
                                     </li>
@@ -77,7 +77,7 @@
                     </v-row>
                     <v-row>
                         <v-col class="button-position-screen" col="2">
-                            <v-btn class="v-btn" v-if="questionIndex > 0" v-on:click="prev">
+                            <v-btn class="v-btn" v-show="questionIndex > 0" v-on:click="prev">
                                 Previous
                             </v-btn>
                             <v-btn class="v-btn" v-on:click="next">
@@ -100,7 +100,7 @@
                         </v-col>
                         <v-col cols="6">
                             <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Check your answers</h2>
-                            <v-simple-table v-if="questionIndex === quiz.questions.length">
+                            <v-simple-table v-show="questionIndex === quiz.questions.length">
                                 <template v-slot:default>
                                     <thead>
                                         <tr>
@@ -668,13 +668,9 @@ export default {
     insertText(){
          $(".A").unbind().click(function() {
             $(".A").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
-            if($(".B").text().length > 3){
+            if($(".B").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3){
                 $(".B").html('[▇]');
-            }
-            if($(".C").text().length > 3){
                 $(".C").html('[▇]');
-            }
-            if($(".D").text().length > 3){
                 $(".D").html('[▇]');
             }
             response_text_one = 'A';
@@ -682,13 +678,9 @@ export default {
 
          $(".B").unbind().click(function() {
             $(".B").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
-            if($(".A").text().length > 3){
+            if($(".A").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3 ){
                 $(".A").html('[▇]');
-            }
-            if($(".C").text().length > 3){
                 $(".C").html('[▇]');
-            }
-            if($(".D").text().length > 3){
                 $(".D").html('[▇]');
             }
             response_text_one = 'B';
@@ -696,13 +688,9 @@ export default {
 
         $(".C").unbind().click(function() {
             $(".C").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
-            if($(".A").text().length > 3){
+            if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".D").text().length > 3){
                 $(".A").html('[▇]');
-            }
-            if($(".B").text().length > 3){
                 $(".B").html('[▇]');
-            }
-            if($(".D").text().length > 3){
                 $(".D").html('[▇]');
             }
             response_text_one = "C"
@@ -710,13 +698,9 @@ export default {
 
         $(".D").unbind().click(function() {
             $(".D").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
-            if($(".A").text().length > 3){
+            if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".C").text().length > 3){
                 $(".A").html('[▇]');
-            }
-            if($(".B").text().length > 3){
                 $(".B").html('[▇]');
-            }
-            if($(".C").text().length > 3){
                 $(".C").html('[▇]');
             }
             response_text_one = "D"
@@ -727,13 +711,9 @@ export default {
 
         $(".TEXT2A").unbind().click(function() {
             $(".TEXT2A").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT2B").text().length > 3){
+            if($(".TEXT2B").text().length > 3 || $(".TEXT2C").text().length > 3 || $(".TEXT2D").text().length > 3){
                 $(".TEXT2B").html('[▇]');
-            }
-            if($(".TEXT2C").text().length > 3){
                 $(".TEXT2C").html('[▇]');
-            }
-            if($(".TEXT2D").text().length > 3){
                 $(".TEXT2D").html('[▇]');
             }
             response_text_two = 'A';
@@ -741,13 +721,9 @@ export default {
 
          $(".TEXT2B").unbind().click(function() {
             $(".TEXT2B").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT2A").text().length > 3){
+            if($(".TEXT2A").text().length > 3 || $(".TEXT2C").text().length > 3 || $(".TEXT2D").text().length > 3){
                 $(".TEXT2A").html('[▇]');
-            }
-            if($(".TEXT2C").text().length > 3){
                 $(".TEXT2C").html('[▇]');
-            }
-            if($(".TEXT2D").text().length > 3){
                 $(".TEXT2D").html('[▇]');
             }
             response_text_two = 'B';
@@ -755,13 +731,9 @@ export default {
 
         $(".TEXT2C").unbind().click(function() {
             $(".TEXT2C").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT2A").text().length > 3){
+            if($(".TEXT2A").text().length > 3 || $(".TEXT2B").text().length > 3 || $(".TEXT2D").text().length > 3){
                 $(".TEXT2A").html('[▇]');
-            }
-            if($(".TEXT2B").text().length > 3){
                 $(".TEXT2B").html('[▇]');
-            }
-            if($(".TEXT2D").text().length > 3){
                 $(".TEXT2D").html('[▇]');
             }
             response_text_two = "C"
@@ -769,13 +741,9 @@ export default {
 
         $(".TEXT2D").unbind().click(function() {
             $(".TEXT2D").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT2A").text().length > 3){
+            if($(".TEXT2A").text().length > 3 || $(".TEXT2B").text().length > 3 || $(".TEXT2C").text().length > 3){
                 $(".TEXT2A").html('[▇]');
-            }
-            if($(".TEXT2B").text().length > 3){
                 $(".TEXT2B").html('[▇]');
-            }
-            if($(".TEXT2C").text().length > 3){
                 $(".TEXT2C").html('[▇]');
             }
             response_text_two = "D"
@@ -815,9 +783,6 @@ export default {
     var sDisplay = s > 0 ? s + (s == 1 ? " " : " ") : "00";
     return mDisplay + ':' + sDisplay;
     },
-    removeItemFromArray(i) {
-        //alert(i)
-    },
         saveDatabase(score){
         const headers = { "Content-Type": "application/json" };
           axios.post("https://toeflmadeeasy.pythonanywhere.com/insertreadingscore",{
@@ -827,7 +792,6 @@ export default {
           "data": new Date().toLocaleString()
           }, { headers })
           .then(response =>
-
               this.$router.push('/scoreboard')
           ).catch(error => console.log(error.response.data));
 
@@ -843,32 +807,19 @@ export default {
 },
     // Go to next question
     next: function() {
-       /* if(this.questionIndex != 0 && this.questionIndex != 1 && !this.selected[this.questionIndex] && this.questionIndex != 16){
-            this.selected[this.questionIndex] = 'Not Answered'
-        }*/
-        //let a = this.correctedAnwsers
-        //let b = this.correctedAnwsers
-
         if(this.questionIndex === this.quiz.questions.length){
             vm.$forceUpdate();
         }
       if(this.questionIndex > 1){
         if(!typeof this.selected22[this.questionIndex-2] !== "undefined"){
             this.selected22[this.questionIndex-2] = "Not Answered"
-        }/*
-        if(typeof this.selected[this.questionIndex-2] !== "undefined"){
-          this.selected[this.questionIndex-2] = "Not Answered"
-        }*/
+        }
       }
       if(old_value.length > 3){
           alert("You can't select more than 3 options")
       }else{
            this.questionIndex++;
       }
-
-      /*if(this.questionIndex != 15){
-        this.questionIndex++;
-      }*/
     },
     // Go to previous question
     prev: function() {
@@ -886,9 +837,6 @@ export default {
   },
   created(){
       console.log("created")
-//console.log(VueCookies.get('TOEFLMADEEASY').public_id)
-    //console.log(VueCookies.get('TOEFLMADEEASY').jwt)
-
   },
   computed: {
       timeIsOver: function () {
@@ -898,16 +846,13 @@ export default {
           this.$router.push('/scoreboard');
         }
       },
-       /* hasAdditional() {
-    return this.values.length > 2
-  }*/
   },
   watch : {
     timeIsOver: function () {
         if(this.countDown < 1){
           alert("Time is over")
           this.saveDatabase(score);
-          this.$router.push('/toefl/reading');
+          this.$router.push('/scoreboard');
         }
       }
   }
