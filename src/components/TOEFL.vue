@@ -1,6 +1,6 @@
 <template>
     <v-row>
-<v-col v-for="(tpo, i) in tpos" :key="i" cols="4">
+<v-col v-for="(tpo, i) in tpos" :key="i" cols="2">
   <v-card flat class="text-center main" >
   <v-responsive class="pt-4">
     <img
@@ -14,7 +14,7 @@
     <v-list-item three-line>
       <v-list-item-content>
             <v-card-text>
-               <h1 class="grey--text">TPO{{++i}}</h1>
+               <h1 style="color: rgba(34, 167, 240, 1)">TPO{{++i}}</h1>
             </v-card-text>
       </v-list-item-content>
     </v-list-item>
@@ -29,13 +29,13 @@
         v-on="on"
         @click="openTPO(i)"
       >
-      <v-icon small left>mdi-text</v-icon>
+      <v-icon small left>mdi-thumb-up</v-icon>
         LET'S GET STARTED
       </v-btn>
         </template>
         <span>Are you ready?</span>
     </v-tooltip>
-        <v-tooltip top>
+    <!--<v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-icon class="like-button-up" v-bind="attrs"
             v-on="on" @click="like()" normal left>mdi-thumb-up
@@ -52,7 +52,7 @@
       </template>
       <span>Not helpful</span>
     </v-tooltip>
-    {{dislikes}}
+    {{dislikes}}-->
     </v-card-actions>
   </v-card>
 </v-col>
@@ -125,14 +125,16 @@ import axios from 'axios';
     margin-left: 40px;
     margin-bottom: 50px;
     border: 0.1px solid;
+    border-color: rgba(34, 167, 240, 1)
 }
 
 .main{
     border: 0.1px solid;
+    border-color: rgba(34, 167, 240, 1)
 }
 
 .main:hover {
-  transform: scale(1.02); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.09); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 .helpful{
