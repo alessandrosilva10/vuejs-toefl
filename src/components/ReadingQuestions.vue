@@ -83,6 +83,7 @@
                       v-model="userResponses[i+14]"
                       :label="response.text"
                       v-bind:value="response.correct"
+                      @change="consoleFilter(response.correct, response.answered)"
                       @click="removeItemFromArray(i)"
                     ></v-checkbox>
                   </v-container>
@@ -119,14 +120,47 @@
     </div>
   </div>
   <div v-show="questionIndex === quiz.questions.length">
-    <h2>
-    COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON! COMING SOON!
-  </h2>
-  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
-    <p>
+
+
+      <v-container class="grey lighten-5">
+    <v-row no-gutters>
+      <v-col
+        cols="6"
+      >
+      <p>
       Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
     </p>
-    <v-btn @click="saveDatabase(score())"> Finish</v-btn>
+    <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
+      </v-col>
+      <v-col
+        cols="6"
+      >
+<v-simple-table v-if="questionIndex === quiz.questions.length">
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-left">
+            Right Answer
+          </th>
+          <th class="text-left">
+            Answer
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="(item, i) in selected"
+          :key="i"
+        >
+          <td>{{ item }}</td>
+          <td>{{ item }}</td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
+      </v-col>
+    </v-row>
+  </v-container>
   </div>
 </v-card>
 </div>
@@ -636,8 +670,8 @@ export default {
     },
     data() {
      return {
-        //countDown : 3240,
-        countDown: 40,
+        countDown : 3240,
+        //countDown: 40,
         response1: '',
         response2: '',
         questionIndexDecrementByText: 2,
@@ -652,22 +686,15 @@ export default {
         // An array initialized with "false" values for each question
         // It means: "did the user answered correctly to the question n?" "no".
         userResponses: Array(quiz_tpo_01.questions.length).fill(false),
-        userResponsesMulti: []
      }
     }, methods: {
     consoleFilter(response, answered) {
-      if(typeof response !== 'undefined'){
-        this.selected[this.questionIndex-2] = response;
-      }else{
-        this.selected[this.questionIndex-2] = answered;
-      }
-
-      if(typeof response !== 'undefined'){
-        this.selected22[this.questionIndex-2] = response;
-      }else{
-        this.selected22[this.questionIndex-2] = 'Not answered';
-      }
-
+      if(this.questionIndex != 0 && this.questionIndex != 1 && !this.selected[this.questionIndex] && this.questionIndex != 16){
+          this.selected[this.questionIndex-2] = answered;
+      }/*
+      if(this.selected[this.questionIndex-3] === null){
+          this.selected[this.questionIndex-3] = 'Not Answered';
+      }*/
     },
     onChange(){
 
@@ -850,6 +877,15 @@ export default {
 },
     // Go to next question
     next: function() {
+       /* if(this.questionIndex != 0 && this.questionIndex != 1 && !this.selected[this.questionIndex] && this.questionIndex != 16){
+            this.selected[this.questionIndex] = 'Not Answered'
+        }*/
+        //let a = this.correctedAnwsers
+        //let b = this.correctedAnwsers
+
+        if(this.questionIndex === this.quiz.questions.length){
+            vm.$forceUpdate();
+        }
       if(this.questionIndex > 1){
         if(!typeof this.selected22[this.questionIndex-2] !== "undefined"){
             this.selected22[this.questionIndex-2] = "Not Answered"

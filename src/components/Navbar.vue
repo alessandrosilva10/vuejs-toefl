@@ -37,24 +37,24 @@
           <v-list-item>
             <v-list-item-title>
             <v-btn text color="grey">
+                <v-icon left>mdi-account-cog-outline</v-icon>
                 <span @click="profile()">Profile</span>
-                <v-icon right>mdi-account-cog-outline</v-icon>
             </v-btn>
             </v-list-item-title>
           </v-list-item>
            <v-list-item>
             <v-list-item-title>
             <v-btn text color="grey">
+                <v-icon left>mdi-eyedropper-minus</v-icon>
                 <span @click="scoreboard()">Scoreboard</span>
-                <v-icon right>mdi-eyedropper-minus</v-icon>
             </v-btn>
             </v-list-item-title>
           </v-list-item>
             <v-list-item>
             <v-list-item-title>
                 <v-btn text color="grey">
+                    <v-icon left>mdi-exit-to-app</v-icon>
                     <span @click="signOut()">Sign Out</span>
-                    <v-icon right>mdi-exit-to-app</v-icon>
                 </v-btn>
             </v-list-item-title>
           </v-list-item>
