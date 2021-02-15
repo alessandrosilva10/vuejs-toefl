@@ -8,17 +8,12 @@
                 <span>Made Easy</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-        <!--<v-btn text color="grey">
-                <span @click="signOut()">Profile</span>
-                <v-icon right>mdi-account-cog-outline</v-icon>
-            </v-btn>
-            <v-btn text color="grey">
-                <span @click="signOut()">Sign Out</span>
-                <v-icon right>mdi-exit-to-app</v-icon>
+        <v-btn text color="grey">
+                <span>{{username}}</span>
             </v-btn>
             <v-btn icon>
         <v-icon>mdi-heart</v-icon>
-      </v-btn>-->
+      </v-btn>
         <v-menu
             left
             bottom
@@ -63,7 +58,17 @@
       </v-menu>
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" app class="blue">
-            <v-list>
+             <v-list style="padding-top: 62px">
+                <v-list-item v-for="link in links_toefl" :key="link.text" router :to="link.route">
+                    <v-list-item-action>
+                        <v-icon class="white--text">{{ link.icon }}</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title class="white--text">{{ link.text }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+            <v-list style="padding-top: 20px">
                 <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-item-action>
                         <v-icon class="white--text">{{ link.icon }}</v-icon>
@@ -82,11 +87,17 @@ export default {
     data(){
         return {
             drawer: true,
-            links: [
-                { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
+            username: VueCookies.get('TOEFLMADEEASY').name,
+            links_toefl: [
+                { icon: 'mdi-view-dashboard', text: 'Toefl Practice'},
                 { icon: 'mdi-book', text: 'Reading Practice', route: '/reading' },
-                { icon: 'mdi-account', text: 'Team', route: '/team' },
-                { icon: 'mdi-file-music', text: 'TOEFL Listening', route: '/toefl' },
+                { icon: 'mdi-file-music', text: 'Listening Practice', route: '/toefl' },
+            ]
+            ,links: [
+                { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
+               // { icon: 'mdi-book', text: 'Reading Practice', route: '/reading' },
+               // { icon: 'mdi-account', text: 'Team', route: '/team' },
+              //  { icon: 'mdi-file-music', text: 'TOEFL Listening', route: '/toefl' },
                 { icon: 'mdi-file-music', text: '1800 Essential Words', route: '/1800' },
                 { icon: 'mdi-youtube', text: 'Import from YouTube', route: '/import' },
                 { icon: 'mdi-youtube', text: 'Study', route: '/index' ,
