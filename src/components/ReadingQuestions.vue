@@ -125,14 +125,17 @@
     <v-col
       cols="6"
     >
-    <p>
-    Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
-  </p>
+    <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Results</h2>
+ <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">
+   Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
+   </h2>
+    <img src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="500"/>
   <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
     </v-col>
     <v-col
       cols="6"
     >
+<h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Check your answers</h2>
 <v-simple-table v-if="questionIndex === quiz.questions.length">
     <template v-slot:default>
       <thead>
