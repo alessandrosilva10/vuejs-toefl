@@ -1,172 +1,127 @@
-
 <template>
-<div oncopy="return false" onpaste="return false" oncut="return false" id="app">
-  <Navbar/>
-    <Navbar v-show="questionIndex === quiz.questions.length"/>
-    <div style="display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-left: 200px;
-    align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
-      <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
-        <h3>
-          Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
-        </h3>
-      </div>
-      <div v-else>
-          <h3>
-          Question {{(questionIndex-questionIndexDecrementByText)}} of {{(quiz.questions.length-questionIndexDecrementByText) - 1}}
-        </h3>
-      </div>
-              <div
-    style="
-    float: left;
-    font-size: 30px;
-    padding-left: 200px;
-    " >
-        {{secondsToHms(countDown) }}
-    </div>
-      <br/> <br/> <br/>
-    </div>
-    <v-card min-height="1000px">
-  <!--<div v-show="selected.length === 2">
-    <table  v-show="questionIndex === quiz.questions.length">
-      <tr v-for="(s, i) in selected" :key="i">
-        <th v-if="selected[i] != 'Not Answered'">Resposta escolhida: {{selected[i]}}</th>
-        <th v-else-if="selected[i] == 'Not Answered'">Resposta escolhida: 'Not Answered'</th>
-        <th>Right anwer: {{correctedAnwsers[i]}}</th>
-      </tr>
-    </table>
-  </div>-->
-  <h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>
-  <!--<v-btn v-show="questionIndex > 1 && questionIndex < 4" @click="showResults = !showResults">Show answer</v-btn>-->
-  <!--<h1>{{ quiz.title }}</h1>-->
-  <!-- index is used to check with current question index -->
-  <div v-for="(question, index) in quiz.questions" :key="index">
-    <!-- Hide all questions, show only the one with index === to current question index -->
-    <div v-show="index === questionIndex">
-    <v-row>
-    <br><br><br>
-    <v-col class="answers-col" col="10">
-      <v-col col="2"><span class="justify" v-html="question.question"/></v-col>
-      <div v-if="questionIndex !=15 && questionIndex != 14 && questionIndex != 29">
-        <ol style="font-size: 20px; margin-top:10px;       display: inline-block;
-      text-align: justify;
-      text-justify: inter-word;
-      font-family: 'dosis', sans-serif;
-      max-width: 800px;
-      margin: 0 5% 1rem;
-      font-size: 20px;" type="A">
-            <li v-for="(response, i) in question.responses" :key="i">
-            <label>
-                <input type="radio"
-                @change="consoleFilter(response.correct, response.answered)"
-                    v-bind:value="response.correct"
-                    v-bind:name="index"
-                    v-model="userResponses[index]"> {{response.text}}
-            </label>
-            </li>
-        </ol>
-      </div>
-
-    <div v-if="questionIndex === 14 || questionIndex === 29">
-        <div v-for="(response, i) in question.responses" :key="i">
-            <span>{{response.text}}</span>
+    <div oncopy="return false" onpaste="return false" oncut="return false" id="app">
+        <Navbar />
+        <Navbar v-show="questionIndex === quiz.questions.length" />
+        <div style="display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    padding-left: 200px;
+                    align-items: center;" v-if="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
+            <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
+                <h3>
+                    Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
+                </h3>
+            </div>
+            <div v-else>
+                <h3>
+                    Question {{(questionIndex-questionIndexDecrementByText)}} of {{(quiz.questions.length-questionIndexDecrementByText) - 1}}
+                </h3>
+            </div>
+            <div style="
+                float: left;
+                font-size: 30px;
+                padding-left: 200px;
+                ">
+                {{secondsToHms(countDown) }}
+            </div>
+            <br /> <br /> <br />
         </div>
+        <v-card min-height="1000px">
+            <h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>
+            <div v-for="(question, index) in quiz.questions" :key="index">
+                <div v-show="index === questionIndex">
+                    <v-row>
+                        <br><br><br>
+                        <v-col class="answers-col" col="10">
+                            <v-col col="2"><span class="justify" v-html="question.question" /></v-col>
+                            <div v-if="questionIndex !=15 && questionIndex != 14 && questionIndex != 29">
+                                <ol style="
+                                        font-size: 20px; margin-top:10px;
+                                        display: inline-block;
+                                        text-align: justify;
+                                        text-justify: inter-word;
+                                        font-family: 'dosis', sans-serif;
+                                        max-width: 800px;
+                                        margin: 0 5% 1rem;
+                                        font-size: 20px;" type="A">
+                                    <li v-for="(response, i) in question.responses" :key="i">
+                                        <label>
+                                            <input type="radio" @change="consoleFilter(response.correct, response.answered)" v-bind:value="response.correct" v-bind:name="index" v-model="userResponses[index]"> {{response.text}}
+                                        </label>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <div v-if="questionIndex === 14 || questionIndex === 29">
+                                <div v-for="(response, i) in question.responses" :key="i">
+                                    <span>{{response.text}}</span>
+                                </div>
+                            </div>
+                            <div v-if="questionIndex === 15">
+                                <ol type="A">
+                                    <li v-for="(response, i) in question.responses" :key="i">
+                                        <label>
+                                            <v-container fluid>
+                                                <v-checkbox v-model="userResponses[i+14]" :label="response.text" v-bind:value="response.correct" @change="consoleFilter(response.correct, response.answered)" @click="removeItemFromArray(i)"></v-checkbox>
+                                            </v-container>
+                                        </label>
+                                    </li>
+                                </ol>
+                            </div>
+                        </v-col>
+                        <v-col class="text-col" col="10">
+                            <span class="justify" @onchange="onChange()" @click="insertText()" v-html="question.text">
+                            </span>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col class="button-position-screen" col="2">
+                            <v-btn class="v-btn" v-if="questionIndex > 0" v-on:click="prev">
+                                Previous
+                            </v-btn>
+                            <v-btn class="v-btn" v-on:click="next">
+                                Next
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </div>
+            </div>
+            <div v-show="questionIndex === quiz.questions.length">
+                <v-container class="grey lighten-5">
+                    <v-row no-gutters>
+                        <v-col cols="6">
+                            <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Results</h2>
+                            <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">
+                                Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
+                            </h2>
+                            <img src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="500" />
+                            <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                            <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Check your answers</h2>
+                            <v-simple-table v-if="questionIndex === quiz.questions.length">
+                                <template v-slot:default>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                Answer
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(item, i) in selected" :key="i">
+                                            <td style="text-align: center">{{ item }}</td>
+                                        </tr>
+                                    </tbody>
+                                </template>
+                            </v-simple-table>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </div>
+        </v-card>
     </div>
-       <!--:disabled="userResponses.length > 3 && userResponses.indexOf(n) === -1"-->
-       <div v-if="questionIndex === 15">
-        <ol type="A">
-            <li v-for="(response, i) in question.responses" :key="i">
-                <label>
-                <v-container fluid>
-                    <v-checkbox
-                      v-model="userResponses[i+14]"
-                      :label="response.text"
-                      v-bind:value="response.correct"
-                      @change="consoleFilter(response.correct, response.answered)"
-                      @click="removeItemFromArray(i)"
-                    ></v-checkbox>
-                  </v-container>
-                  <!--
-                    <input
-                    @click="removeItemFromArray(i)"
-                    type="checkbox"
-                    style="border: 0px;
-                    width: 10%;
-                    height: 2em;"
-                    :disabled="userResponsesMulti.length > 3 && userResponsesMulti.indexOf(n) === -1"
-                    v-bind:value="response.correct"
-                    v-bind:name="index"
-                    v-model="userResponsesMulti[i]"> {{response.text}}-->
-                </label>
-            </li>
-        </ol>
-      </div>
-      </v-col>
-        <v-col class="text-col" col="10">
-         <span class="justify" @onchange="onChange()" @click="insertText()" v-html="question.text">
-        </span>
-        </v-col>
-      </v-row><v-row>
-          <v-col class="button-position-screen" col="2">
-            <v-btn class="v-btn" v-if="questionIndex > 0" v-on:click="prev">
-                    Previous
-            </v-btn >
-            <v-btn class="v-btn" v-on:click="next">
-                    Next
-            </v-btn >
-          </v-col>
-    </v-row>
-    </div>
-  </div>
-  <div v-show="questionIndex === quiz.questions.length">
-    <v-container class="grey lighten-5">
-  <v-row no-gutters>
-    <v-col
-      cols="6"
-    >
-    <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Results</h2>
- <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">
-   Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
-   </h2>
-    <img src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="500"/>
-  <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
-    </v-col>
-    <v-col
-      cols="6"
-    >
-<h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Check your answers</h2>
-<v-simple-table v-if="questionIndex === quiz.questions.length">
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <!--<th class="text-left">
-            Question
-          </th>-->
-          <th class="text-center">
-            Answer
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(item, i) in selected"
-          :key="i"
-        >
-          <!--<td>{{ i++ }}</td>-->
-          <td style="text-align: center">{{ item }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
-      </v-col>
-    </v-row>
-  </v-container>
-  </div>
-</v-card>
-</div>
 </template>
 <script>
 import Navbar from '@/components/Navbar';
