@@ -89,7 +89,7 @@ export default {
             drawer: true,
             username: VueCookies.get('TOEFLMADEEASY').name,
             links_toefl: [
-                { icon: 'mdi-view-dashboard', text: 'Toefl Practice'},
+                { icon: 'mdi-view-dashboard', text: 'TOEFL Practice'},
                 { icon: 'mdi-book', text: 'Reading Practice', route: '/reading' },
                 { icon: 'mdi-file-music', text: 'Listening Practice', route: '/toefl' },
             ]
