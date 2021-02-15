@@ -70,13 +70,12 @@
     <v-list-item three-line>
       <v-list-item-content>
             <v-card-text>
-              <div class="subheading">{{ tpo.lecture }}</div>
+              <div style="color: rgba(34, 167, 240, 1)" class="subheading"><strong>{{ tpo.lecture }}</strong></div>
               <br/>
               <!--<div class="grey--text">{{ tpo.lecture}}</div>-->
             </v-card-text>
                 <img :src="img" class="img" width="150"/>
-                      <br/> <br/>
-                     <div class="subheading">TPO {{tpo.tpo_id}}</div>
+                      <!--<div class="subheading">TPO {{tpo.tpo_id}}</div>-->
                       <div class="css">
                       <Popup :lecture="tpo.text" :mp3="tpo.mp3"/></div>
       </v-list-item-content>
@@ -85,7 +84,7 @@
     <v-tooltip top>
         <span>Open the lesson? Let's study now?</span>
     </v-tooltip>
-        <v-tooltip top>
+        <!--<v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-icon class="like-button-up" v-bind="attrs"
             v-on="on" @click="like()" normal left>mdi-thumb-up
@@ -102,7 +101,7 @@
       </template>
       <span>Not helpful</span>
     </v-tooltip>
-    {{dislikes}}
+    {{dislikes}}-->
     </v-card-actions>
   </v-card></div>
                 <!--
@@ -202,7 +201,8 @@ export default {
     float: left;
     margin-left: 40px;
     margin-bottom: 50px;
-    border: 0.1px solid;
+    border: 0.5px solid;
+    border-color:rgba(34, 167, 240, 1)
 }
 
 .main:hover {
