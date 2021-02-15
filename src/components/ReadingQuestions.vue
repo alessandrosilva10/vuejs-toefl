@@ -51,13 +51,16 @@
     <v-col class="answers-col" col="10">
       <v-col col="2"><span class="justify" v-html="question.question"/></v-col>
       <div v-if="questionIndex !=15 && questionIndex != 14 && questionIndex != 29">
-        <ol type="A">
+        <ol style="font-size: 20px; margin-top:10px;       display: inline-block;
+      text-align: justify;
+      text-justify: inter-word;
+      font-family: 'dosis', sans-serif;
+      max-width: 800px;
+      margin: 0 5% 1rem;
+      font-size: 20px;" type="A">
             <li v-for="(response, i) in question.responses" :key="i">
             <label>
                 <input type="radio"
-                style="   border: 0px;
-                width: 10%;
-                height: 2em;"
                 @change="consoleFilter(response.correct, response.answered)"
                     v-bind:value="response.correct"
                     v-bind:name="index"
