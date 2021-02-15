@@ -120,29 +120,27 @@
     </div>
   </div>
   <div v-show="questionIndex === quiz.questions.length">
-
-
-      <v-container class="grey lighten-5">
-    <v-row no-gutters>
-      <v-col
-        cols="6"
-      >
-      <p>
-      Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
-    </p>
-    <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
-      </v-col>
-      <v-col
-        cols="6"
-      >
+    <v-container class="grey lighten-5">
+  <v-row no-gutters>
+    <v-col
+      cols="6"
+    >
+    <p>
+    Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
+  </p>
+  <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
+    </v-col>
+    <v-col
+      cols="6"
+    >
 <v-simple-table v-if="questionIndex === quiz.questions.length">
     <template v-slot:default>
       <thead>
         <tr>
-          <th class="text-left">
-            Right Answer
-          </th>
-          <th class="text-left">
+          <!--<th class="text-left">
+            Question
+          </th>-->
+          <th class="text-center">
             Answer
           </th>
         </tr>
@@ -152,8 +150,8 @@
           v-for="(item, i) in selected"
           :key="i"
         >
-          <td>{{ item }}</td>
-          <td>{{ item }}</td>
+          <!--<td>{{ i++ }}</td>-->
+          <td style="text-align: center">{{ item }}</td>
         </tr>
       </tbody>
     </template>
