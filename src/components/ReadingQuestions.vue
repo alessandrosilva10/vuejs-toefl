@@ -14,7 +14,7 @@
             </div>
             <div v-else>
                 <h3>
-                    Question {{(questionIndex-questionIndexDecrementByText)}} of {{(quiz.questions.length-questionIndexDecrementByText) - 1}}
+                    Question {{(questionIndex-questionIndexDecrementByText)}} of {{(quiz.questions.length-questionIndexDecrementByText) -1}}
                 </h3>
             </div>
             <div style="
@@ -128,15 +128,31 @@
                 <v-container class="grey lighten-5">
                     <v-row no-gutters>
                         <v-col cols="6">
-                            <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Results</h2>
-                            <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">
-                                Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 2 }}
+                            <h2 style="text-align: center;padding-top: 10px; padding-top: 20px; font-family: Helvetica, Arial, sans-serif;">
+                                Final Score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
                             </h2>
-                            <img src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="500" />
-                            <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
+                            <img style="
+                                display: block;
+                                margin-left: auto;
+                                margin-right: auto;
+                                width: 50%;
+                                padding-top: 80px;
+                            " src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="300" />
+                            <h2 style="text-align: center;padding-top: 10px; padding-top: 80px; font-family: Helvetica, Arial, sans-serif;">
+                                TOEFL Score: {{ calculateTOEFLscore() }}
+                            </h2>
+                            <div style="text-align: center;padding-top: 80px; padding-bottom: 10px; font-family: Helvetica, Arial, sans-serif;">
+                                <v-btn @click="saveDatabase(score())"> Save your score</v-btn>
+                            </div>
                         </v-col>
                         <v-col cols="6">
-                            <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Check your answers</h2>
+                            <h2
+                            style="
+                                text-align: center;
+                                padding-top: 10px;
+                                padding-bottom: 10px;
+                                font-family: Helvetica, Arial, sans-serif;
+                            ">Check your answers</h2>
                             <v-simple-table v-if="questionIndex === quiz.questions.length">
                                 <template v-slot:default>
                                     <thead>
@@ -805,7 +821,7 @@ var quiz_tpo_01 = {
       ]
     },
     {
-      text: `Above the tree line there is a zone that is generally called alpine tundra.<span class="TEX3A">[▇]</span>Immediately adjacent to the timberline, the tundra consists of a fairly complete cover of low-lying shrubs, herbs, and grasses, while higher up the number and diversity of species decrease until there is much bare ground with occasional mosses and lichens and some prostrate cushion plants.<span class="TEXT3B">[▇]</span> Some plants can even survive in favorable microhabitats above the snow line. The highest plants in the world occur at around 6,100 meters on Makalu in the Himalayas.<span class="TEXT3C">[▇]</span> t this great height, rocks, warmed by the sun, melt small snowdrifts.<span class="TEXT3D">[▇]</span>
+      text: `Above the tree line there is a zone that is generally called alpine tundra.<span class="TEXT3A">[▇]</span>Immediately adjacent to the timberline, the tundra consists of a fairly complete cover of low-lying shrubs, herbs, and grasses, while higher up the number and diversity of species decrease until there is much bare ground with occasional mosses and lichens and some prostrate cushion plants.<span class="TEXT3B">[▇]</span> Some plants can even survive in favorable microhabitats above the snow line. The highest plants in the world occur at around 6,100 meters on Makalu in the Himalayas.<span class="TEXT3C">[▇]</span> t this great height, rocks, warmed by the sun, melt small snowdrifts.<span class="TEXT3D">[▇]</span>
         <br><br>
         `,
       question: '9. Look at the four squares [▇] that indicate where the following sentence could be added to the passage. Where would the sentence best fit?',
@@ -835,6 +851,7 @@ let response_text_two = ''
 let response_text_three = ''
 let old_value_text_one = [];
 let old_value_text_two = [];
+let old_value_text_three = [];
 
 import VueCookies from 'vue-cookies'
 
@@ -872,8 +889,15 @@ export default {
                old_value_text_two.push(...answered)
            }
           this.selected[this.questionIndex-2] = old_value_text_two;
+      }else if(this.questionIndex === 41){
+           if(old_value_text_three.includes(answered)){
+               old_value_text_three = old_value_text_three.filter(e => e !== answered)
+           }else{
+               old_value_text_three.push(...answered)
+           }
+          this.selected[this.questionIndex-2] = old_value_text_three;
       }
-     else if(this.questionIndex != 0 && this.questionIndex != 1  && this.questionIndex != 16){
+     else if(this.questionIndex != 0 && this.questionIndex != 1/*  && this.questionIndex != 16 */){
           this.selected[this.questionIndex-2] = answered;
       }
       this.$forceUpdate();
@@ -965,9 +989,6 @@ export default {
             response_text_two = "D"
         });
         this.selected[27] = response_text_two;
-        /*this.selected[26] = response_text_two;*/
-
-
 
 ////////////////////////////////////////////////////////////////
 
@@ -1010,24 +1031,7 @@ export default {
             }
             response_text_three = "D"
         });
-        //this.selected[27] = response_text_two;
-
-/*
-        if(response_text_one === this.correctedAnwsers[17]){
-            this.response1 = "A"
-            this.userResponses[13] = "A"
-        }else{
-            this.userResponses[13] = false
-        }
-
-        //text 2
-        if(response_text_two === this.correctedAnwsers[23]){
-            this.response2 = "D"
-            this.userResponses[26] = "D"
-        }else{
-            this.userResponses[26] = false
-        }
-*/
+        this.selected[38] = response_text_three;
     },
         countDownTimer() {
             if(this.countDown > 0) {
@@ -1070,22 +1074,23 @@ export default {
 },
     // Go to next question
     next: function() {
-        if(this.questionIndex === this.quiz.questions.length){
+          /* if(this.questionIndex === this.quiz.questions.length){
             this.$forceUpdate();
         }
-        /*
+
       if(this.questionIndex > 1){
         if(!typeof this.selected22[this.questionIndex-2] !== "undefined"){
             this.selected22[this.questionIndex-2] = "Not Answered"
         }
       }*/
-      if(old_value_text_one.length > 3 || old_value_text_two.length > 3){
+      if(old_value_text_one.length > 3 || old_value_text_two.length > 3 || old_value_text_three > 3){
            this.$toast.error("You can not select more than 3 options", {
             timeout: 5000
         })
       }else{
            this.questionIndex++;
       }
+      //this.$forceUpdate();
     },
     // Go to previous question
     prev: function() {
@@ -1094,15 +1099,17 @@ export default {
     // Return "true" count in userResponses
     score: function() {
       return this.userResponses.filter(function(val) { if(val !== true) { return val}}).length;
+    },
+    calculateTOEFLscore: function() {
+       var toefl_score = [0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11, 11, 12, 13, 14, 15, 15, 16, 17, 18, 19, 19, 20, 20, 21, 22, 23, 24, 24, 25, 26, 27, 28, 28, 29, 30]
+       var l = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
+       return toefl_score[l]
     }
   },mounted () {
-      //if(this.questionIndex > 0){
-          this.countDownTimer();
-      //}
-      console.log("mounted")
+    this.countDownTimer();
   },
   created(){
-      console.log("created")
+
   },
   computed: {
       timeIsOver: function () {
