@@ -1,6 +1,5 @@
 <template>
     <div oncopy="return false" onpaste="return false" oncut="return false" id="app">
-        <Navbar />
         <Navbar v-show="questionIndex === quiz.questions.length" />
         <div style="display: flex;
                     flex-direction: row;
@@ -656,9 +655,9 @@ export default {
                old_value.push(...answered)
            }
           this.selected[this.questionIndex-2] = old_value;
-          vm.$forceUpdate();
+          this.$forceUpdate();
       }
-      else if(this.questionIndex != 0 && this.questionIndex != 1 && !this.selected[this.questionIndex] && this.questionIndex != 16){
+      else if(this.questionIndex != 0 && this.questionIndex != 1 /*&& !this.selected[this.questionIndex]*/ && this.questionIndex != 16){
           this.selected[this.questionIndex-2] = answered;
       }
     },
@@ -705,7 +704,7 @@ export default {
             }
             response_text_one = "D"
         });
-
+        this.selected[12] = response_text_one;
 
 ////////////////////////////////////////////////////////////////
 
@@ -748,8 +747,10 @@ export default {
             }
             response_text_two = "D"
         });
+        this.selected[27] = response_text_two;
+        /*this.selected[26] = response_text_two;
 
-        //text 1
+
         if(response_text_one === this.correctedAnwsers[17]){
             this.response1 = "A"
             this.userResponses[13] = "A"
@@ -764,7 +765,7 @@ export default {
         }else{
             this.userResponses[26] = false
         }
-        //////////
+*/
     },
         countDownTimer() {
             if(this.countDown > 0) {
@@ -808,7 +809,7 @@ export default {
     // Go to next question
     next: function() {
         if(this.questionIndex === this.quiz.questions.length){
-            vm.$forceUpdate();
+            this.$forceUpdate();
         }
       if(this.questionIndex > 1){
         if(!typeof this.selected22[this.questionIndex-2] !== "undefined"){
