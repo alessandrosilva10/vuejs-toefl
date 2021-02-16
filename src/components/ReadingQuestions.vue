@@ -34,7 +34,7 @@
                         <br><br><br>
                         <v-col class="answers-col" col="10">
                             <v-col col="2"><span class="justify" v-html="question.question" /></v-col>
-                            <div v-show="questionIndex !=15 && questionIndex != 14 && questionIndex != 29">
+                            <div v-show="questionIndex !=15 && questionIndex != 14 && questionIndex != 29 && questionIndex != 30">
                                 <ol style="
                                         font-size: 20px; margin-top:10px;
                                         display: inline-block;
@@ -51,7 +51,6 @@
                                     </li>
                                 </ol>
                             </div>
-
                             <div v-show="questionIndex === 14 || questionIndex === 29">
                                 <div v-for="(response, i) in question.responses" :key="i">
                                     <span>{{response.text}}</span>
@@ -61,9 +60,26 @@
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
-                                            <v-container fluid>
-                                                <v-checkbox v-model="userResponses[i+14]" :label="response.text" v-bind:value="response.correct" @change="consoleFilter(response.correct, response.answered)"></v-checkbox>
-                                            </v-container>
+                                            <v-checkbox v-if="questionIndex === 15"
+                                                v-model="userResponses[i+14]"
+                                                :label="response.text"
+                                                v-bind:value="response.correct"
+                                                @change="consoleFilter(response.correct, response.answered)">
+                                            </v-checkbox>
+                                        </label>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div v-show="questionIndex === 30">
+                                <ol type="A">
+                                    <li v-for="(response, i) in question.responses" :key="i">
+                                        <label>
+                                             <v-checkbox
+                                                v-model="userResponses[i+29]"
+                                                :label="response.text"
+                                                v-bind:value="response.correct"
+                                                @change="consoleFilter(response.correct, response.answered)">
+                                            </v-checkbox>
                                         </label>
                                     </li>
                                 </ol>
@@ -619,7 +635,9 @@ var quiz_tpo_01 = {
 let response_text_one = ''
 let response_text_two = ''
 let response_text_three = ''
-let old_value = [];
+let old_value_text_one = [];
+let old_value_text_two = [];
+
 import VueCookies from 'vue-cookies'
 
 export default {
@@ -630,7 +648,7 @@ export default {
      return {
         countDown : 3240,
         //countDown: 40,
-        values: old_value,
+        //values: old_value_text_one,
         response1: '',
         response2: '',
         questionIndexDecrementByText: 2,
@@ -639,7 +657,7 @@ export default {
         correctedAnwsers: ['C', 'C', 'B', 'D','D', 'A', 'A', 'A', 'C', 'B', 'D', 'A', 'D', 'A', 'B', 'C', 'D', 'A','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D'],
         selected: [''],
         showResults: false,
-        selected22: [''],
+        //selected22: [''],
         // Store current question index
         questionIndex: 0,
         // An array initialized with "false" values for each question
@@ -649,17 +667,24 @@ export default {
     }, methods: {
     consoleFilter(response, answered) {
       if(this.questionIndex === 15){
-           if(old_value.includes(answered)){
-               old_value = old_value.filter(e => e !== answered)
+           if(old_value_text_one.includes(answered)){
+               old_value_text_one = old_value_text_one.filter(e => e !== answered)
            }else{
-               old_value.push(...answered)
+               old_value_text_one.push(...answered)
            }
-          this.selected[this.questionIndex-2] = old_value;
-          this.$forceUpdate();
+          this.selected[this.questionIndex-2] = old_value_text_one;
+      }else if(this.questionIndex === 30){
+           if(old_value_text_two.includes(answered)){
+               old_value_text_two = old_value_text_two.filter(e => e !== answered)
+           }else{
+               old_value_text_two.push(...answered)
+           }
+          this.selected[this.questionIndex-2] = old_value_text_two;
       }
-      else if(this.questionIndex != 0 && this.questionIndex != 1 /*&& !this.selected[this.questionIndex]*/ && this.questionIndex != 16){
+     else if(this.questionIndex != 0 && this.questionIndex != 1  && this.questionIndex != 16){
           this.selected[this.questionIndex-2] = answered;
       }
+      this.$forceUpdate();
     },
     onChange(){
 
@@ -811,13 +836,16 @@ export default {
         if(this.questionIndex === this.quiz.questions.length){
             this.$forceUpdate();
         }
+        /*
       if(this.questionIndex > 1){
         if(!typeof this.selected22[this.questionIndex-2] !== "undefined"){
             this.selected22[this.questionIndex-2] = "Not Answered"
         }
-      }
-      if(old_value.length > 3){
-          alert("You can't select more than 3 options")
+      }*/
+      if(old_value_text_one.length > 3 || old_value_text_two.length > 3){
+           this.$toast.error("You can not select more than 3 options", {
+            timeout: 5000
+        })
       }else{
            this.questionIndex++;
       }
