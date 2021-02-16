@@ -9,7 +9,7 @@
                     align-items: center;" v-show="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
             <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
                 <h3>
-                    Question {{(questionIndex-questionIndexDecrementByText) + 1 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
+                    Question {{(questionIndex-questionIndexDecrementByText) + 2 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
                 </h3>
             </div>
             <div v-else>
@@ -26,15 +26,16 @@
             </div>
             <br /> <br /> <br />
         </div>
+        {{questionIndex}}
         <v-card min-height="1000px">
-            <h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>
+            <!--<h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>-->
             <div v-for="(question, index) in quiz.questions" :key="index">
                 <div v-show="index === questionIndex">
                     <v-row>
                         <br><br><br>
                         <v-col class="answers-col" col="10">
                             <v-col col="2"><span class="justify" v-html="question.question" /></v-col>
-                            <div v-show="questionIndex !=15 && questionIndex != 14 && questionIndex != 29 && questionIndex != 30">
+                            <div v-show="questionIndex !=15 && questionIndex != 14 && questionIndex != 29 && questionIndex != 30 && questionIndex != 40 && questionIndex != 41">
                                 <ol style="
                                         font-size: 20px; margin-top:10px;
                                         display: inline-block;
@@ -51,11 +52,17 @@
                                     </li>
                                 </ol>
                             </div>
-                            <div v-show="questionIndex === 14 || questionIndex === 29">
+
+                            <!-- Indexes of insert table -->
+                            <div v-show="questionIndex === 14 || questionIndex === 29 || questionIndex ===40">
                                 <div v-for="(response, i) in question.responses" :key="i">
-                                    <span>{{response.text}}</span>
+                                    <br>
+                                    <span style="font-size: 125%;">{{response.text}}</span>
                                 </div>
                             </div>
+                            <!-- -->
+
+                            <!-- Indexes of multi selection -->
                             <div v-show="questionIndex === 15">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
@@ -84,6 +91,8 @@
                                     </li>
                                 </ol>
                             </div>
+                             <!-- -->
+
                         </v-col>
                         <v-col class="text-col" col="10">
                             <span class="justify" @onchange="onChange()" @click="insertText()" v-html="question.text">
@@ -108,7 +117,7 @@
                         <v-col cols="6">
                             <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">Results</h2>
                             <h2 style="text-align: center;padding-top: 10px; padding-bottom: 10px">
-                                Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 1 }}
+                                Total score: {{ score() }} / {{ (quiz.questions.length - questionIndexDecrementByText) - 2 }}
                             </h2>
                             <img src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="500" />
                             <v-btn color="blue" @click="saveDatabase(score())"> Finish</v-btn>
@@ -613,7 +622,7 @@ var quiz_tpo_01 = {
       ]
     },
     //////////////////////////////
-            {
+     {
       text: `
         <br><br>
         `,
@@ -628,9 +637,171 @@ var quiz_tpo_01 = {
 
       ]
     },
+    {
+      text: `
+        Timberline Vegetation on Mountains
+        <br><br>
+        The transition from forest to treeless tundra on a mountain slope is often
+        a dramatic one. Within a vertical distance of just a few tens of meters, trees
+        disappear as a life-form and are replaced by low shrubs, herbs, and grasses. This
+        rapid zone of transition is called the upper timberline or tree line. In many semiarid
+        areas there is also a lower timberline where the forest passes into steppe or desert
+        at its lower edge, usually because of a lack of moisture.<br>
+        The upper timberline, like the snow line, is highest in the tropics and lowest in the
+        Polar Regions. It ranges from sea level in the Polar Regions to 4,500 meters in the
+        dry subtropics and 3,500-4,500 meters in the moist tropics. Timberline trees are
+        normally evergreens, suggesting that these have some advantage over deciduous
+        trees (those that lose their leaves) in the extreme environments of the upper
+        timberline. There are some areas, however, where broadleaf deciduous trees form
+        the timberline. Species of birch, for example, may occur at the timberline in parts
+        of the Himalayas.<br>
+        At the upper timberline the trees begin to become twisted and deformed. This is
+        particularly true for trees in the middle and upper latitudes, which tend
+        to attain greater heights on ridges, whereas in the tropics the trees reach their
+        greater heights in the valleys. This is because middle- and upper- latitude
+        timberlines are strongly influenced by the duration and depth of the snow cover.
+        As the snow is deeper and lasts longer in the valleys, trees tend to attain greater
+        heights on the ridges, even though they are more exposed to high-velocity winds
+        and poor, thin soils there. In the tropics, the valleys appear to be more favorable
+        because they are less prone to dry out, they have less frost, and they have deeper
+        soils.<br>
+        There is still no universally agreed-on explanation for why there should be such a
+        dramatic cessation of tree growth at the upper timberline. Various environmental
+        factors may play a role. Too much snow, for example, can smother trees, and
+        avalanches and snow creep can damage or destroy them. Late-lying snow reduces
+        the effective growing season to the point where seedlings cannot establish
+        themselves. Wind velocity also increases with altitude and may cause serious stress
+        for trees, as is made evident by the deformed shapes at high altitudes.Some
+        scientists have proposed that the presence of increasing levels of ultraviolet light
+        with elevation may play a role, while browsing and grazing animals like the ibex
+        may be another contributing factor. Probably the most important environmental
+        factor is temperature, for if the growing season is too short and temperatures are
+        too low, tree shoots and buds cannot mature sufficiently to survive the winter
+        months.<br>
+        Above the tree line there is a zone that is generally called alpine
+        tundra. Immediately adjacent to the timberline, the tundra consists of a fairly
+        complete cover of low-lying shrubs, herbs, and grasses, while higher up the
+        number and diversity of species decrease until there is much bare ground with
+        occasional mosses and lichens and some prostrate cushion plants. Some plants can
+        even survive in favorable microhabitats above the snow line. The highest plants in
+        the world occur at around 6,100 meters on Makalu in the Himalayas. At this great
+        height, rocks, warmed by the sun, melt small snowdrifts.<br>
+        The most striking characteristic of the plants of the alpine zone is their low growth
+        form. This enables them to avoid the worst rigors of high winds and permits them
+        to make use of the higher temperatures immediately adjacent to the ground surface.
+        In an area where low temperatures are limiting to life, the importance of the
+        additional heat near the surface is crucial. The low growth form can also permit the
+        plants to take advantage of the insulation provided by a winter snow cover. In the
+        equatorial mountains the low growth form is less prevalent.<br>
+    `,
+    },
+    {
+      text: `Paragraph 1: ✦ The transition from forest to treeless tundra on a mountain slope is often a <strong>dramatic</strong> one. Within a vertical distance of just a few tens of meters, trees disappear as a life-form and are replaced by low shrubs, herbs, and grasses. This rapid zone of transition is called the upper timberline or tree line. In many semiarid areas there is also a lower timberline where the forest passes into steppe or desert at its lower edge, usually because of a lack of moisture.
+        <br><br>
+        `,
+      question: '1. The word “dramatic” in the passage is closest in meaning to',
+      responses: [
+        {text: 'Gradual', answered: 'A'},
+        {text: 'Complex', answered: 'B'},
+        {text: 'Visible', answered: 'C'},
+        {text: 'Striking', answered: 'D', correct: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 1: ✦ The transition from forest to treeless tundra on a mountain slope is often a dramatic one. Within a vertical distance of just a few tens of meters, trees disappear as a life-form and are replaced by low shrubs, herbs, and grasses. This rapid zone of transition is called the upper timberline or tree line. In many semiarid areas there is also a lower timberline where the forest passes into steppe or desert at its lower edge, usually because of a lack of moisture.
+        <br><br>
+        `,
+      question: '2. Where is the lower timberline mentioned in paragraph 1 likely to be found?',
+      responses: [
+        {text: 'In an area that has little water', answered: 'A', correct: 'A'},
+        {text: 'In an area that has little sunlight', answered: 'B'},
+        {text: 'Above a transition area', answered: 'C'},
+        {text: 'On a mountain that has on upper timberline.', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 1: ✦ The transition from forest to treeless tundra on a mountain slope is often a dramatic one. Within a vertical distance of just a few tens of meters, trees disappear as a life-form and are replaced by low shrubs, herbs, and grasses. This rapid zone of transition is called the upper timberline or tree line. In many semiarid areas there is also a lower timberline where the forest passes into steppe or desert at its lower edge, usually because of a lack of moisture.
+        <br><br>
+        `,
+      question: '3. Which of the following can be inferred from paragraph 1 about both the upper and lower timberlines?',
+      responses: [
+        {text: 'Both are treeless zones.', answered: 'A'},
+        {text: 'Both mark forest boundaries.', answered: 'B', correct: 'B'},
+        {text: 'Both are surrounded by desert areas.', answered: 'C'},
+        {text: 'Both suffer from a lack of moisture.', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 3: ✦ At the upper timberline the trees begin to become twisted and deformed. This is particularly true for trees in the middle and upper latitudes, which tend to <strong>attain</strong> greater heights on ridges, whereas in the tropics the trees reach their greater heights in the valleys. This is because middle- and upper- latitude timberlines are strongly influenced by the duration and depth of the snow cover. As the snow is deeper and lasts longer in the valleys, trees tend to attain greater heights on the ridges, even though they are more exposed to high-velocity winds and poor, thin soils there. In the tropics, the valleys appear to be more favorable because they are less prone to dry out, they have less frost, and they have deeper soils.
+        <br><br>
+        `,
+      question: '4. The word “attain” in the passage is closest in meaning to',
+      responses: [
+        {text: 'Require', answered: 'A'},
+        {text: 'Resist', answered: 'B'},
+        {text: 'Achieve', answered: 'C', correct: 'C'},
+        {text: 'Endure', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 3: ✦ At the upper timberline the trees begin to become twisted and deformed. This is particularly true for trees in the middle and upper latitudes, which tend to attain greater heights on ridges, whereas in the tropics the trees reach their greater heights in the valleys. This is because middle- and upper- latitude timberlines are strongly influenced by the duration and depth of the snow cover. As the snow is deeper and lasts longer in the valleys, trees tend to attain greater heights on the ridges, even though they are more exposed to high-velocity winds and poor, thin soils there. In the tropics, the valleys appear to be more favorable because they are less prone to dry out, they have less frost, and they have deeper soils.
+        <br><br>
+        `,
+      question: '5. According to paragraph 3, which of the following is true of trees in the middle and upper latitudes?',
+      responses: [
+        {text: 'Tree growth is negatively affected by the snow cover in valleys', answered: 'A', correct: 'A'},
+        {text: 'Tree growth is greater in valleys than on ridges.', answered: 'B'},
+        {text: 'Tree growth on ridges is not affected by high-velocity winds.', answered: 'C'},
+        {text: 'Tree growth lasts longer in those latitudes than it does in the tropics.', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 4: ✦ There is still no universally agreed-on explanation for why there should be such a dramatic cessation of tree growth at the upper timberline. Various environmental factors may play a role. Too much snow, for example, can smother trees, and avalanches and snow creep can damage or destroy them. Late-lying snow reduces the effective growing season to the point where seedlings cannot establish themselves. <strong>Wind velocity also increases with altitude and may cause serious stress for trees, as is made evident by the deformed shapes at high altitudes.</strong> Some scientists have proposed that the presence of increasing levels of ultraviolet light with elevation may play a role, while browsing and grazing animals like the ibex may be another contributing factor. Probably the most important environmental factor is temperature, for if the growing season is too short and temperatures are too low, tree shoots and buds cannot mature sufficiently to survive the winter months.
+        <br><br>
+        `,
+      question: '6. Which of the sentences below best express the essential information in the highlighted sentence in the passage? In correct choices change the meaning in important ways or leave out essential information.',
+      responses: [
+        {text: 'Because of their deformed shapes at high altitudes, trees are not likely to be seriously harmed by the strong winds typical of those altitudes.', answered: 'A'},
+        {text: 'As altitude increases, the velocity of winds increase, leading to a serious decrease in the number of trees found at high altitudes.', answered: 'B'},
+        {text: 'The deformed shapes of trees at high altitudes show that wind velocity, which increase with altitude, can cause serious hardship for trees.', answered: 'C', correct: 'C'},
+        {text: 'Increased wind velocity at high altitudes deforms the shapes of trees, and this may cause serious stress for trees.', answered: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 4: ✦ There is still no universally agreed-on explanation for why there should be such a dramatic cessation of tree growth at the upper timberline. Various environmental factors may play a role. Too much snow, for example, can smother trees, and avalanches and snow creep can damage or destroy them. Late-lying snow reduces the effective growing season to the point where seedlings cannot establish themselves. Wind velocity also increases with altitude and may cause serious stress for trees, as is made evident by the deformed shapes at high altitudes. Some scientists have proposed that the presence of increasing levels of ultraviolet light with elevation may play a role, while browsing and grazing animals like the ibex may be another contributing factor. Probably the most important environmental factor is temperature, for if the growing season is too short and temperatures are too low, tree shoots and buds cannot mature sufficiently to survive the winter months.
+        <br><br>
+        `,
+      question: '7. In paragraph 4, what is the author’s main purpose in the discussion of the dramatic cessation of tree growth at the upper timberline?',
+      responses: [
+        {text: 'To argue that none of several environment factors that are believed to contribute to that phenomenon do in fact play a role in causing it.', answered: 'A'},
+        {text: 'To argue in support of one particular explanation of that phenomenon against several competing explanations', answered: 'B'},
+        {text: 'To explain why the primary environmental factor responsible for that phenomenon has not yet been identified', answered: 'C'},
+        {text: 'To present several environmental factors that may contribute to a satisfactory explanation of that phenomenon', answered: 'D', correct: 'D'},
+      ]
+    },
+    {
+      text: `Paragraph 6: ✦ The most striking characteristic of the plants of the alpine zone is their low growth form. This enables them to avoid the worst rigors of high winds and permits them to make use of the higher temperatures immediately adjacent to the ground surface. In an area where low temperatures are limiting to life, the importance of the additional heat near the surface is crucial. The low growth form can also permit the plants to take advantage of the insulation provided by a winter snow cover. In the equatorial mountains the low growth form is less prevalent.
+        <br><br>
+        `,
+      question: '8. According to paragraph 6, all of the following statements are true of plants in the alpine zone EXCEPT:',
+      responses: [
+        {text: 'Because they are low, they are less exposed to strong winds.', answered: 'A'},
+        {text: 'Because they are low, the winter snow cover gives them more protection from the extreme cold.', answered: 'B'},
+        {text: 'In the equatorial mountains, they tend to be lower than in mountains elsewhere.', answered: 'C', correct: 'C'},
+        {text: 'Their low growth form keeps them closer to the ground, where there is more heat than further up', answered: 'D'},
+      ]
+    },
+    {
+      text: `Above the tree line there is a zone that is generally called alpine tundra.<span class="TEX3A">[▇]</span>Immediately adjacent to the timberline, the tundra consists of a fairly complete cover of low-lying shrubs, herbs, and grasses, while higher up the number and diversity of species decrease until there is much bare ground with occasional mosses and lichens and some prostrate cushion plants.<span class="TEXT3B">[▇]</span> Some plants can even survive in favorable microhabitats above the snow line. The highest plants in the world occur at around 6,100 meters on Makalu in the Himalayas.<span class="TEXT3C">[▇]</span> t this great height, rocks, warmed by the sun, melt small snowdrifts.<span class="TEXT3D">[▇]</span>
+        <br><br>
+        `,
+      question: '9. Look at the four squares [▇] that indicate where the following sentence could be added to the passage. Where would the sentence best fit?',
+      responses: [
+        {text: 'This explains how, for example, alpine cushion plants have been found growing at an altitude of 6,180 meters.', answered: 'D', correct: 'D'},
+      ]
+    },
   ]
 };
-//https://t.weixue100.com/toefl/read/34925/27645.html##
 
 let response_text_one = ''
 let response_text_two = ''
@@ -647,21 +818,15 @@ export default {
     data() {
      return {
         countDown : 3240,
-        //countDown: 40,
-        //values: old_value_text_one,
         response1: '',
         response2: '',
-        questionIndexDecrementByText: 2,
+        questionIndexDecrementByText: 3,
         scrolledToBottom: false,
         quiz: quiz_tpo_01,
         correctedAnwsers: ['C', 'C', 'B', 'D','D', 'A', 'A', 'A', 'C', 'B', 'D', 'A', 'D', 'A', 'B', 'C', 'D', 'A','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D'],
         selected: [''],
         showResults: false,
-        //selected22: [''],
-        // Store current question index
         questionIndex: 0,
-        // An array initialized with "false" values for each question
-        // It means: "did the user answered correctly to the question n?" "no".
         userResponses: Array(quiz_tpo_01.questions.length).fill(false),
      }
     }, methods: {

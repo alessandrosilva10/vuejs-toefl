@@ -1,7 +1,7 @@
 <template>
 <v-container class="study-card my-5">
     <Navbar />
-    <Loading :title="'Loading the TOEFL READING PRACTICE - TPO' + this.$route.params.tpo_id + ''" />
+    <Loading :title="'Loading TPO' + this.$route.params.tpo_id + ''" />
     <div v-if="!isLoadingRendered">
         <ReadingQuestions />
     </div>
