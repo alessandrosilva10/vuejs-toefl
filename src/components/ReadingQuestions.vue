@@ -26,7 +26,6 @@
             </div>
             <br /> <br /> <br />
         </div>
-        {{questionIndex}}
         <v-card min-height="1000px">
             <!--<h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>-->
             <div v-for="(question, index) in quiz.questions" :key="index">
@@ -54,7 +53,7 @@
                             </div>
 
                             <!-- Indexes of insert table -->
-                            <div v-show="questionIndex === 14 || questionIndex === 29 || questionIndex ===40">
+                            <div v-show="questionIndex === 14 || questionIndex === 29 || questionIndex === 40">
                                 <div v-for="(response, i) in question.responses" :key="i">
                                     <br>
                                     <span style="font-size: 125%;">{{response.text}}</span>
@@ -83,6 +82,20 @@
                                         <label>
                                              <v-checkbox
                                                 v-model="userResponses[i+29]"
+                                                :label="response.text"
+                                                v-bind:value="response.correct"
+                                                @change="consoleFilter(response.correct, response.answered)">
+                                            </v-checkbox>
+                                        </label>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div v-show="questionIndex === 41">
+                                <ol type="A">
+                                    <li v-for="(response, i) in question.responses" :key="i">
+                                        <label>
+                                             <v-checkbox
+                                                v-model="userResponses[i+40]"
                                                 :label="response.text"
                                                 v-bind:value="response.correct"
                                                 @change="consoleFilter(response.correct, response.answered)">
@@ -631,7 +644,7 @@ var quiz_tpo_01 = {
         {text: 'The presence of theater in almost all societies is thought to have occurred because early storytellers traveled to different groups to tell their stories.', answered: 'A'},
         {text: 'Many theorists believe that theater arises when societies act out myths to preserve social well-being.', answered: 'B', correct: 'B'},
         {text: 'The more sophisticated societies became, the better they could influence desirable occurrences through ritualized theater.', answered: 'C'},
-        {text: 'Some theories of theater development focus on how theater was used by group leaders to group leaders govern other members of society.', answered: 'D', correct: 'D'},
+        {text: 'Some theories of theater development focus on how theater was used by group leaders to group leaders govern other members of society.', answered: 'D'},
         {text: 'Theater may have come from pleasure humans receive from storytelling and moving rhythmically.', answered: 'E', correct: 'E'},
         {text: 'The human capacities for imitation and fantasy are considered possible reasons why societies develop theater.', answered: 'F', correct: 'F'},
 
@@ -800,6 +813,20 @@ var quiz_tpo_01 = {
         {text: 'This explains how, for example, alpine cushion plants have been found growing at an altitude of 6,180 meters.', answered: 'D', correct: 'D'},
       ]
     },
+    {
+      text: `
+        `,
+      question: '10.Directions: An introductory sentence for a brief summary of the passage is provided below. Complete the summary by selecting the THREE answer choices that express the most important ideas in the passage. Some sentences do not belong in the summary because they express ideas that are not presented in the passage or are minor ideas in the passage. This question is worth 2 points. At the timberline, whether upper or lower, there is a profound change in the growth of trees and other plants.',
+      responses: [
+        {text: 'Birch is one of the few species of tree that can survive in the extreme environments of the upper timberline.', answered: 'A'},
+        {text: 'There is no agreement among scientists as to exactly why plant growth is sharply different above and below the upper timberline.', answered: 'B', correct: 'B'},
+        {text: 'The temperature at the upper timberline is probably more important in preventing tree growth than factors such as the amount of snowfall or the force of winds.', answered: 'C', correct: 'C'},
+        {text: 'The geographical location of an upper timberline has an impact on both the types of trees found there and their physical characteristics.', answered: 'D', correct: 'D'},
+        {text: 'High levels of ultraviolet light most likely play a greater role in determining tree growth at the upper timberline than do grazing animals such as the ibex.', answered: 'E'},
+        {text: 'Despite being adjacent to the timberline, the alpine tundra is an area where certain kinds of low trees can endure high winds and very low temperatures.', answered: 'F'},
+
+      ]
+    },
   ]
 };
 
@@ -938,9 +965,54 @@ export default {
             response_text_two = "D"
         });
         this.selected[27] = response_text_two;
-        /*this.selected[26] = response_text_two;
+        /*this.selected[26] = response_text_two;*/
 
 
+
+////////////////////////////////////////////////////////////////
+
+        $(".TEXT3A").unbind().click(function() {
+            $(".TEXT3A").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT3B").text().length > 3 || $(".TEXT3C").text().length > 3 || $(".TEXT3D").text().length > 3){
+                $(".TEXT3B").html('[▇]');
+                $(".TEXT3C").html('[▇]');
+                $(".TEXT3D").html('[▇]');
+            }
+            response_text_three = 'A';
+        });
+
+         $(".TEXT3B").unbind().click(function() {
+            $(".TEXT3B").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT3A").text().length > 3 || $(".TEXT3C").text().length > 3 || $(".TEXT3D").text().length > 3){
+                $(".TEXT3A").html('[▇]');
+                $(".TEXT3C").html('[▇]');
+                $(".TEXT3D").html('[▇]');
+            }
+            response_text_three = 'B';
+        });
+
+        $(".TEXT3C").unbind().click(function() {
+            $(".TEXT3C").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT3A").text().length > 3 || $(".TEXT3B").text().length > 3 || $(".TEXT3D").text().length > 3){
+                $(".TEXT3A").html('[▇]');
+                $(".TEXT3B").html('[▇]');
+                $(".TEXT3D").html('[▇]');
+            }
+            response_text_three = "C"
+        });
+
+        $(".TEXT3D").unbind().click(function() {
+            $(".TEXT3D").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            if($(".TEXT3A").text().length > 3 || $(".TEXT3B").text().length > 3 || $(".TEXT3C").text().length > 3){
+                $(".TEXT3A").html('[▇]');
+                $(".TEXT3B").html('[▇]');
+                $(".TEXT3C").html('[▇]');
+            }
+            response_text_three = "D"
+        });
+        //this.selected[27] = response_text_two;
+
+/*
         if(response_text_one === this.correctedAnwsers[17]){
             this.response1 = "A"
             this.userResponses[13] = "A"
