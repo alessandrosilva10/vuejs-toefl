@@ -421,7 +421,8 @@ export default {
             this.selected22[this.questionIndex-2] = "Not Answered"
         }
       }*/
-      if(old_value_text_one.length > 3 || old_value_text_two.length > 3 || old_value_text_three > 3){
+
+      if(old_value_text_one.length > 3 || old_value_text_two.length > 3 || old_value_text_three.length > 3){
            this.$toast.error("You can not select more than 3 options", {
             timeout: 5000
         })
