@@ -61,7 +61,7 @@
                             <!-- -->
 
                             <!-- Indexes of multi selection -->
-                            <div v-show="questionIndex === 15">
+                            <div v-if="questionIndex === 15">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
@@ -75,7 +75,7 @@
                                     </li>
                                 </ol>
                             </div>
-                            <div v-show="questionIndex === 30">
+                            <div v-if="questionIndex === 30">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
@@ -89,7 +89,7 @@
                                     </li>
                                 </ol>
                             </div>
-                            <div v-show="questionIndex === 41">
+                            <div v-if="questionIndex === 41">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
@@ -471,7 +471,7 @@ async created(){
         }
       },
   },
-  watch : {
+  /*watch : {
     timeIsOver: function () {
         if(this.countDown < 1){
           alert("Time is over")
@@ -479,7 +479,7 @@ async created(){
           this.$router.push('/scoreboard');
         }
       }
-  }
+  }*/
 }
 </script>
 
