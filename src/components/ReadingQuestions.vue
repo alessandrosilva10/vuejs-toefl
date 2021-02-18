@@ -52,7 +52,7 @@
                             </div>
 
                             <!-- Indexes of insert table -->
-                            <div v-show="questionIndex === 14 || questionIndex === 29 || questionIndex === 40">
+                            <div v-show="questionIndex === insert_table_index_1 || questionIndex === insert_table_index_2 || questionIndex === insert_table_index_3">
                                 <div v-for="(response, i) in question.responses" :key="i">
                                     <br>
                                     <span style="font-size: 125%;">{{response.text}}</span>
@@ -181,8 +181,6 @@ import Vtabs from '@/components/Vtabs';
 import $ from "jquery";
 import axios from 'axios';
 
-//http://t.weixue100.com/toefl/read/result?aeid=396807
-
 let response_text_one = ''
 let response_text_two = ''
 let response_text_three = ''
@@ -196,15 +194,16 @@ export default {
         components: {
         Navbar, Vtabs
     },
+    props: ['insert_table_index_1', 'insert_table_index_2', 'insert_table_index_3', 'quiz'],
     data() {
      return {
-        countDown : 3240,
+        countDown: 3240,
         response1: '',
         response2: '',
         tpo_id: this.$route.params.tpo_id,
         questionIndexDecrementByText: 3,
         scrolledToBottom: false,
-        quiz: [],
+        //quiz: [],
         correctedAnwsers: ['C', 'C', 'B', 'D','D', 'A', 'A', 'A', 'C', 'B', 'D', 'A', 'D', 'A', 'B', 'C', 'D', 'A','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D'],
         selected: [''],
         showResults: false,
@@ -448,23 +447,23 @@ export default {
       console.log("mounted")
   },
 async created(){
-  console.log("created")
+  /*console.log("created")
          const headers = { "Content-Type": "application/json" };
        await axios.post("https://toeflmadeeasy.pythonanywhere.com/gettporeading",{
         "public_id": VueCookies.get('TOEFLMADEEASY').public_id,
         "tpo_id": this.tpo_id,
         }, { headers })
         .then((response) =>{
-             this.quiz = response.data.tpo
+            this.quiz = response.data.tpo
         }
         )
       setTimeout(() => {
         this.countDownTimer();
     },0)
-    this.$forceUpdate()
+    this.$forceUpdate()*/
   },
   computed: {
-      timeIsOver: function () {
+       timeIsOver: function () {
         if(this.countDown < 1){
           alert("Time is over")
           this.saveDatabase(this.userResponses.filter(function(val) { if(val !== true) { return val}}).length);

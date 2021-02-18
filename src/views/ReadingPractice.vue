@@ -3,7 +3,12 @@
     <Navbar />
     <Loading :title="'Loading TPO' + this.$route.params.tpo_id + ''" />
     <div v-if="!isLoadingRendered">
-        <ReadingQuestions />
+        <ReadingQuestions 
+            :insert_table_index_1="insert_table_index_1" 
+            :insert_table_index_2="insert_table_index_2" 
+            :insert_table_index_3="insert_table_index_3"
+            :quiz="quiz"
+        />
     </div>
 </v-container>
 </template>
@@ -12,11 +17,18 @@
 import Loading from '../components/Loading'
 import ReadingQuestions from '../components/ReadingQuestions'
 import Navbar from '../components/Navbar'
+import axios from 'axios';
+import VueCookies from 'vue-cookies'
 
 export default {
     data(){
         return {
-            isLoadingRendered: true
+            isLoadingRendered: true,
+            tpo_id: this.$route.params.tpo_id,
+            insert_table_index_1: '',
+            insert_table_index_2: '',
+            insert_table_index_3: '',
+            quiz: []
         }
     },
     components: {
@@ -27,7 +39,21 @@ export default {
     mounted() {
       setTimeout(() => {
         this.isLoadingRendered = false;
-    }, 4200)
+    }, 4200)}
+    ,
+    async created(){
+       const headers = { "Content-Type": "application/json" };
+       await axios.post("https://toeflmadeeasy.pythonanywhere.com/gettporeading",{
+        "public_id": VueCookies.get('TOEFLMADEEASY').public_id,
+        "tpo_id": this.tpo_id,
+        }, { headers })
+        .then((response) =>{
+            console.log(response.data)
+            this.insert_table_index_1 = response.data.insert_table_index_1
+            this.insert_table_index_2 = response.data.insert_table_index_2
+            this.insert_table_index_3 = response.data.insert_table_index_3
+            this.quiz = response.data.tpo
+        })
     }
 }
 </script>
