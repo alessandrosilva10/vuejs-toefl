@@ -17,7 +17,7 @@ import axios from 'axios'
 import Toast from "vue-toastification"
 import Profile from '../views/Profile.vue'
 import Scoreboard from '../views/Scoreboard.vue'
-
+import ToeflReading from '../views/ToeflReading.vue'
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -25,6 +25,34 @@ Vue.use(axios)
 Vue.use(Toast)
 
 const routes = [
+  {
+    path: '/toefl-reading',
+    name: 'TOEFL READING',
+    component: ToeflReading,
+    props: true,
+    beforeEnter(to, from, next) {
+        try {
+            if(!VueCookies.get('TOEFLMADEEASY') || VueCookies.get('TOEFLMADEEASY').jwt == null) {
+                router.push("/login")
+            }else{
+                axios.defaults.headers.common['X-Access-Token'] = VueCookies.get('TOEFLMADEEASY').jwt
+            }
+            axios.post("https://toeflmadeeasy.pythonanywhere.com/validate")
+          .then(response => {
+              if(response.status === 200){
+                next();
+              }else if(response.status === 403){
+                router.push("/login")
+                next();
+              }else{
+                router.push("/login")
+                next();
+              }
+          })}
+          catch(err) {
+            router.push("/login")
+        }},
+    },
   {
     path: '/',
     name: 'Dashboard',

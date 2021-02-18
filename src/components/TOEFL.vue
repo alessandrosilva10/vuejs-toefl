@@ -19,11 +19,11 @@
       </v-list-item-content>
     </v-list-item>
     <v-card-actions>
-    <v-tooltip top>
+    <v-tooltip top> <!--:to="route"-->
         <template v-slot:activator="{ on, attrs }">
         <v-btn
         text
-        :to="route"
+       
         class="css"
         v-bind="attrs"
         v-on="on"
@@ -60,10 +60,6 @@
 </template>
 <script>
 import axios from 'axios';
-//import Vue from 'vue';
-//import VueRouter from 'vue-router';
-
-//Vue.use(VueRouter)
 
   export default {
       props: ['thumbnail'],
@@ -75,16 +71,14 @@ import axios from 'axios';
       }),
       methods: {
         openTPO(i){
-            window.open('/toefl/reading&tpo=' + i,'_self')
-           //Router.push();
-         //this.$router.push('/toefl/reading&tpo=' + i);
+          this.$router.push({path: '/toefl/reading&tpo=' + i});
         },
         mouseOverHelpful: function(){
             this.active_helpful = !this.active_helpful;
         },
         mouseOverNotHelpful: function(){
             this.active_not_helpful = !this.active_not_helpful;
-        },
+        }/*,
         dislike(){
             const headers = { "Content-Type": "application/json" };
             axios.post("https://toeflmadeeasy.pythonanywhere.com/dislikes1111",
@@ -114,7 +108,7 @@ import axios from 'axios';
         .catch(error => {
             console.log(error)
         });
-        }
+        }*/
     }
   }
 </script>
