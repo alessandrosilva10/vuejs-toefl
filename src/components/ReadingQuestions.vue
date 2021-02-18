@@ -440,9 +440,9 @@ export default {
       return this.userResponses.filter(function(val) { if(val !== true) { return val}}).length;
     },
     calculateTOEFLscore: function() {
-       var toefl_score = [0, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11, 11, 12, 13, 14, 15, 15, 16, 17, 18, 19, 19, 20, 20, 21, 22, 23, 24, 24, 25, 26, 27, 28, 28, 29, 30]
-       var l = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
-       return toefl_score[l]
+       var total_points = 38;
+       var raw_points = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
+       return (raw_points/total_points) * 30
     }
   },mounted () {
       console.log("mounted")
