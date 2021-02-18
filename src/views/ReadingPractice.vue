@@ -7,6 +7,9 @@
             :insert_table_index_1="insert_table_index_1" 
             :insert_table_index_2="insert_table_index_2" 
             :insert_table_index_3="insert_table_index_3"
+            :multi_select_index_1="multi_select_index_1"
+            :multi_select_index_2="multi_select_index_2"
+            :multi_select_index_3="multi_select_index_3"
             :quiz="quiz"
             :total_points="total_points"
         />
@@ -29,6 +32,9 @@ export default {
             insert_table_index_1: '',
             insert_table_index_2: '',
             insert_table_index_3: '',
+            multi_select_index_1: '',
+            multi_select_index_2: '',
+            multi_select_index_3: '',
             total_points: '',
             quiz: []
         }
@@ -55,6 +61,9 @@ export default {
             this.insert_table_index_1 = response.data.insert_table_index_1
             this.insert_table_index_2 = response.data.insert_table_index_2
             this.insert_table_index_3 = response.data.insert_table_index_3
+            this.multi_select_index_1 = response.data.multi_select_index_1
+            this.multi_select_index_2 = response.data.multi_select_index_2
+            this.multi_select_index_3 = response.data.multi_select_index_3
             this.quiz = response.data.tpo
         })
     }

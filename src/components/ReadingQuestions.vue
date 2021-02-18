@@ -5,8 +5,8 @@
                     flex-wrap: wrap;
                     justify-content: center;
                     padding-left: 200px;
-                    align-items: center;" v-show="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== 15">
-            <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < 15">
+                    align-items: center;" v-show="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== multi_select_index_1">
+            <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < multi_select_index_1">
                 <h3>
                     Question {{(questionIndex-questionIndexDecrementByText) + 2 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
                 </h3>
@@ -32,8 +32,8 @@
                     <v-row>
                         <br><br><br>
                         <v-col class="answers-col" col="10">
-                            <v-col col="2"><span class="justify" v-html="question.question" /></v-col>
-                            <div v-if="questionIndex !=15 && questionIndex != 14 && questionIndex != 29 && questionIndex != 30 && questionIndex != 40 && questionIndex != 41">
+                            <v-col col="2"><span class="justify" v-html="question.question" /></v-col> 
+                            <div v-if="questionIndex !=multi_select_index_1 && questionIndex != insert_table_index_1 && questionIndex != insert_table_index_2 && questionIndex != multi_select_index_2 && questionIndex != insert_table_index_3 && questionIndex != multi_select_index_3">
                                 <ol style="
                                         font-size: 20px; margin-top:10px;
                                         display: inline-block;
@@ -61,7 +61,7 @@
                             <!-- -->
 
                             <!-- Indexes of multi selection -->
-                            <div v-show="questionIndex === 15">
+                            <div v-show="questionIndex === multi_select_index_1">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
@@ -75,7 +75,7 @@
                                     </li>
                                 </ol>
                             </div>
-                            <div v-show="questionIndex === 30">
+                            <div v-show="questionIndex === multi_select_index_2">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
@@ -89,7 +89,7 @@
                                     </li>
                                 </ol>
                             </div>
-                            <div v-show="questionIndex === 41">
+                            <div v-show="questionIndex === multi_select_index_3">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
@@ -194,7 +194,7 @@ export default {
         components: {
         Navbar, Vtabs
     },
-    props: ['insert_table_index_1', 'insert_table_index_2', 'insert_table_index_3', 'quiz', 'total_points'],
+    props: ['insert_table_index_1', 'insert_table_index_2', 'insert_table_index_3', 'quiz', 'total_points', 'multi_select_index_1', 'multi_select_index_2', 'multi_select_index_3'],
     data() {
      return {
         countDown: 3240,
