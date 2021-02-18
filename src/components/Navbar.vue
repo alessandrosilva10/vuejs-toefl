@@ -85,6 +85,7 @@
         </v-navigation-drawer>
     </nav>
 </template>
+<script data-ad-client="ca-pub-9433226655333610" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
 import VueCookies from 'vue-cookies'
 export default {
