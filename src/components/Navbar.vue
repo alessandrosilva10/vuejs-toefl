@@ -78,6 +78,10 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
+            <Adsense
+                data-ad-client="ca-pub-9433226655333610"
+                data-ad-slot="1234567890">
+            </Adsense>
         </v-navigation-drawer>
     </nav>
 </template>

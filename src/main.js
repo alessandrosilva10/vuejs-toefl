@@ -8,6 +8,7 @@ import axios from "axios";
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
+import Ads from 'vue-google-adsense'
 
 const options = {
     // You can set your default options here
@@ -26,6 +27,11 @@ Vue.use(VuetifyDialog, {
 
 Vue.use(axios);
 Vue.config.productionTip = false
+Vue.use(require('vue-script2'))
+
+Vue.use(Ads.Adsense)
+Vue.use(Ads.InArticleAdsense)
+Vue.use(Ads.InFeedAdsense)
 
 new Vue({
   router,
