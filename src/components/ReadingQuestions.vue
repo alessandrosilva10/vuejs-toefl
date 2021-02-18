@@ -194,7 +194,7 @@ export default {
         components: {
         Navbar, Vtabs
     },
-    props: ['insert_table_index_1', 'insert_table_index_2', 'insert_table_index_3', 'quiz'],
+    props: ['insert_table_index_1', 'insert_table_index_2', 'insert_table_index_3', 'quiz', 'total_points'],
     data() {
      return {
         countDown: 3240,
@@ -439,9 +439,8 @@ export default {
       return this.userResponses.filter(function(val) { if(val !== true) { return val}}).length;
     },
     calculateTOEFLscore: function() {
-       var total_points = 38;
        var raw_points = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
-       return ((raw_points/total_points) * 30).toFixed();
+       return ((raw_points/this.total_points) * 30).toFixed();
     }
   },mounted () {
       this.countDownTimer()

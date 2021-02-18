@@ -8,6 +8,7 @@
             :insert_table_index_2="insert_table_index_2" 
             :insert_table_index_3="insert_table_index_3"
             :quiz="quiz"
+            :total_points="total_points"
         />
     </div>
 </v-container>
@@ -28,6 +29,7 @@ export default {
             insert_table_index_1: '',
             insert_table_index_2: '',
             insert_table_index_3: '',
+            total_points: '',
             quiz: []
         }
     },
@@ -49,6 +51,7 @@ export default {
         }, { headers })
         .then((response) =>{
             console.log(response.data)
+            this.total_points = response.data.total_points
             this.insert_table_index_1 = response.data.insert_table_index_1
             this.insert_table_index_2 = response.data.insert_table_index_2
             this.insert_table_index_3 = response.data.insert_table_index_3
