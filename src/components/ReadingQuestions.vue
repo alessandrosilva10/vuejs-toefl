@@ -442,7 +442,7 @@ export default {
     calculateTOEFLscore: function() {
        var total_points = 38;
        var raw_points = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
-       return (raw_points/total_points) * 30
+       return ((raw_points/total_points) * 30).toFixed();
     }
   },mounted () {
       console.log("mounted")
