@@ -444,23 +444,10 @@ export default {
        return ((raw_points/total_points) * 30).toFixed();
     }
   },mounted () {
-      console.log("mounted")
+      this.countDownTimer()
   },
-async created(){
-  /*console.log("created")
-         const headers = { "Content-Type": "application/json" };
-       await axios.post("https://toeflmadeeasy.pythonanywhere.com/gettporeading",{
-        "public_id": VueCookies.get('TOEFLMADEEASY').public_id,
-        "tpo_id": this.tpo_id,
-        }, { headers })
-        .then((response) =>{
-            this.quiz = response.data.tpo
-        }
-        )
-      setTimeout(() => {
-        this.countDownTimer();
-    },0)
-    this.$forceUpdate()*/
+    created(){
+
   },
   computed: {
        timeIsOver: function () {
