@@ -28,12 +28,12 @@
         <v-card min-height="1000px">
             <!--<h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>-->
             <div v-for="(question, index) in quiz.questions" :key="index">
-                <div v-show="index === questionIndex">
+                <div v-if="index === questionIndex">
                     <v-row>
                         <br><br><br>
                         <v-col class="answers-col" col="10">
                             <v-col col="2"><span class="justify" v-html="question.question" /></v-col>
-                            <div v-show="questionIndex !=15 && questionIndex != 14 && questionIndex != 29 && questionIndex != 30 && questionIndex != 40 && questionIndex != 41">
+                            <div v-if="questionIndex !=15 && questionIndex != 14 && questionIndex != 29 && questionIndex != 30 && questionIndex != 40 && questionIndex != 41">
                                 <ol style="
                                         font-size: 20px; margin-top:10px;
                                         display: inline-block;
