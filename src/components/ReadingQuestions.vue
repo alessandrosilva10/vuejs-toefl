@@ -61,11 +61,11 @@
                             <!-- -->
 
                             <!-- Indexes of multi selection -->
-                            <div v-if="questionIndex === 15">
+                            <div v-show="questionIndex === 15">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
-                                            <v-checkbox v-if="questionIndex === 15"
+                                            <v-checkbox
                                                 v-model="userResponses[i+14]"
                                                 :label="response.text"
                                                 v-bind:value="response.correct"
@@ -75,7 +75,7 @@
                                     </li>
                                 </ol>
                             </div>
-                            <div v-if="questionIndex === 30">
+                            <div v-show="questionIndex === 30">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
@@ -89,7 +89,7 @@
                                     </li>
                                 </ol>
                             </div>
-                            <div v-if="questionIndex === 41">
+                            <div v-show="questionIndex === 41">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
