@@ -201,7 +201,7 @@ export default {
     },
     props: ['insert_table_index_1', 'insert_table_question', 
             'insert_table_index_2', 'insert_table_index_3', 'quiz', 'total_points', 
-            'multi_select_index_1', 'multi_select_index_2', 'multi_select_index_3'],
+            'multi_select_index_1', 'multi_select_index_2', 'multi_select_index_3', 'insert_table_question_text_2', 'insert_table_question_text_3'],
     data() {
      return {
         countDown: 3240,
