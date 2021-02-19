@@ -18,6 +18,14 @@
             </div>
             <div style="
                 float: left;
+                font-size: 22px;
+                padding-left: 200px;
+                ">
+                <span class="text-col" col="10"><strong>Answer:</strong> {{selected[questionIndex] ? selected[questionIndex] : 'Not answered'}}</span>
+            </div>
+            
+            <div style="
+                float: left;
                 font-size: 30px;
                 padding-left: 200px;
                 ">
@@ -103,10 +111,9 @@
                                 </ol>
                             </div>
                              <!-- -->
-                        </v-col>
+                        </v-col> 
                         <v-col class="text-col" col="10">
-                            <span class="justify" @onchange="onChange()" @click="insertText()" v-html="question.text">
-                            </span>
+                            <span class="justify"  @click="insertText()" v-html="question.text"><br></span>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -203,6 +210,7 @@ export default {
         tpo_id: this.$route.params.tpo_id,
         questionIndexDecrementByText: 3,
         scrolledToBottom: false,
+        insert_table_selected: '',
         //quiz: [],
         correctedAnwsers: ['C', 'C', 'B', 'D','D', 'A', 'A', 'A', 'C', 'B', 'D', 'A', 'D', 'A', 'B', 'C', 'D', 'A','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D','D'],
         selected: [''],
@@ -241,10 +249,15 @@ export default {
       this.$forceUpdate();
     },
     onChange(){
-
+        /*console.log(insert_table_selected)
+        if(this.selected[this.insert_table_index_1].length > 3){
+            $(this.selected[this.insert_table_index_1]).html(this.insert_table_question);
+        }*/
     },
     insertText(){
+
         let insert_table_question = this.insert_table_question
+
          $(".A").unbind().click(function() {
             $(".A").html(insert_table_question);
             if($(".B").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3){
@@ -284,7 +297,7 @@ export default {
             }
             response_text_one = "D"
         });
-        this.selected[12] = response_text_one;
+        this.selected[this.insert_table_index_1] = response_text_one;
 
 ////////////////////////////////////////////////////////////////
 
