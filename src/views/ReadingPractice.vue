@@ -1,7 +1,7 @@
 <template>
 <v-container class="study-card my-5">
     <Navbar />
-    <Loading :title="'Loading TPO' + this.$route.params.tpo_id + ''" />
+    <Loading :title="'Loading TPO ' + this.$route.params.tpo_id + ''" />
     <div v-if="!isLoadingRendered">
         <ReadingQuestions 
             :insert_table_index_1="insert_table_index_1" 
@@ -62,7 +62,6 @@ export default {
         "tpo_id": this.tpo_id,
         }, { headers })
         .then((response) =>{
-            console.log(response.data)
             this.total_points = response.data.total_points
             this.insert_table_index_1 = response.data.insert_table_index_1
             this.insert_table_index_2 = response.data.insert_table_index_2
