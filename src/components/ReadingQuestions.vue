@@ -26,7 +26,7 @@
             
             <div style="
                 float: left;
-                font-size: 30px;
+                font-size: 22px;
                 padding-left: 200px;
                 ">
                 Time: {{secondsToHms(countDown) }}
