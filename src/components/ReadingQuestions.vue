@@ -29,7 +29,7 @@
                 font-size: 30px;
                 padding-left: 200px;
                 ">
-                {{secondsToHms(countDown) }}
+                Time: {{secondsToHms(countDown) }}
             </div>
             <br /> <br /> <br />
         </div>
