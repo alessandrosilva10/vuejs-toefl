@@ -255,11 +255,11 @@ export default {
         }*/
     },
     insertText(){
-
-        let insert_table_question = this.insert_table_question
+        let insert_table_question_text_1 = this.insert_table_question
+        let insert_table_question_text_2 = this.insert_table_question_text_2
 
          $(".A").unbind().click(function() {
-            $(".A").html(insert_table_question);
+            $(".A").html(insert_table_question_text_1);
             if($(".B").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3){
                 $(".B").html('[▇]');
                 $(".C").html('[▇]');
@@ -269,7 +269,7 @@ export default {
         });
 
          $(".B").unbind().click(function() {
-            $(".B").html(insert_table_question);
+            $(".B").html(insert_table_question_text_1);
             if($(".A").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3 ){
                 $(".A").html('[▇]');
                 $(".C").html('[▇]');
@@ -279,7 +279,7 @@ export default {
         });
 
         $(".C").unbind().click(function() {
-            $(".C").html(insert_table_question);
+            $(".C").html(insert_table_question_text_1);
             if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".D").text().length > 3){
                 $(".A").html('[▇]');
                 $(".B").html('[▇]');
@@ -289,7 +289,7 @@ export default {
         });
 
         $(".D").unbind().click(function() {
-            $(".D").html(insert_table_question);
+            $(".D").html(insert_table_question_text_1);
             if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".C").text().length > 3){
                 $(".A").html('[▇]');
                 $(".B").html('[▇]');
@@ -302,7 +302,7 @@ export default {
 ////////////////////////////////////////////////////////////////
 
         $(".TEXT2A").unbind().click(function() {
-            $(".TEXT2A").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT2A").html(insert_table_question_text_2);
             if($(".TEXT2B").text().length > 3 || $(".TEXT2C").text().length > 3 || $(".TEXT2D").text().length > 3){
                 $(".TEXT2B").html('[▇]');
                 $(".TEXT2C").html('[▇]');
@@ -312,7 +312,7 @@ export default {
         });
 
          $(".TEXT2B").unbind().click(function() {
-            $(".TEXT2B").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT2B").html(insert_table_question_text_2);
             if($(".TEXT2A").text().length > 3 || $(".TEXT2C").text().length > 3 || $(".TEXT2D").text().length > 3){
                 $(".TEXT2A").html('[▇]');
                 $(".TEXT2C").html('[▇]');
@@ -322,7 +322,7 @@ export default {
         });
 
         $(".TEXT2C").unbind().click(function() {
-            $(".TEXT2C").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT2C").html(insert_table_question_text_2);
             if($(".TEXT2A").text().length > 3 || $(".TEXT2B").text().length > 3 || $(".TEXT2D").text().length > 3){
                 $(".TEXT2A").html('[▇]');
                 $(".TEXT2B").html('[▇]');
@@ -332,7 +332,7 @@ export default {
         });
 
         $(".TEXT2D").unbind().click(function() {
-            $(".TEXT2D").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT2D").html(insert_table_question_text_2);
             if($(".TEXT2A").text().length > 3 || $(".TEXT2B").text().length > 3 || $(".TEXT2C").text().length > 3){
                 $(".TEXT2A").html('[▇]');
                 $(".TEXT2B").html('[▇]');
@@ -340,7 +340,7 @@ export default {
             }
             response_text_two = "D"
         });
-        this.selected[27] = response_text_two;
+        this.selected[this.insert_table_index_2] = response_text_two;
 
 ////////////////////////////////////////////////////////////////
 
@@ -383,7 +383,7 @@ export default {
             }
             response_text_three = "D"
         });
-        this.selected[38] = response_text_three;
+        this.selected[this.insert_table_index_3] = response_text_three;
     },
         countDownTimer() {
             if(this.countDown > 0) {
