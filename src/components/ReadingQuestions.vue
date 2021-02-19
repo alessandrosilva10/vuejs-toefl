@@ -5,15 +5,16 @@
                     flex-wrap: wrap;
                     justify-content: center;
                     padding-left: 200px;
-                    align-items: center;" v-show="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== multi_select_index_1">
-            <div v-if="(questionIndex-questionIndexDecrementByText) + 1 < multi_select_index_1">
-                <h3>
-                    Question {{(questionIndex-questionIndexDecrementByText) + 2 }} of {{(quiz.questions.length-questionIndexDecrementByText)-1}}
+                    align-items: center;" v-show="questionIndex-1 > 0 && questionIndex-1 < quiz.questions.length-1 && questionIndex-1 !== multi_select_index_1 &&  questionIndex-1 !== multi_select_index_2 && questionIndex-1 !== multi_select_index_3">
+            <div>
+                <h3 v-if="questionIndex-1 < multi_select_index_1">
+                    Question {{questionIndex-1}} of {{quiz.questions.length-4}}
                 </h3>
-            </div>
-            <div v-else>
-                <h3>
-                    Question {{(questionIndex-questionIndexDecrementByText)}} of {{(quiz.questions.length-questionIndexDecrementByText) -1}}
+                <h3 v-if="questionIndex-1 > multi_select_index_1 && questionIndex-1 < multi_select_index_2">
+                    Question {{questionIndex-2}} of {{quiz.questions.length-4}}
+                </h3>
+                 <h3 v-if="questionIndex-1 > multi_select_index_2 && questionIndex-1 < multi_select_index_3">
+                    Question {{questionIndex-3}} of {{quiz.questions.length-4}}
                 </h3>
             </div>
             <div style="
@@ -398,19 +399,19 @@ export default {
      this.scrolledToBottom = true // replace it with your code
     }
  }
-},
+},     /*
+    calcularIndexOfQuestions = () => {
+        alert(this.questionIndex)
+          if(this.questionIndex-1 < this.multi_select_index_1){
+            return "Question " + this.questionIndex-1 + " of " + this.quiz.questions.length-4
+          }else if(this.questionIndex-1 > this.multi_select_index_1 && this.questionIndex-1 < this.multi_select_index_2){
+            return "Question " + this.questionIndex-2 + " of " + this.quiz.questions.length-4
+          }else if(this.questionIndex-1 > this.multi_select_index_2 && this.questionIndex-1 <this. multi_select_index_3){
+           return "Question " + this.questionIndex-3 + " of " + this.quiz.questions.length-4
+          } 
+      },*/
     // Go to next question
     next: function() {
-          /* if(this.questionIndex === this.quiz.questions.length){
-            this.$forceUpdate();
-        }
-
-      if(this.questionIndex > 1){
-        if(!typeof this.selected22[this.questionIndex-2] !== "undefined"){
-            this.selected22[this.questionIndex-2] = "Not Answered"
-        }
-      }*/
-
       if(old_value_text_one.length > 3 || old_value_text_two.length > 3 || old_value_text_three.length > 3){
            this.$toast.error("You can not select more than 3 options", {
             timeout: 5000
@@ -418,7 +419,6 @@ export default {
       }else{
            this.questionIndex++;
       }
-      //this.$forceUpdate();
     },
     // Go to previous question
     prev: function() {
