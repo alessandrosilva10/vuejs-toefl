@@ -257,44 +257,37 @@ export default {
     insertText(){
         let insert_table_question_text_1 = this.insert_table_question
         let insert_table_question_text_2 = this.insert_table_question_text_2
+        let insert_table_question_text_3 = this.insert_table_question_text_3
 
          $(".A").unbind().click(function() {
             $(".A").html(insert_table_question_text_1);
-            if($(".B").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3){
-                $(".B").html('[▇]');
-                $(".C").html('[▇]');
-                $(".D").html('[▇]');
-            }
+            $(".B").html('[▇]');
+            $(".C").html('[▇]');
+            $(".D").html('[▇]');
             response_text_one = 'A';
         });
 
          $(".B").unbind().click(function() {
             $(".B").html(insert_table_question_text_1);
-            if($(".A").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3 ){
-                $(".A").html('[▇]');
-                $(".C").html('[▇]');
-                $(".D").html('[▇]');
-            }
+            $(".A").html('[▇]');
+            $(".C").html('[▇]');
+            $(".D").html('[▇]');
             response_text_one = 'B';
         });
 
         $(".C").unbind().click(function() {
             $(".C").html(insert_table_question_text_1);
-            if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".D").text().length > 3){
-                $(".A").html('[▇]');
-                $(".B").html('[▇]');
-                $(".D").html('[▇]');
-            }
+            $(".A").html('[▇]');
+            $(".B").html('[▇]');
+            $(".D").html('[▇]');
             response_text_one = "C"
         });
 
         $(".D").unbind().click(function() {
             $(".D").html(insert_table_question_text_1);
-            if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".C").text().length > 3){
-                $(".A").html('[▇]');
-                $(".B").html('[▇]');
-                $(".C").html('[▇]');
-            }
+            $(".A").html('[▇]');
+            $(".B").html('[▇]');
+            $(".C").html('[▇]');
             response_text_one = "D"
         });
         this.selected[this.insert_table_index_1] = response_text_one;
@@ -303,84 +296,66 @@ export default {
 
         $(".TEXT2A").unbind().click(function() {
             $(".TEXT2A").html(insert_table_question_text_2);
-            if($(".TEXT2B").text().length > 3 || $(".TEXT2C").text().length > 3 || $(".TEXT2D").text().length > 3){
-                $(".TEXT2B").html('[▇]');
-                $(".TEXT2C").html('[▇]');
-                $(".TEXT2D").html('[▇]');
-            }
+            $(".TEXT2B").html('[▇]');
+            $(".TEXT2C").html('[▇]');
+            $(".TEXT2D").html('[▇]');
             response_text_two = 'A';
         });
 
          $(".TEXT2B").unbind().click(function() {
             $(".TEXT2B").html(insert_table_question_text_2);
-            if($(".TEXT2A").text().length > 3 || $(".TEXT2C").text().length > 3 || $(".TEXT2D").text().length > 3){
-                $(".TEXT2A").html('[▇]');
-                $(".TEXT2C").html('[▇]');
-                $(".TEXT2D").html('[▇]');
-            }
+            $(".TEXT2A").html('[▇]');
+            $(".TEXT2C").html('[▇]');
+            $(".TEXT2D").html('[▇]');
             response_text_two = 'B';
         });
 
         $(".TEXT2C").unbind().click(function() {
             $(".TEXT2C").html(insert_table_question_text_2);
-            if($(".TEXT2A").text().length > 3 || $(".TEXT2B").text().length > 3 || $(".TEXT2D").text().length > 3){
-                $(".TEXT2A").html('[▇]');
-                $(".TEXT2B").html('[▇]');
-                $(".TEXT2D").html('[▇]');
-            }
+            $(".TEXT2A").html('[▇]');
+            $(".TEXT2B").html('[▇]');
+            $(".TEXT2D").html('[▇]');
             response_text_two = "C"
         });
 
         $(".TEXT2D").unbind().click(function() {
             $(".TEXT2D").html(insert_table_question_text_2);
-            if($(".TEXT2A").text().length > 3 || $(".TEXT2B").text().length > 3 || $(".TEXT2C").text().length > 3){
-                $(".TEXT2A").html('[▇]');
-                $(".TEXT2B").html('[▇]');
-                $(".TEXT2C").html('[▇]');
-            }
+            $(".TEXT2A").html('[▇]');
+            $(".TEXT2B").html('[▇]');
+            $(".TEXT2C").html('[▇]');
             response_text_two = "D"
         });
         this.selected[this.insert_table_index_2] = response_text_two;
 
-////////////////////////////////////////////////////////////////
-
         $(".TEXT3A").unbind().click(function() {
             $(".TEXT3A").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT3B").text().length > 3 || $(".TEXT3C").text().length > 3 || $(".TEXT3D").text().length > 3){
-                $(".TEXT3B").html('[▇]');
-                $(".TEXT3C").html('[▇]');
-                $(".TEXT3D").html('[▇]');
-            }
+            $(".TEXT3B").html('[▇]');
+            $(".TEXT3C").html('[▇]');
+            $(".TEXT3D").html('[▇]');
             response_text_three = 'A';
         });
 
          $(".TEXT3B").unbind().click(function() {
             $(".TEXT3B").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT3A").text().length > 3 || $(".TEXT3C").text().length > 3 || $(".TEXT3D").text().length > 3){
-                $(".TEXT3A").html('[▇]');
-                $(".TEXT3C").html('[▇]');
-                $(".TEXT3D").html('[▇]');
-            }
+            $(".TEXT3A").html('[▇]');
+            $(".TEXT3C").html('[▇]');
+            $(".TEXT3D").html('[▇]');
             response_text_three = 'B';
         });
 
         $(".TEXT3C").unbind().click(function() {
             $(".TEXT3C").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT3A").text().length > 3 || $(".TEXT3B").text().length > 3 || $(".TEXT3D").text().length > 3){
-                $(".TEXT3A").html('[▇]');
-                $(".TEXT3B").html('[▇]');
-                $(".TEXT3D").html('[▇]');
-            }
+            $(".TEXT3A").html('[▇]');
+            $(".TEXT3B").html('[▇]');
+            $(".TEXT3D").html('[▇]');
             response_text_three = "C"
         });
 
         $(".TEXT3D").unbind().click(function() {
             $(".TEXT3D").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
-            if($(".TEXT3A").text().length > 3 || $(".TEXT3B").text().length > 3 || $(".TEXT3C").text().length > 3){
-                $(".TEXT3A").html('[▇]');
-                $(".TEXT3B").html('[▇]');
-                $(".TEXT3C").html('[▇]');
-            }
+            $(".TEXT3A").html('[▇]');
+            $(".TEXT3B").html('[▇]');
+            $(".TEXT3C").html('[▇]');
             response_text_three = "D"
         });
         this.selected[this.insert_table_index_3] = response_text_three;
