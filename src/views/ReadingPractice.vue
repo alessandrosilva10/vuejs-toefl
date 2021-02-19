@@ -12,6 +12,7 @@
             :multi_select_index_3="multi_select_index_3"
             :quiz="quiz"
             :total_points="total_points"
+            :insert_table_question="insert_table_question"
         />
     </div>
 </v-container>
@@ -36,6 +37,7 @@ export default {
             multi_select_index_2: '',
             multi_select_index_3: '',
             total_points: '',
+            insert_table_question: '',
             quiz: []
         }
     },
@@ -64,6 +66,7 @@ export default {
             this.multi_select_index_1 = response.data.multi_select_index_1
             this.multi_select_index_2 = response.data.multi_select_index_2
             this.multi_select_index_3 = response.data.multi_select_index_3
+            this.insert_table_question = response.data.insert_table_question
             this.quiz = response.data.tpo
         })
     }

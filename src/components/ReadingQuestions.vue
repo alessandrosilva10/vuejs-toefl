@@ -59,14 +59,13 @@
                                 </div>
                             </div>
                             <!-- -->
-
                             <!-- Indexes of multi selection -->
                             <div v-show="questionIndex === multi_select_index_1">
                                 <ol type="A">
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
                                             <v-checkbox
-                                                v-model="userResponses[i+14]"
+                                                v-model="userResponses[i+insert_table_index_1]"
                                                 :label="response.text"
                                                 v-bind:value="response.correct"
                                                 @change="consoleFilter(response.correct, response.answered)">
@@ -80,7 +79,7 @@
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
                                              <v-checkbox
-                                                v-model="userResponses[i+29]"
+                                                v-model="userResponses[i+insert_table_index_2]"
                                                 :label="response.text"
                                                 v-bind:value="response.correct"
                                                 @change="consoleFilter(response.correct, response.answered)">
@@ -94,7 +93,7 @@
                                     <li v-for="(response, i) in question.responses" :key="i">
                                         <label>
                                              <v-checkbox
-                                                v-model="userResponses[i+40]"
+                                                v-model="userResponses[i+insert_table_index_3]"
                                                 :label="response.text"
                                                 v-bind:value="response.correct"
                                                 @change="consoleFilter(response.correct, response.answered)">
@@ -104,7 +103,6 @@
                                 </ol>
                             </div>
                              <!-- -->
-
                         </v-col>
                         <v-col class="text-col" col="10">
                             <span class="justify" @onchange="onChange()" @click="insertText()" v-html="question.text">
@@ -194,7 +192,9 @@ export default {
         components: {
         Navbar, Vtabs
     },
-    props: ['insert_table_index_1', 'insert_table_index_2', 'insert_table_index_3', 'quiz', 'total_points', 'multi_select_index_1', 'multi_select_index_2', 'multi_select_index_3'],
+    props: ['insert_table_index_1', 'insert_table_question', 
+            'insert_table_index_2', 'insert_table_index_3', 'quiz', 'total_points', 
+            'multi_select_index_1', 'multi_select_index_2', 'multi_select_index_3'],
     data() {
      return {
         countDown: 3240,
@@ -208,34 +208,35 @@ export default {
         selected: [''],
         showResults: false,
         questionIndex: 0,
-        userResponses: Array(42).fill(false),
+        userResponses: Array(42).fill(false)
      }
     }, methods: {
     consoleFilter(response, answered) {
-      if(this.questionIndex === 15){
+      if(this.questionIndex === this.multi_select_index_1){
            if(old_value_text_one.includes(answered)){
                old_value_text_one = old_value_text_one.filter(e => e !== answered)
            }else{
                old_value_text_one.push(...answered)
            }
-          this.selected[this.questionIndex-2] = old_value_text_one;
-      }else if(this.questionIndex === 30){
+
+          this.selected[this.questionIndex] = old_value_text_one;
+      }else if(this.questionIndex === this.multi_select_index_2){
            if(old_value_text_two.includes(answered)){
                old_value_text_two = old_value_text_two.filter(e => e !== answered)
            }else{
                old_value_text_two.push(...answered)
            }
-          this.selected[this.questionIndex-2] = old_value_text_two;
-      }else if(this.questionIndex === 41){
+          this.selected[this.questionIndex] = old_value_text_two;
+      }else if(this.questionIndex === this.multi_select_index_3){
            if(old_value_text_three.includes(answered)){
                old_value_text_three = old_value_text_three.filter(e => e !== answered)
            }else{
                old_value_text_three.push(...answered)
            }
-          this.selected[this.questionIndex-2] = old_value_text_three;
+          this.selected[this.questionIndex] = old_value_text_three;
       }
      else if(this.questionIndex != 0 && this.questionIndex != 1/*  && this.questionIndex != 16 */){
-          this.selected[this.questionIndex-2] = answered;
+          this.selected[this.questionIndex] = answered;
       }
       this.$forceUpdate();
     },
@@ -243,8 +244,9 @@ export default {
 
     },
     insertText(){
+        let insert_table_question = this.insert_table_question
          $(".A").unbind().click(function() {
-            $(".A").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            $(".A").html(insert_table_question);
             if($(".B").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3){
                 $(".B").html('[▇]');
                 $(".C").html('[▇]');
@@ -254,7 +256,7 @@ export default {
         });
 
          $(".B").unbind().click(function() {
-            $(".B").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            $(".B").html(insert_table_question);
             if($(".A").text().length > 3 || $(".C").text().length > 3 || $(".D").text().length > 3 ){
                 $(".A").html('[▇]');
                 $(".C").html('[▇]');
@@ -264,7 +266,7 @@ export default {
         });
 
         $(".C").unbind().click(function() {
-            $(".C").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            $(".C").html(insert_table_question);
             if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".D").text().length > 3){
                 $(".A").html('[▇]');
                 $(".B").html('[▇]');
@@ -274,7 +276,7 @@ export default {
         });
 
         $(".D").unbind().click(function() {
-            $(".D").html('<strong>What, then, determines what proportion of the water stays and what proportion drains away?</strong>');
+            $(".D").html(insert_table_question);
             if($(".A").text().length > 3 || $(".B").text().length > 3 || $(".C").text().length > 3){
                 $(".A").html('[▇]');
                 $(".B").html('[▇]');
@@ -443,6 +445,7 @@ export default {
        return ((raw_points/this.total_points) * 30).toFixed();
     }
   },mounted () {
+
       this.countDownTimer()
   },
     created(){
