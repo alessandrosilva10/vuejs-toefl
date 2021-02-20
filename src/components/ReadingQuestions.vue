@@ -34,10 +34,22 @@
             </div>
             <br /> <br /> <br />
         </div>
-        <v-card min-height="1000px">
+        <v-card>
             <!--<h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>-->
             <div v-for="(question, index) in quiz.questions" :key="index">
                 <div v-if="index === questionIndex">
+                    <v-row>
+                        <v-col class="button-position-screen" col="2">
+                            <v-btn class="v-btn" v-show="questionIndex > 0" v-on:click="prev">
+                                <v-icon style="padding-right: 5px;">mdi-arrow-left-bold</v-icon>                        
+                                Previous
+                            </v-btn>
+                            <v-btn class="v-btn" v-on:click="next">
+                                Next
+                                <v-icon style="padding-left: 5px;">mdi-arrow-right-bold</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
                     <v-row>
                         <br><br><br>
                         <v-col class="answers-col" col="10">
@@ -117,16 +129,6 @@
                             <span class="justify"  @click="insertText()" v-html="question.text"><br></span>
                         </v-col>
                     </v-row>
-                    <v-row>
-                        <v-col class="button-position-screen" col="2">
-                            <v-btn class="v-btn" v-show="questionIndex > 0" v-on:click="prev">
-                                Previous
-                            </v-btn>
-                            <v-btn class="v-btn" v-on:click="next">
-                                Next
-                            </v-btn>
-                        </v-col>
-                    </v-row>
                 </div>
             </div>
             <div v-show="questionIndex === quiz.questions.length">
@@ -143,11 +145,11 @@
                                 width: 50%;
                                 padding-top: 80px;
                             " src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="300" />
-                            <h2 v-if="questionIndex === quiz.questions.length" style="text-align: center;padding-top: 10px; padding-top: 80px; font-family: Helvetica, Arial, sans-serif;">
-                                TOEFL Score: {{ calculateTOEFLscore() }}
+                            <h2 style="text-align: center;padding-top: 10px; padding-top: 80px; font-family: Helvetica, Arial, sans-serif;">
+                                TOEFL Score: {{ calculateTOEFLscore }}
                             </h2>
                             <div style="text-align: center;padding-top: 80px; padding-bottom: 10px; font-family: Helvetica, Arial, sans-serif;">
-                                <v-btn @click="saveDatabase(calculateTOEFLscore(score()))"> Save your score</v-btn>
+                                <v-btn @click="saveDatabase(calculateTOEFLscore)"> Save your score</v-btn>
                             </div>
                         </v-col>
                         <v-col cols="6">
@@ -193,6 +195,7 @@ let response_text_three = ''
 let old_value_text_one = [];
 let old_value_text_two = [];
 let old_value_text_three = [];
+let add_user_response = Array(3).fill(false);
 
 import VueCookies from 'vue-cookies'
 
@@ -217,7 +220,8 @@ export default {
         selected: [''],
         showResults: false,
         questionIndex: 0,
-        userResponses: Array(42).fill(false)
+        userResponses: Array(42).fill(false),
+        isScoreCalculated: false,
      }
     }, methods: {
     consoleFilter(response, answered) {
@@ -266,6 +270,7 @@ export default {
             $(".C").html('[▇]');
             $(".D").html('[▇]');
             response_text_one = 'A';
+            add_user_response[0] = 'A';
         });
 
          $(".B").unbind().click(function() {
@@ -274,6 +279,7 @@ export default {
             $(".C").html('[▇]');
             $(".D").html('[▇]');
             response_text_one = 'B';
+            add_user_response[0] = false;
         });
 
         $(".C").unbind().click(function() {
@@ -282,6 +288,7 @@ export default {
             $(".B").html('[▇]');
             $(".D").html('[▇]');
             response_text_one = "C"
+            add_user_response[0] = false;
         });
 
         $(".D").unbind().click(function() {
@@ -290,9 +297,11 @@ export default {
             $(".B").html('[▇]');
             $(".C").html('[▇]');
             response_text_one = "D"
+            add_user_response[0] = false;
         });
-        this.selected[this.insert_table_index_1] = response_text_one;
 
+        this.selected[this.insert_table_index_1] = response_text_one;
+        this.userResponses[55] = add_user_response[0]
 ////////////////////////////////////////////////////////////////
 
         $(".TEXT2A").unbind().click(function() {
@@ -301,6 +310,7 @@ export default {
             $(".TEXT2C").html('[▇]');
             $(".TEXT2D").html('[▇]');
             response_text_two = 'A';
+            add_user_response[1] = false;
         });
 
          $(".TEXT2B").unbind().click(function() {
@@ -309,6 +319,7 @@ export default {
             $(".TEXT2C").html('[▇]');
             $(".TEXT2D").html('[▇]');
             response_text_two = 'B';
+            add_user_response[1] = false;
         });
 
         $(".TEXT2C").unbind().click(function() {
@@ -317,6 +328,7 @@ export default {
             $(".TEXT2B").html('[▇]');
             $(".TEXT2D").html('[▇]');
             response_text_two = "C"
+            add_user_response[1] = false;
         });
 
         $(".TEXT2D").unbind().click(function() {
@@ -325,8 +337,10 @@ export default {
             $(".TEXT2B").html('[▇]');
             $(".TEXT2C").html('[▇]');
             response_text_two = "D"
+            add_user_response[1] = "D"
         });
         this.selected[this.insert_table_index_2] = response_text_two;
+        this.userResponses[56] = add_user_response[1]
 
         $(".TEXT3A").unbind().click(function() {
             $(".TEXT3A").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
@@ -360,6 +374,10 @@ export default {
             response_text_three = "D"
         });
         this.selected[this.insert_table_index_3] = response_text_three;
+      /*  if(response_text_three === 'D'){
+            this.userResponses[-2] = response_text_three;
+        }
+        this.$forceUpdate();*/
     },
         countDownTimer() {
             if(this.countDown > 0) {
@@ -399,18 +417,7 @@ export default {
      this.scrolledToBottom = true // replace it with your code
     }
  }
-},     /*
-    calcularIndexOfQuestions = () => {
-        alert(this.questionIndex)
-          if(this.questionIndex-1 < this.multi_select_index_1){
-            return "Question " + this.questionIndex-1 + " of " + this.quiz.questions.length-4
-          }else if(this.questionIndex-1 > this.multi_select_index_1 && this.questionIndex-1 < this.multi_select_index_2){
-            return "Question " + this.questionIndex-2 + " of " + this.quiz.questions.length-4
-          }else if(this.questionIndex-1 > this.multi_select_index_2 && this.questionIndex-1 <this. multi_select_index_3){
-           return "Question " + this.questionIndex-3 + " of " + this.quiz.questions.length-4
-          } 
-      },*/
-    // Go to next question
+}, // Go to next question
     next: function() {
       if(old_value_text_one.length > 3 || old_value_text_two.length > 3 || old_value_text_three.length > 3){
            this.$toast.error("You can not select more than 3 options", {
@@ -428,18 +435,17 @@ export default {
     score: function() {
       return this.userResponses.filter(function(val) { if(val !== true) { return val}}).length;
     },
-    calculateTOEFLscore: function() {
-       var raw_points = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
-       return ((raw_points/this.total_points) * 30).toFixed();
-    }
   },mounted () {
-
       this.countDownTimer()
   },
     created(){
 
   },
   computed: {
+    calculateTOEFLscore(){
+       var raw_points = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
+       return ((raw_points/this.total_points) * 30).toFixed();
+    },
        timeIsOver: function () {
         if(this.countDown < 1){
           alert("Time is over")
@@ -448,15 +454,6 @@ export default {
         }
       },
   },
-  /*watch : {
-    timeIsOver: function () {
-        if(this.countDown < 1){
-          alert("Time is over")
-          this.saveDatabase(score);
-          this.$router.push('/scoreboard');
-        }
-      }
-  }*/
 }
 </script>
 
@@ -491,8 +488,10 @@ export default {
     padding-right: 50px;
 }
 .button-position-screen {
-    position:absolute;
-    left: 50%;
+    padding-top: 20px;
+    padding-right: 75px;
+    display:flex;
+    justify-content:space-between;
 }
 </style>
 
