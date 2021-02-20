@@ -143,11 +143,11 @@
                                 width: 50%;
                                 padding-top: 80px;
                             " src="https://i.ibb.co/R64TvFb/medal-1622523-640.png" width="300" />
-                            <h2 style="text-align: center;padding-top: 10px; padding-top: 80px; font-family: Helvetica, Arial, sans-serif;">
+                            <h2 v-if="questionIndex === quiz.questions.length" style="text-align: center;padding-top: 10px; padding-top: 80px; font-family: Helvetica, Arial, sans-serif;">
                                 TOEFL Score: {{ calculateTOEFLscore() }}
                             </h2>
                             <div style="text-align: center;padding-top: 80px; padding-bottom: 10px; font-family: Helvetica, Arial, sans-serif;">
-                                <v-btn @click="saveDatabase(calculateTOEFLscore())"> Save your score</v-btn>
+                                <v-btn @click="saveDatabase(calculateTOEFLscore(score()))"> Save your score</v-btn>
                             </div>
                         </v-col>
                         <v-col cols="6">
