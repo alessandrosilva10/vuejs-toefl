@@ -147,7 +147,7 @@
                                 TOEFL Score: {{ calculateTOEFLscore() }}
                             </h2>
                             <div style="text-align: center;padding-top: 80px; padding-bottom: 10px; font-family: Helvetica, Arial, sans-serif;">
-                                <v-btn @click="saveDatabase(score())"> Save your score</v-btn>
+                                <v-btn @click="saveDatabase(calculateTOEFLscore())"> Save your score</v-btn>
                             </div>
                         </v-col>
                         <v-col cols="6">
