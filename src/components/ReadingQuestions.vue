@@ -189,6 +189,17 @@ import Vtabs from '@/components/Vtabs';
 import $ from "jquery";
 import axios from 'axios';
 
+/*
+@mouseover($event, 5)
+e.type
+@mouseleave
+@dblclick
+@mousemove
+e.offsetX
+e.offsetY
+v-bind:href="url" or :href="url"
+*/
+
 let response_text_one = ''
 let response_text_two = ''
 let response_text_three = ''

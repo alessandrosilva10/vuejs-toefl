@@ -122,6 +122,7 @@ export default {
       text-align: justify;
       text-justify: inter-word;
       font-family: "dosis", sans-serif;
+      font-size: 38px;
       max-width: 800px;
       margin: 0 5% 1rem;
 }
