@@ -354,7 +354,7 @@ export default {
         this.userResponses[56] = add_user_response[1]
 
         $(".TEXT3A").unbind().click(function() {
-            $(".TEXT3A").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT3A").html(insert_table_question_text_3);
             $(".TEXT3B").html('[▇]');
             $(".TEXT3C").html('[▇]');
             $(".TEXT3D").html('[▇]');
@@ -362,7 +362,7 @@ export default {
         });
 
          $(".TEXT3B").unbind().click(function() {
-            $(".TEXT3B").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT3B").html(insert_table_question_text_3);
             $(".TEXT3A").html('[▇]');
             $(".TEXT3C").html('[▇]');
             $(".TEXT3D").html('[▇]');
@@ -370,7 +370,7 @@ export default {
         });
 
         $(".TEXT3C").unbind().click(function() {
-            $(".TEXT3C").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT3C").html(insert_table_question_text_3);
             $(".TEXT3A").html('[▇]');
             $(".TEXT3B").html('[▇]');
             $(".TEXT3D").html('[▇]');
@@ -378,7 +378,7 @@ export default {
         });
 
         $(".TEXT3D").unbind().click(function() {
-            $(".TEXT3D").html('<strong>To enhance their listeners’ enjoyment, storytellers continually make their stories more engaging and memorable.</strong>');
+            $(".TEXT3D").html(insert_table_question_text_3);
             $(".TEXT3A").html('[▇]');
             $(".TEXT3B").html('[▇]');
             $(".TEXT3C").html('[▇]');
