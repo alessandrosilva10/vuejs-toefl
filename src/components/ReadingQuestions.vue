@@ -35,6 +35,9 @@
             <br /> <br /> <br />
         </div>
         <v-card>
+            {{selected}}
+            <br><br>
+            {{userResponses}}
             <!--<h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>-->
             <div v-for="(question, index) in quiz.questions" :key="index">
                 <div v-if="index === questionIndex">
@@ -170,7 +173,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(item, i) in selected" :key="i">
+                                        <tr v-for="(item, i) in selected" v-if="i > 1" :key="i">
                                             <td style="text-align: center">{{ item }}</td>
                                         </tr>
                                     </tbody>
@@ -453,6 +456,12 @@ export default {
 
   },
   computed: {
+        getArray(){
+            const arr = this.selected.filter((item , index)=>{
+                    return index > 1//will return the array from the second value
+                })
+            return arr;
+    },
     calculateTOEFLscore(){
        var raw_points = this.userResponses.filter(function(val) { if(val !== true) { return val}}).length
        return ((raw_points/this.total_points) * 30).toFixed();
