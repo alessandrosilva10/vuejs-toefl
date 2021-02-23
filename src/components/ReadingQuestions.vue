@@ -35,9 +35,6 @@
             <br /> <br /> <br />
         </div>
         <v-card>
-            {{selected}}
-            <br><br>
-            {{userResponses}}
             <!--<h1 v-show="showResults && questionIndex > 1"> Resposta certa: {{correctedAnwsers[questionIndex-2]}}</h1>-->
             <div v-for="(question, index) in quiz.questions" :key="index">
                 <div v-if="index === questionIndex">
