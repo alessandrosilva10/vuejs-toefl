@@ -99,7 +99,7 @@ import { VueReCaptcha } from 'vue-recaptcha-v3'
 // For more options see below
 Vue.use(VueReCaptcha, { siteKey: '6LcR9WkaAAAAAOmFZF2P26dHXEQkb2JKNMD20-bz', loaderOptions: {
     useRecaptchaNet: true,
-    autoHideBadge: false
+    autoHideBadge: autoHideBadge
   }})
 // secret key: 6LcR9WkaAAAAAEdbIo6Wu_TbPV4rbGAtLhKDb_c7
 
@@ -109,6 +109,9 @@ export default {
 components: {
     Dialog
 },
+data: () => ({
+    autoHideBadge: false,
+}),
 computed: {
     passwordMatch() {
       return () => this.password === this.verify || "Password must match";
@@ -144,6 +147,7 @@ computed: {
                     this.$toast.success("Welcome back, " + VueCookies.get('TOEFLMADEEASY').name + " !", {
                     timeout: 5000
                     })
+                    this.autoHideBadge = true;
                     this.$router.push("/");
                 }
             })
