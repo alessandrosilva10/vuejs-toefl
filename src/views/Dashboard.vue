@@ -1,11 +1,11 @@
 <template>
   <div class="dashboard">
       <Navbar/>
-      <h1 class="subtitle-1 grey--text">Dashboard</h1>
+      <h1 class="subtitle-1 grey--text"></h1>
         <v-container class="my-5">
             <v-layout row>
                 <v-flex xs12 md6>
-                    Coming soon!
+                   
                     <Chart/>
                 </v-flex>
             </v-layout>
