@@ -64,11 +64,11 @@
                                         max-width: 800px;
                                         margin: 0 5% 1rem;
                                         font-size: 20px;" type="A">
-                                    <li v-for="(response, i) in question.responses" :key="i">
-                                        <label>
+                                    <div class="select" v-for="(response, i) in question.responses" :key="i">
+                                    <label>
                                             <input type="radio" @change="consoleFilter(response.correct, response.answered)" v-bind:value="response.correct" v-bind:name="index" v-model="userResponses[index]"> {{response.text}}
                                         </label>
-                                    </li>
+                                    </div>
                                 </ol>
                             </div>
 
@@ -509,6 +509,10 @@ export default {
     padding-right: 75px;
     display:flex;
     justify-content:space-between;
+}
+
+.select{
+    padding-top: 10px;
 }
 </style>
 
