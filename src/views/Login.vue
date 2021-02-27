@@ -97,7 +97,8 @@ import Dialog from '../components/Dialog.vue'
 import { VueReCaptcha } from 'vue-recaptcha-v3'
  
 // For more options see below
-Vue.use(VueReCaptcha, { siteKey: '42ca106915971caddcb09d608fe65437a3fd6b92' })
+Vue.use(VueReCaptcha, { siteKey: '6LcR9WkaAAAAAOmFZF2P26dHXEQkb2JKNMD20-bz' })
+// secret key: 6LcR9WkaAAAAAEdbIo6Wu_TbPV4rbGAtLhKDb_c7
 
 Vue.use(Router)
 
