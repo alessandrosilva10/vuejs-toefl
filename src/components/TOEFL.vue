@@ -1,5 +1,5 @@
 <template>
-    <v-row>
+    <v-row style="margin: 0 auto;">
 <v-col v-for="(tpo, i) in tpos" :key="i" cols="2">
   <v-card flat class="text-center main" >
   <v-responsive class="pt-4">
