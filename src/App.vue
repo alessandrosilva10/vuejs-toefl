@@ -15,9 +15,10 @@
       </v-card-text>
     </v-card>
 </div>
+<div class="hidden-md-and-down">
  <v-content class="mx-4">
     <router-view></router-view>
-     </v-content>
+     </v-content></div>
 </v-app>
 </template>
 
