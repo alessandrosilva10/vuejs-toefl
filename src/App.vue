@@ -1,9 +1,5 @@
 <template>
-  <v-app class="grey lighten-4">
-      <v-content class="mx-4">
-          <router-view></router-view>
-      </v-content>
-  </v-app>
+    <router-view></router-view>
 </template>
 
 <script>

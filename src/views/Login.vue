@@ -1,18 +1,26 @@
 <template>
-    <div id="app" >
-    <v-app>
+    <v-app  style="background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,72,194,0.9472163865546218) 0%, rgba(101,209,231,1) 97%);">
     <v-row>
         <v-col cols="12">
-            <p class="line-1 anim-typewriter">TOEFL MADE EASY - 2021</p>
-            <br/>
-            <p class="line-1 anim-typewriter">THE BEST WAY TO IMPROVE YOUR READING AND LISTENING FOR THE TOEFL TEST</p>
+            <span style="font-size: 36px; color: white; margin:auto; display:table; text-align: center; padding-top: 80px">TOEF MADE EASY 2021</span>
         </v-col>
-        </v-row>
+    </v-row>
         <v-row>
-        <v-col cols="12">
+        <v-col cols="6">
+            <div class="card-login">
+                 <span style="padding-left:100px; font-size: 36px; color: white; margin:auto; display:table; text-align: center; padding-top: 0px">
+                    Fast, Accurate, and Customized Get the TOEFL®
+                </span>
+                <br>
+                <span style="padding-left:100px; font-size: 36px; color: white; margin:auto; display:table; text-align: center; padding-top: 0px">
+                    Improve your reading and listening with TPO
+                </span>
+            </div>
+        </v-col>
+        <v-col cols="6">
         <div class="dialog">
-            <div>
-                <v-tabs v-model="tab" show-arrows background-color="blue accent-4" icons-and-text dark grow>
+                <v-tabs v-model="tab" show-arrows background-color="rgba(19,72,194,0.9472163865546218)" icons-and-text dark grow>
                     <v-tabs-slider  color="purple darken-4"></v-tabs-slider>
                     <v-tab v-for="(i, index) in tabs"  @click="getTabId(index)"  :key="index">
                         <v-icon large>{{ i.icon }}</v-icon>
@@ -75,11 +83,10 @@
                     </v-tab-item>
                 </v-tabs>
             </div>
-        </div>
         </v-col>
         </v-row>
     </v-app>
-</div>
+
 </template>
 <script>
 import axios from 'axios';
@@ -207,6 +214,10 @@ computed: {
 .dialog {
     height: 380px;
     width: 600px;
+    display: table;
+    margin: 0 auto;
+}
+.card-login {
     display: table;
     margin: 0 auto;
 }
