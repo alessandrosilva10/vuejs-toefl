@@ -1,5 +1,9 @@
 <template>
+<v-app style="margin-left: -20px; margin-right: -20px;">
+ <v-content class="mx-4">
     <router-view></router-view>
+     </v-content>
+    </v-app>
 </template>
 
 <script>
