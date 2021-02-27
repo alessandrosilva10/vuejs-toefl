@@ -20,6 +20,7 @@
                         :rules="nameRules"
                         :counter="25"
                         required
+                        disabled
                     ></v-text-field>
                 </p>
                 <p>
@@ -29,33 +30,37 @@
                         :rules="nameRules"
                         :counter="25"
                         required
+                        disabled
                     ></v-text-field>
                 </p>
                 <p>
                     <strong>Password</strong>
                     <v-text-field
-                        v-model="password"
+                        v-model="old_password"
                         :rules="nameRules"
                         :counter="25"
                         required
+                        type="password"
                     ></v-text-field>
                 </p>
                 <p>
                     <strong>New password</strong>
                     <v-text-field
-                        v-model="password"
+                        v-model="new_password"
                         :rules="nameRules"
                         :counter="25"
                         required
+                        type="password"
                     ></v-text-field>
                 </p>
                                 <p>
-                    <strong>New password</strong>
+                    <strong>Retype new password</strong>
                     <v-text-field
-                        v-model="password"
+                        v-model="new_password_two"
                         :rules="nameRules"
                         :counter="25"
                         required
+                        type="password"
                     ></v-text-field>
                 </p>
                 <v-btn @click="updateProfile()">Update Profile</v-btn>
@@ -87,11 +92,24 @@ export default {
         Navbar
     },
     data: () => ({
-        user_info: []
+        user_info: [],
+        old_password: '',
+        new_password: '',
+        new_password_two: ''
     }),
     methods: {
         updateProfile(){
-            alert('This feature is coming soon!')
+            if(this.old_password === ''){
+                this.$toast.error("Password can not be empty", {
+                    timeout: 3000
+                })
+            }
+
+            if(this.new_password != this.new_password_two){
+                this.$toast.error("Password confirmation doesn't match Password", {
+                    timeout: 3000
+                })
+            }
         }
     },
     mounted() {
