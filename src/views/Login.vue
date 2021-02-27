@@ -3,7 +3,7 @@
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,72,194,0.9472163865546218) 0%, rgba(101,209,231,1) 97%);">
     <v-row>
         <v-col cols="12">
-            <span style="font-size: 36px; color: white; margin:auto; display:table; text-align: center; padding-top: 80px">TOEF MADE EASY 2021</span>
+            <span style="font-size: 36px; color: white; margin:auto; display:table; text-align: center; padding-top: 80px">TOEFL MADE EASY @2021</span>
         </v-col>
     </v-row>
         <v-row>
