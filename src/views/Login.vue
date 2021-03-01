@@ -191,7 +191,7 @@ computed: {
     }
   },
   mounted() {
-      //this.recaptcha();
+      this.recaptcha();
       alert(this.token)
   },
   data: () => ({
