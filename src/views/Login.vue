@@ -125,6 +125,7 @@ computed: {
  
       // Execute reCAPTCHA with action "login".
       const token = await this.$recaptcha('login')
+      console.log('eu')
          console.log(token) // Will print the token
       // Do stuff with the received token.
     },
@@ -190,7 +191,7 @@ computed: {
     }
   },
   mounted() {
-      console.log(this.currentTab)
+      console.log(this.recaptcha())
   },
   data: () => ({
     dialog: true,
