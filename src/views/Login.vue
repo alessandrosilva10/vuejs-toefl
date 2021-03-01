@@ -112,6 +112,7 @@ components: {
 },
 data: () => ({
     autoHideBadge: false,
+    token: ''
 }),
 computed: {
     passwordMatch() {
@@ -124,9 +125,8 @@ computed: {
       await this.$recaptchaLoaded()
  
       // Execute reCAPTCHA with action "login".
-      const token = await this.$recaptcha('login')
-      console.log('eu')
-         console.log(token) // Will print the token
+      this.token = await this.$recaptcha('login')
+
       // Do stuff with the received token.
     },
       modal(){
@@ -191,7 +191,8 @@ computed: {
     }
   },
   mounted() {
-      console.log(this.recaptcha())
+      //this.recaptcha();
+      alert(this.token)
   },
   data: () => ({
     dialog: true,
