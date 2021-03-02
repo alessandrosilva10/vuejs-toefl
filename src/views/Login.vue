@@ -192,7 +192,7 @@ computed: {
   },
   mounted() {
       this.recaptcha();
-      alert(this.token)
+      //alert(this.token)
   },
   data: () => ({
     dialog: true,
