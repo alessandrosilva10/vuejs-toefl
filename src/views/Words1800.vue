@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         openPdf(){
-            window.open('http://www.e4thai.com/e4e/images/pdf2/ess_vocab.pdf');
+            window.open('https://www.e4thai.com/e4e/images/pdf2/ess_vocab.pdf');
         }
     }
 }

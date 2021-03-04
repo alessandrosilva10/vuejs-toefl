@@ -1,3 +1,3 @@
-module.exports = { devServer: { proxy: 'http://toeflmadeeasy.pythonanywhere.com'}, "transpileDependencies": [
+module.exports = { devServer: { proxy: 'https://toeflmadeeasy.pythonanywhere.com'}, "transpileDependencies": [
     "vuetify"
 ]};
