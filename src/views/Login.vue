@@ -95,7 +95,7 @@ import VueCookies from 'vue-cookies'
 import Vue from 'vue'
 import Router from 'vue-router';
 import Dialog from '../components/Dialog.vue'
-//import { VueReCaptcha } from 'vue-recaptcha-v3'
+import { VueReCaptcha } from 'vue-recaptcha-v3'
  
 // For more options see below
 Vue.use(VueReCaptcha, { siteKey: '6LcR9WkaAAAAAOmFZF2P26dHXEQkb2JKNMD20-bz', loaderOptions: {
