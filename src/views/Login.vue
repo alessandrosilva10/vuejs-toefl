@@ -95,13 +95,13 @@ import VueCookies from 'vue-cookies'
 import Vue from 'vue'
 import Router from 'vue-router';
 import Dialog from '../components/Dialog.vue'
-import { VueReCaptcha } from 'vue-recaptcha-v3'
+//import { VueReCaptcha } from 'vue-recaptcha-v3'
  
 // For more options see below
-Vue.use(VueReCaptcha, { siteKey: '6LcR9WkaAAAAAOmFZF2P26dHXEQkb2JKNMD20-bz', loaderOptions: {
+/*Vue.use(VueReCaptcha, { siteKey: '6LcR9WkaAAAAAOmFZF2P26dHXEQkb2JKNMD20-bz', loaderOptions: {
     useRecaptchaNet: true,
     autoHideBadge: false
-  }})
+  }})*/
 // secret key: 6LcR9WkaAAAAAEdbIo6Wu_TbPV4rbGAtLhKDb_c7
 
 Vue.use(Router)
@@ -120,7 +120,7 @@ computed: {
     }
   },
   methods: {
-      async recaptcha() {
+     /* async recaptcha() {
       // (optional) Wait until recaptcha has been loaded.
       await this.$recaptchaLoaded()
  
@@ -128,7 +128,7 @@ computed: {
       this.token = await this.$recaptcha('login')
 
       // Do stuff with the received token.
-    },
+    },*/
       modal(){
           alert("modal")
       },
@@ -191,7 +191,7 @@ computed: {
     }
   },
   mounted() {
-      this.recaptcha();
+     // this.recaptcha();
       //alert(this.token)
   },
   data: () => ({
